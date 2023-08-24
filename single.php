@@ -1,33 +1,40 @@
-<?php get_header(); ?>
-<?php include get_theme_file_path('/compnay/navigation.php'); ?> 
+<?php
+/**
+ * The template for displaying all single posts
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
+ *
+ * @package Law_Theme
+ */
 
-<div class='blogs_wrapper mt-4'>
-            <div class='blogs'>
-            
-                <div class="row">
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-<div class="col-md-12 " id="post-<?php the_ID(); ?>">
-                                            <div class="blog p-2 bg-body">                       
-                                            <?php if ( has_post_thumbnail() ) {
-                                                the_post_thumbnail('full', array('class' => 'feature_img w-100'));
-                                            } else { ?>
-                                                <img src="<?php bloginfo('template_directory'); ?>/reources/images/blog_img.png" alt="Featured Thumbnail" class="feature_img w-100" />
-                                                <?php } ?>
-                                                <h3 class="heading mt-2"><?php the_title(); ?></h3>
-                                                <p class="short_info"> <?php  the_content(); ?></p>
-                                                <h6 class="author mt-2">Written by <?php echo get_the_author(); ?> </h6>
-                                            </div>
-                                    </div>  
-	<?php edit_post_link(__('Edit','text_domain'),'','.'); ?>
-	<?php //comments_template(); ?>
-<?php endwhile; endif; ?>
+get_header();
+?>
 
-</div>
-            </div>
-        </div>
-        
-    </main>
+	<main id="primary" class="site-main">
 
+		<?php
+		while ( have_posts() ) :
+			the_post();
 
-<?php //get_sidebar('blog'); ?>
-<?php get_footer(); ?>
+			get_template_part( 'template-parts/content', get_post_type() );
+
+			the_post_navigation(
+				array(
+					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'law-theme' ) . '</span> <span class="nav-title">%title</span>',
+					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'law-theme' ) . '</span> <span class="nav-title">%title</span>',
+				)
+			);
+
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
+
+		endwhile; // End of the loop.
+		?>
+
+	</main><!-- #main -->
+
+<?php
+get_sidebar();
+get_footer();

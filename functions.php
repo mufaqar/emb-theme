@@ -1,213 +1,178 @@
 <?php
+/**
+ * Law Theme functions and definitions
+ *
+ * @link https://developer.wordpress.org/themes/basics/theme-functions/
+ *
+ * @package Law_Theme
+ */
 
-  load_theme_textdomain('dd_domain'); 
+if ( ! defined( '_S_VERSION' ) ) {
+	// Replace the version number of the theme on each release.
+	define( '_S_VERSION', '1.0.0' );
+}
+
+/**
+ * Sets up theme defaults and registers support for various WordPress features.
+ *
+ * Note that this function is hooked into the after_setup_theme hook, which
+ * runs before the init hook. The init hook is too late for some features, such
+ * as indicating support for post thumbnails.
+ */
+function law_theme_setup() {
+	/*
+		* Make theme available for translation.
+		* Translations can be filed in the /languages/ directory.
+		* If you're building a theme based on Law Theme, use a find and replace
+		* to change 'law-theme' to the name of your theme in all the template files.
+		*/
+	load_theme_textdomain( 'law-theme', get_template_directory() . '/languages' );
+
+	// Add default posts and comments RSS feed links to head.
+	add_theme_support( 'automatic-feed-links' );
+
+	/*
+		* Let WordPress manage the document title.
+		* By adding theme support, we declare that this theme does not use a
+		* hard-coded <title> tag in the document head, and expect WordPress to
+		* provide it for us.
+		*/
+	add_theme_support( 'title-tag' );
+
+	/*
+		* Enable support for Post Thumbnails on posts and pages.
+		*
+		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+		*/
 	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 140, 140, true );
-	add_image_size( 'single-post-thumbnail', 300, 9999 );
-  add_image_size( 'product-thumbnail', 260, 220, true );
 
-    
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus(
+		array(
+			'menu-1' => esc_html__( 'Primary', 'law-theme' ),
+		)
+	);
 
-	// Add RSS links to <head> section
-	//automatic_feed_links();
-	
-	// Clean up the <head>
-	function removeHeadLinks() {
-    	remove_action('wp_head', 'rsd_link');
-    	remove_action('wp_head', 'wlwmanifest_link');
-    }
-    add_action('init', 'removeHeadLinks');
-    remove_action('wp_head', 'wp_generator');
-    
-		// Declare sidebar widget zone
-	if (function_exists('register_sidebar')) {
-    	register_sidebar(array(
-    		'name' => 'Sidebar Widgets',
-    		'id'   => 'sidebar-widgets',
-    		'description'   => 'These are widgets for the sidebar.',
-    		'before_widget' => '<div id="%1$s" class="widget %2$s">',
-    		'after_widget'  => '</div>',
-    		'before_title'  => '<h4>',
-    		'after_title'   => '</h4>'
-    	));
-    }
+	/*
+		* Switch default core markup for search form, comment form, and comments
+		* to output valid HTML5.
+		*/
+	add_theme_support(
+		'html5',
+		array(
+			'search-form',
+			'comment-form',
+			'comment-list',
+			'gallery',
+			'caption',
+			'style',
+			'script',
+		)
+	);
 
-function pagination($pages = '', $range = 4)
-{
-     $showitems = ($range * 2)+1;  
- 
-     global $paged;
-     if(empty($paged)) $paged = 1;
- 
-     if($pages == '')
-     {
-         global $wp_query;
-         $pages = $wp_query->max_num_pages;
-         if(!$pages)
-         {
-             $pages = 1;
-         }
-     }   
- 
-     if(1 != $pages)
-     {
-         echo "<div class=\"pagination\"><span>Page ".$paged." of ".$pages."</span>";
-         if($paged > 2 && $paged > $range+1 && $showitems < $pages) echo "<a href='".get_pagenum_link(1)."'>&laquo; First</a>";
-         if($paged > 1 && $showitems < $pages) echo "<a href='".get_pagenum_link($paged - 1)."'>&lsaquo; Previous</a>";
- 
-         for ($i=1; $i <= $pages; $i++)
-         {
-             if (1 != $pages &&( !($i >= $paged+$range+1 || $i <= $paged-$range-1) || $pages <= $showitems ))
-             {
-                 echo ($paged == $i)? "<span class=\"current\">".$i."</span>":"<a href='".get_pagenum_link($i)."' class=\"inactive\">".$i."</a>";
-             }
-         }
- 
-         if ($paged < $pages && $showitems < $pages) echo "<a href=\"".get_pagenum_link($paged + 1)."\">Next &rsaquo;</a>";
-         if ($paged < $pages-1 &&  $paged+$range-1 < $pages && $showitems < $pages) echo "<a href='".get_pagenum_link($pages)."'>Last &raquo;</a>";
-         echo "</div>\n";
-     }
+	// Set up the WordPress core custom background feature.
+	add_theme_support(
+		'custom-background',
+		apply_filters(
+			'law_theme_custom_background_args',
+			array(
+				'default-color' => 'ffffff',
+				'default-image' => '',
+			)
+		)
+	);
+
+	// Add theme support for selective refresh for widgets.
+	add_theme_support( 'customize-selective-refresh-widgets' );
+
+	/**
+	 * Add support for core custom logo.
+	 *
+	 * @link https://codex.wordpress.org/Theme_Logo
+	 */
+	add_theme_support(
+		'custom-logo',
+		array(
+			'height'      => 250,
+			'width'       => 250,
+			'flex-width'  => true,
+			'flex-height' => true,
+		)
+	);
+}
+add_action( 'after_setup_theme', 'law_theme_setup' );
+
+/**
+ * Set the content width in pixels, based on the theme's design and stylesheet.
+ *
+ * Priority 0 to make it available to lower priority callbacks.
+ *
+ * @global int $content_width
+ */
+function law_theme_content_width() {
+	$GLOBALS['content_width'] = apply_filters( 'law_theme_content_width', 640 );
+}
+add_action( 'after_setup_theme', 'law_theme_content_width', 0 );
+
+/**
+ * Register widget area.
+ *
+ * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
+ */
+function law_theme_widgets_init() {
+	register_sidebar(
+		array(
+			'name'          => esc_html__( 'Sidebar', 'law-theme' ),
+			'id'            => 'sidebar-1',
+			'description'   => esc_html__( 'Add widgets here.', 'law-theme' ),
+			'before_widget' => '<section id="%1$s" class="widget %2$s">',
+			'after_widget'  => '</section>',
+			'before_title'  => '<h2 class="widget-title">',
+			'after_title'   => '</h2>',
+		)
+	);
+}
+add_action( 'widgets_init', 'law_theme_widgets_init' );
+
+/**
+ * Enqueue scripts and styles.
+ */
+function law_theme_scripts() {
+	wp_enqueue_style( 'law-theme-style', get_stylesheet_uri(), array(), _S_VERSION );
+	wp_style_add_data( 'law-theme-style', 'rtl', 'replace' );
+
+	wp_enqueue_script( 'law-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
+		wp_enqueue_script( 'comment-reply' );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'law_theme_scripts' );
+
+/**
+ * Implement the Custom Header feature.
+ */
+require get_template_directory() . '/inc/custom-header.php';
+
+/**
+ * Custom template tags for this theme.
+ */
+require get_template_directory() . '/inc/template-tags.php';
+
+/**
+ * Functions which enhance the theme by hooking into WordPress.
+ */
+require get_template_directory() . '/inc/template-functions.php';
+
+/**
+ * Customizer additions.
+ */
+require get_template_directory() . '/inc/customizer.php';
+
+/**
+ * Load Jetpack compatibility file.
+ */
+if ( defined( 'JETPACK__VERSION' ) ) {
+	require get_template_directory() . '/inc/jetpack.php';
 }
 
-if (function_exists('register_nav_menus')) {
-register_nav_menus( array(	
-		'agent' => __( 'Agent Menu'),       
-        'tech' => __( 'Technician Menu'),
-        'super' => __( 'Super  Menu')
-	) );
-}
-
-function fallbackmenu1(){ ?>
-			<div id="menu">
-				<ul><li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus to work.</li></ul>
-			</div>
-<?php }
-
-function fallbackmenu2(){ ?>
-			<div id="menu">
-				<ul><li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus to work.</li></ul>
-			</div>
-<?php }
-
-function add_more_buttons($buttons) {
- $buttons[] = 'hr';
- $buttons[] = 'del';
- $buttons[] = 'sub';
- $buttons[] = 'sup';
- $buttons[] = 'fontselect';
- $buttons[] = 'fontsizeselect';
- $buttons[] = 'cleanup';
- $buttons[] = 'styleselect';
- $buttons[] = 'lineheight';
- return $buttons;
-}
-add_filter("mce_buttons_3", "add_more_buttons");
-
-function add_first_and_last($items) {
-    $items[1]->classes[] = 'first-menu-item';
-    $items[count($items)]->classes[] = 'last-menu-item';
-    return $items;
-}
- 
-add_filter('wp_nav_menu_objects', 'add_first_and_last');
-
-// Theme Options
-//include_once('admin/index.php');
-//Metabox
-//include_once('metaboxes.php');
-include_once('inc/extra_function.php');
-
-
-function callback($buffer) {
-    return $buffer;
-}
-function buffer_start() { ob_start("callback"); }
-function buffer_end() { ob_end_flush(); }
-add_action('init', 'buffer_start');
-add_action('wp_footer', 'buffer_end');
-
-
-// Enqueue Font Awesome 5 in WordPress 
-function tme_load_font_awesome() {
-    wp_enqueue_script( 'font-awesome-free', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js' );
-}
-add_action( 'wp_enqueue_scripts', 'tme_load_font_awesome' );
-
-
-/* for javascript (only when using child theme) */
-//wp_enqueue_script('url-script', home_url() );
-//wp_localize_script('url-script', 'webpath', array('theme_path' => home_url()));
-
-
-
-/* Disable WordPress Admin Bar for all users */
-//add_filter( 'show_admin_bar', '__return_false' );
-
-
-function enqueue_scripts() {
-    wp_enqueue_script( 'jquery' );
-    wp_enqueue_script( 'ajax-script', get_template_directory_uri() . '/js/ajax.js', array( 'jquery' ), '1.0', true );
-  }
-  add_action( 'wp_enqueue_scripts', 'enqueue_scripts' );
-
-
-function load_subcategories() {
-    $parent_id = $_POST['parent_id'];
-    $subcategories = get_categories( array(
-      'taxonomy' => 'cat_fault_type',
-      'parent' => $parent_id,
-      'hide_empty' => false
-    ) );
-    $output = '<option value="">Select a subcategory</option>';
-    foreach ( $subcategories as $subcategory ) {
-      $output .= '<option value="' . $subcategory->term_id . '">' . $subcategory->name . '</option>';
-    }
-    wp_send_json($output);
-    wp_die();
-  }
-  add_action( 'wp_ajax_load_subcategories', 'load_subcategories' );
-  add_action( 'wp_ajax_nopriv_load_subcategories', 'load_subcategories' );
-
-
-
-  function update_post_title_with_meta() {
-    $args = array(
-      'post_type' => 'repair',
-      'posts_per_page' => -1, 
-    );
-    $posts = get_posts( $args );
-    foreach ( $posts as $post ) {
-     // $new_title = get_post_meta( $post->ID, 'my_meta_field', true ); // Replace this with the meta field key you want to use
-
-     // Model NO
-      $term_model_nocat = get_the_terms($post->ID, 'model_cat' );
-      $model_no_cat_name = $term_model_nocat[0]->name;   
-
-      // Fault Cat
-      $term_falt_cat = get_the_terms( $post->ID, 'cat_fault_type' );
-      $falt_cat_name = $term_falt_cat[0]->name;
-      //model type Cate
-      $term_model_type_cat = get_the_terms($post->ID, 'model_type_cat' );	
-      $model_type_name = $term_model_type_cat[0]->name;
-      // Type 
-      $term_type_cat = get_the_terms( $post->ID, 'repair_cat' );	
-      $type_name = $term_type_cat[0]->name;
-      
-    $title =  $model_no_cat_name; 
-     
-     
-
-      if ( !empty( $title ) ) {
-        wp_update_post( array(
-          'ID' => $post->ID,
-          'post_title' => $title,
-        
-      
-        ) );
-      }
-    }
-  }
- // add_action( 'init', 'update_post_title_with_meta' );
-
-
-  

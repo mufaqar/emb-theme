@@ -1,35 +1,38 @@
-<?php get_header('landing'); ?>
+<?php
+/**
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site may use a
+ * different template.
+ *
+ * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
+ *
+ * @package Law_Theme
+ */
 
+get_header();
+?>
 
-<main class="main position-relative" style="height: 420px;">
-<div class="container">
-    <div class="d-flex justify-content-between align-content-center align-items-center row">
-        <div class="col-md-6 hero_content" style="padding-top: 10rem !important;">
-            <h1><?php the_title();?></h1>
-          
-        </div>
-        <div class="col-md-6 hero_right">
-            <!-- <img src="<?php bloginfo('template_directory'); ?>/reources/images/right_banner.png" alt="" class="w-100"> -->
-        </div>
-    </div>
+	<main id="primary" class="site-main">
 
-</div>
-       
-</main>
+		<?php
+		while ( have_posts() ) :
+			the_post();
 
+			get_template_part( 'template-parts/content', 'page' );
 
-<section class="container landing_contents my-5">
+			// If comments are open or we have at least one comment, load up the comment template.
+			if ( comments_open() || get_comments_number() ) :
+				comments_template();
+			endif;
 
+		endwhile; // End of the loop.
+		?>
 
+	</main><!-- #main -->
 
-
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
-    <div class="post my-5" id="post-<?php the_ID(); ?>">
-             <h1><?php the_title(); ?></h1>       
-			<?php the_content(); ?>			
-    </div>
-<?php endwhile; endif; ?>
-
-           </section>
-
-<?php get_footer('landing'); ?>
+<?php
+get_sidebar();
+get_footer();
