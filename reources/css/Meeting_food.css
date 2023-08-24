@@ -1,0 +1,65 @@
+
+.setting_metting_food{
+    background: #FFFFFF;
+    border: 3px solid #5FB227;
+    border-radius: 15px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    max-width: 854px !important;
+    width: 100%;
+    padding: 3rem 0;
+}
+.setting_metting_food .vector_img{
+    margin-left: 782px;
+    margin-top: 10px;
+}
+
+.setting_metting_food  h2.food{
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    font-family: 'DM Sans';
+    color: #101010;
+}
+.setting_metting_food p.lunch{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    padding: 0 2rem;
+    margin-top: 1rem;
+    color: #565656;
+}
+.setting_metting_food p.everyone_deserves{
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 30px;
+    color: #5FB227;
+    margin-top: 0.8rem;
+    margin-bottom: 2.5rem;
+}
+.setting_metting_food .line{
+    border: 1px solid #bebaba;
+}
+.setting_metting_food p.overview_order{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    color: #101010;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+.setting_metting_food p.no_booking{
+    font-weight: 400;
+    
+    font-size: 18px;
+    line-height: 30px;
+    color: #565656;
+    text-align: center;
+}
+

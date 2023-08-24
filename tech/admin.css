@@ -1,0 +1,313 @@
+/* Admin CSS */
+
+.tablediv > .dataTables_wrapper > div:nth-child(2) > div {
+  background: white;
+  padding: 0.5rem 1.5rem !important;
+  box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+.tablediv {
+  margin-bottom: 3rem;
+}
+.orders_table td span.status.Complete {
+  background: rgba(5, 182, 81, 0.1);
+  border-radius: 31.8209px;
+  padding: 8px 1.35rem;
+  color: #05b651;
+}
+.orders_table td span.status.Pending {
+  background: rgba(255, 148, 26, 0.1);
+  border-radius: 31.8209px;
+  padding: 8px 1.7rem;
+  color: rgba(255, 148, 26, 1);
+}
+.orders_table td span.status.Cancel {
+  background: rgba(241, 49, 49, 0.1);
+  border-radius: 31.8209px;
+  padding: 8px 2rem;
+  color: rgba(241, 49, 49, 1);
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: white;
+}
+.tablediv .dataTables_length {
+  display: none;
+}
+.tablediv table {
+  border-collapse: separate;
+}
+.orders_table tbody tr td {
+  padding: 1rem 0;
+  font-size: 14px;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 700;
+  color: #061624;
+}
+/* .tablediv .dataTables_info {
+  display: none !important;
+} */
+.tablediv > .dataTables_wrapper > div:nth-child(3) .col-md-5 {
+  width: 20%;
+  margin-top: 2rem;
+}
+.tablediv > .dataTables_wrapper > div:nth-child(3) .col-md-7 {
+  width: 80% !important;
+  padding: 0;
+}
+.tablediv > .dataTables_wrapper > div:nth-child(3) .col-md-7 > div > ul {
+  display: flex;
+  justify-content: end;
+  margin-top: 2rem;
+}
+.tablediv > .dataTables_wrapper > div:nth-child(3) .col-md-7 > div > ul li a {
+  margin: 0 0.5rem;
+  background: #f0f0f0;
+  border-radius: 9.35908px;
+  border: none;
+  color: black;
+}
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li:first-child
+  a,
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li:last-child
+  a {
+  background: #f0f0f0;
+  border-radius: 9.35908px;
+  border: none;
+  transition: 0.3s ease-in-out;
+}
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li:first-child:hover
+  a,
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li:last-child:hover
+  a,
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li:hover
+  a {
+  background: #5fb227;
+  color: white;
+}
+.tablediv
+  > .dataTables_wrapper
+  > div:nth-child(3)
+  .col-md-7
+  > div
+  > ul
+  li.active
+  a {
+  background: #5fb227;
+  color: white;
+}
+.tablediv .dataTables_wrapper > div:first-child > div:first-child {
+  width: 0;
+}
+.tablediv .dataTables_wrapper > div:first-child > div:last-child {
+  width: 100%;
+  padding: 0;
+}
+.tablediv
+  .dataTables_wrapper
+  > div:first-child
+  > div:last-child
+  .dataTables_filter {
+  display: flex;
+  justify-content: end;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+}
+.tablediv
+  .dataTables_wrapper
+  > div:first-child
+  > div:last-child
+  .dataTables_filter
+  input {
+  /* border: none; */
+  border-radius: 8px;
+}
+
+tbody tr:last-child {
+  border: transparent;
+}
+
+.admin_parrent {
+  position: relative;
+  margin-top: 3rem;
+}
+.admin_parrent .toggle_btn {
+  position: absolute;
+  top: -1.2rem;
+  width: 70%;
+}
+._user_profile {
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+.payment_status.Complete {
+  color: #05b651;
+}
+.payment_status.Pending {
+  color: rgba(255, 148, 26, 1);
+}
+.payment_status.Cancel {
+  color: rgba(241, 49, 49, 1);
+}
+.account_detils {
+  background: rgba(112, 71, 238, 0.1);
+  color: #5fb227;
+  padding: 10px 1rem;
+  border-radius: 7px;
+  width: 136px;
+  text-align: center;
+}
+.p_image {
+  border: 1px solid #5fb227;
+  border-radius: 9.35908px;
+  width: 56px;
+  height: 50px;
+}
+._admin_foodlist .orders_table tbody tr td {
+  padding-top: 2.1rem;
+}
+._admin_foodlist .orders_table tbody tr td:last-child {
+  padding: 1rem 0;
+}
+body.admin_pages {
+  background: #f2f4f3;
+}
+
+.admin_pages .add_menu {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32.4px 46.5px;
+  margin-bottom: 3rem;
+}
+
+/* upload files  */
+.admin_pages .upload_file {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 73px;
+  display: flex;
+  font-size: 2.5rem;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+}
+.admin_pages .upload_file .upload_icon {
+  font-size: 80px;
+  background: #f8f8f8;
+  margin-right: 1rem;
+}
+.admin_pages .upload_file ::-webkit-file-upload-button {
+  display: none;
+}
+.admin_pages .upload_file input {
+  width: 375px;
+  cursor: pointer;
+}
+.admin_input {
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  box-shadow: 0;
+}
+.admin_label {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  color: #171832;
+  margin-bottom: 0.8rem;
+  margin-top: 0.8rem;
+}
+.admin_inputselect {
+  background: #f8f8f8;
+  border-radius: 5px;
+  padding: 1rem;
+  border: none;
+  outline: none;
+  box-shadow: 0;
+}
+._ad_sel_wrapper {
+  position: relative;
+}
+.admin_arrow_down {
+  position: absolute;
+  right: 1.5rem;
+  top: 1rem;
+  font-size: 25px;
+  font-weight: 700;
+}
+.admin_arrow_down.plus {
+  color: #5fb227;
+}
+.admin_save_btn {
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 15px;
+  color: #ffffff;
+  background: #5fb227;
+  border-radius: 9px;
+  padding: 0.9rem 2.2rem;
+  margin-top: 1rem;
+}
+.adminbtn_div {
+  display: flex;
+  justify-content: end;
+}
+._options {
+  margin-top: 1rem;
+}
+._options > div {
+  background: #5fb227;
+  border-radius: 5px;
+  color: white;
+  padding: 0.4rem 1rem;
+  display: inline;
+  margin: 7px;
+}
+._options > div span {
+  margin-right: 1rem;
+}
+._options > div:first-child {
+  margin-left: 0;
+}
+
+@media (max-width: 1240px) {
+  .admin_parrent .toggle_btn {
+    position: relative;
+    margin-bottom: 0.7rem;
+    width: 100%;
+  }
+}

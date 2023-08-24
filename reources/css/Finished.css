@@ -1,0 +1,101 @@
+body{
+    background-color: rgb(70, 67, 67);
+}
+.box{
+    max-width: 1059px;
+    width: 100%;
+    height: 970px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 40px;
+}
+.box .first_row{
+    display: flex;
+    align-items: center;
+    
+}
+.box .first_row .arrow img{
+    margin-top: 3.19rem;
+    margin-left: 56px;
+    width: 18px;
+    height: 32px;
+}
+.box .first_row .dish img{
+    margin-top: 3.19rem;
+    margin-left: 392px;
+    width: 127px;
+    height: 51px;
+}
+.box .content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.box .content .right img{
+    margin-top: 7.31rem;
+    width: 156px;
+    height: 158px;
+}
+.box .content h1.finished{
+    width: 140px;
+    height: 42px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 30px;
+    color: #313131;
+}
+.box .content h2.looking{
+    margin-top: 5.1rem;
+    width: 669px;
+    height: 42px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 42px;
+    color: #313131;
+}
+.box .content p.find_information{
+    margin-top: -2px;
+    width: 685px;
+    height: 63px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    text-align: center;
+    color: #313131;
+}
+.box .content h3.employees_receive{
+    width: 437px;
+    height: 26px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 5px;
+    color: #313131;
+}
+.box .content a.button{
+    margin-top: 6.8rem;
+    width: 350px;
+    height: 56px;
+    background: #5FB227;
+    border-radius: 65px;
+}
+.box .content a.button_text{
+    padding: 14px 192px;
+    font-family: 'DM Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 26px;
+    color: #FFFFFF;
+    text-align: center;
+    height: 26px;
+    text-decoration: none;
+}
+
+ 
