@@ -1,4 +1,4 @@
-<?php /* Template Name: Super-AddUser  */ 
+<?php /* Template Name: AddCompany  */ 
 get_header();
 
 ?> 
@@ -7,14 +7,14 @@ get_header();
 
 <div class="custom_container catering_form mt-5 mb-5">
     <div class="_info mt-5 mb-3">
-        <h2>Create User  </h2>
+        <h2>Create Company  </h2>
     </div>
     <div class="_form p-4 pt-5 pb-5">
     <form class="add_ticket" id="add_ticket" action="#" enctype="multipart/form-data">
             <div class="row">
             
                 <div class="col-md-6 mb-3">
-                    <label for="">User Name</label>
+                    <label for="">Name</label>
                     <div class="_select">
                         <input type="text" value="" placeholder="Please enter name" id="name" required>
                     </div>
@@ -29,26 +29,28 @@ get_header();
 
 
                 <div class="col-md-6 mt-3 mt-md-0 mb-3">
-                    <label for="">Password</label>
+                    <label for="">Address</label>
                     <div class="_select">
-                        <input type="password" value="" placeholder="Enter agent email Password" id="password" required>
+                    <input type="text" value="" placeholder="Please Address" id="address" required>
                     </div>
                 </div>
 
-                <div class="col-md-6 mb-3">
-                        <label for="">User Type</label>
-                        <div class="_select">
-                            <select id="user_type">    
-                            <option value="agent"> Agent </option>
-                            <option value="technician"> Technician </option>                        
-                                
-                            </select>
-                            <img src="<?php bloginfo('template_directory'); ?>/reources/images/down-arrow.png" alt="">
-                        </div>
+                <div class="col-md-6 mt-3 mt-md-0 mb-3">
+                    <label for="">City</label>
+                    <div class="_select">
+                    <input type="text" value="" placeholder="Please add city" id="city" required>
                     </div>
+                </div>
+
+                <div class="col-md-6 mt-3 mt-md-0 mb-3">
+                    <label for="">Country</label>
+                    <div class="_select">
+                    <input type="text" value="" placeholder="Please add country" id="country" required>
+                    </div>
+                </div>
 
                 <div class="d-flex justify-content-end savebtn">
-                    <input type="submit" class="btn_primary"  value="Add Agent"/>
+                    <input type="submit" class="btn_primary"  value="Add Company"/>
                 </div>
             </div>
         </form>
@@ -90,8 +92,7 @@ get_header();
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script type="text/javascript">   
      jQuery(document).ready(function($) {	
-        $('._cross').click(function(){
-           
+        $('._cross').click(function(){           
            $(".hideme").css("display", "none");
        });
                  
@@ -100,13 +101,17 @@ get_header();
             $("#spinner-div").show();                     
             var name = jQuery('#name').val();	             
             var email = jQuery('#email').val();	       
-            var password = jQuery('#password').val();
+            var address = jQuery('#address').val();
+            var city = jQuery('#city').val();
+            var country = jQuery('#country').val();
             var user_type = jQuery('#user_type').val();
             form_data = new FormData();   
             form_data.append('action', 'add_agent');
             form_data.append('name', name);
             form_data.append('email', email);	
-            form_data.append('password', password);
+            form_data.append('address', address);
+            form_data.append('city', city);
+            form_data.append('country', country);
             form_data.append('user_type', user_type);
             $.ajax(
                 {
