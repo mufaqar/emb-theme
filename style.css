@@ -1,8 +1,8 @@
 /*
-Theme Name: NZ Store
-Text Domain:  NZ Store
-Version: 5
-Description: Custom Theme for  NZ Store
+Theme Name: ECM Theme
+Text Domain:  ecm-store
+Version: 1
+Description: Custom Theme for  ECM Theme
 Tags: blog, one-column, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images
 Author: Mufaqar 
 Author URI: http://mufaqar.com
@@ -411,9 +411,7 @@ footer .footer_social img:hover {
   border-bottom-right-radius: 30px;
 }
 
-.launch_calandar .sidebar .logo {
-  filter: invert(1);
-}
+
 
 .launch_calandar .sidebar .toggle_btn {
   border-radius: 35px;
