@@ -476,7 +476,8 @@ footer .footer_social img:hover {
 }
 
 .launch_calandar .content {
-  width: calc(100% - 230px) !important;
+  padding: 50px;
+  width: calc(100% - 450px) !important;
 }
 
 .launch_calandar .content .proofile_info .user h6 {
