@@ -74,7 +74,7 @@ get_header();
                         <div class="content mt-5">
                             <div class="right"><img src="<?php bloginfo('template_directory'); ?>/reources/images/img 3.png" alt=""></div>
                             <h1 class="finished">Finished!</h1>
-                            <h2 class="mb-5 mt-5">Your Ticket has beed created!</h2>
+                            <h2 class="mb-5 mt-5">We Have Create Company For you</h2>
                         </div>
                     </div>
                     
@@ -106,7 +106,7 @@ get_header();
             var country = jQuery('#country').val();
             var user_type = jQuery('#user_type').val();
             form_data = new FormData();   
-            form_data.append('action', 'add_agent');
+            form_data.append('action', 'add_company');
             form_data.append('name', name);
             form_data.append('email', email);	
             form_data.append('address', address);

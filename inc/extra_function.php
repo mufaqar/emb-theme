@@ -13,17 +13,7 @@ function remove_admin_bar() {
   }
 }
 
-add_role('agent', 'Agent', array(
-    'read' => true, // True allows that capability, False specifically removes it.
-    'edit_posts' => true,
-    'delete_posts' => true,
-    'edit_published_posts' => true,
-    'publish_posts' => true,
-    'edit_files' => true,
-    'upload_files' => true //last in array needs no comma!
-));
-
-add_role( 'technician', 'Technician', get_role( 'agent' )->capabilities );
+add_role( 'company', 'Company', get_role( 'company' )->capabilities );
 
 
 add_filter( 'manage_tickets_posts_columns', 'set_custom_edit_tickets_columns' );    
@@ -89,15 +79,6 @@ function tickets_column_register_sortable( $columns ) {
 }
 
 add_filter("manage_edit-tickets_sortable_columns", "tickets_column_register_sortable" );
-
-
-
-
-
-
-
-
-
 add_filter( 'manage_orders_posts_columns', 'set_custom_edit_orders_columns' );    
 add_action( 'manage_orders_posts_custom_column' , 'custom_orders_column', 10, 2 );
 function set_custom_edit_orders_columns($columns) {    

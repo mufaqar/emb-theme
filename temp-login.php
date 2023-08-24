@@ -20,22 +20,11 @@ $role = $user_info->roles;
 
 
 if (in_array('administrator', $user_info->roles)) {
-    $url = home_url('admin-dashboard');
+    $url = home_url('dashboard');
     wp_redirect($url);
     exit();
     }
-elseif (in_array('agent', $user_info->roles)) {
-    $url = home_url('agent-dashboard'); 
-    wp_redirect($url);
-    exit();
 
-    } 
-    elseif (in_array('technician', $user_info->roles)) {
-        $url = home_url('tech-dashboard'); 
-        wp_redirect($url);
-    exit();
-    
-        } 
 else {
     $url = home_url('dashboard');
     wp_redirect($url);
