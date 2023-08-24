@@ -1,57 +1,31 @@
-<?php
-/**
- * The main template file
- *
- * This is the most generic template file in a WordPress theme
- * and one of the two required files for a theme (the other being style.css).
- * It is used to display a page when nothing more specific matches a query.
- * E.g., it puts together the home page when no home.php file exists.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Law_Theme
- */
-
-get_header();
-?>
-
-	<main id="primary" class="site-main">
-
-		<?php
-		if ( have_posts() ) :
-
-			if ( is_home() && ! is_front_page() ) :
+<?php get_header(); ?>
+<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+		<h1><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h1>
+        <?php include (TEMPLATEPATH . '/inc/meta.php' ); ?>
+        <div class="entry">
+             <?php if ( has_post_thumbnail() ) { ?>
+                    <div class="thumb">
+						<?php the_post_thumbnail(); ?>
+                    </div>
+				<?php } ?>	
+				<?php 
+					global $more;    // Declare global $more (before the loop).
+					$more = 0;       // Set (inside the loop) to display content above the more tag.
+					the_content(__('Continue Reading','text_domain'));
 				?>
-				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
-				</header>
-				<?php
-			endif;
-
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-
-<?php
-get_sidebar();
-get_footer();
+            <div class="clear"></div>
+            <div class="tags">
+				<?php the_tags( __('Tags:','text_domain'),'','.'); ?>
+            </div>
+        </div>
+    </div>
+<?php endwhile; ?>
+<?php if (function_exists("pagination")) {
+    pagination($additional_loop->max_num_pages);
+} ?>		
+<?php else : ?>
+    <h2><?php _e('Nothing Found','text_domain'); ?></h2>
+<?php endif; ?>
+<?php get_sidebar(); ?>
+<?php get_footer(); ?>

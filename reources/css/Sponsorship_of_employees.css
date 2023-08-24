@@ -1,0 +1,181 @@
+.overlay{
+    background: rgba(0,0,0,0.3);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.overlay .model_wrapper{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) !important;
+    max-width: 854px !important;
+    width: 100%;
+}
+
+.modal{
+    max-width: 819px;
+    /* height: 442px; */
+    background: #FFFFFF;
+    border: 3px solid #5FB227;
+    border-radius: 15px;
+    position: relative;
+}
+.box h1.sponsorhip{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    text-align: center;
+    color: #101010;
+}
+.box .vector_img{
+    margin-top: 10px;
+    margin-right: 10px;
+    transform: rotate(-180deg);
+}
+.box p.company_choose{
+
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 30px;
+    text-align: center;
+    color: #565656;
+    margin-top: .5rem;
+}
+.box .company_sponsors{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 0;
+}
+.box .company_sponsors h2.employees_with{
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: right;
+    color: #5FB227;
+    margin-top: 12px;
+}
+.box .company_sponsors input.nok{
+    margin-top: 14px;
+    margin-left: 21px;
+
+    width: 95px;
+    height: 47px;
+    background: #ECECEC;
+    border: 0.563636px solid #CBCBCB;
+    border-radius: 8px;
+}
+.box .company_sponsors input.nok_text{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+
+    color: #565656;
+
+    opacity: 0.5;
+}
+.box .company_sponsors input.or{
+    margin-top: 22px;
+    margin-left: 14px;
+    width: 17px;
+    height: 30px;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 30px;
+    color: #565656;
+    border-style: none;
+    opacity: 0.5;
+}
+.box .company_sponsors input.perc{
+    margin-top: 14px;
+    margin-left: 13px;
+    width: 95px;
+    height: 47px;
+    background: #ECECEC;
+    border: 0.563636px solid #CBCBCB;
+    border-radius: 8px;
+}
+.box .company_sponsors input.perc_text{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+
+   color: #565656;
+
+   opacity: 0.5;
+
+}
+
+.box a.save_btn{
+    
+    margin-left: 333px;
+    margin-right: 332px;
+    width: 154px;
+    height: 50px;
+    background: #5FB227;
+    border-radius: 36px;
+    border-style: none;
+    justify-content: center;
+
+}
+.box a.btn_text{
+    padding: 12px 58px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+
+    color: #FFFFFF;
+}
+.box .line{
+    margin-top: 30px;
+    opacity: 0.2;
+    border: 1px solid #000000;
+}
+.box h3.appoinment{
+    margin-top: 30px;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 31px;
+    color: #101010;
+    text-align: center;
+
+}
+.box h4.start_date{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 30px;
+    text-align: center;
+    color: #565656;
+    margin-bottom: 2rem;
+}
+
+.savebtn{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.savebtn a{
+    padding: 12px 45px !important;
+}
+.cross{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+
+@media (max-width:768px) {
+    .box .company_sponsors{
+        flex-direction: column;
+    }
+    .box .company_sponsors h2.employees_with{
+        text-align: center;
+    }
+}
