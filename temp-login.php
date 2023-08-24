@@ -76,9 +76,9 @@ else {
             </div>
             <div class="col-sm-12 right col-md-6 p-3">
                  <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo.png" alt="" style="max-width:350px" > <br/><br/>
-                <h3>Welcome to Budget Computer & Kiwi Mobiles</h3>
-                <p>1191 Eruera street Rotrua, 3010 </p>
-                <p>DID : 073477044 </p>
+                <h3>Welcome to ECM</h3>
+                <p>We Deal in UK </p>
+              
                 <form class="login_form" id="loginform">
                     <div class="form-group">
                         <label for="username">Email</label>
