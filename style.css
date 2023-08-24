@@ -1,7 +1,7 @@
 /*
 Theme Name: ECM Theme
 Text Domain:  ecm-store
-Version: 1
+Version: 1.0.1
 Description: Custom Theme for  ECM Theme
 Tags: blog, one-column, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images
 Author: Mufaqar 
@@ -106,7 +106,7 @@ input:focus {
 }
 
 :root {
-  --green: #5fb227;
+  --green: #2334DE;
   --litegray: #e5e5e5;
   --black: #212121;
 }
