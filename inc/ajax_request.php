@@ -11,8 +11,7 @@ function add_company() {
 		$company_name = $_POST['name'];
 		$company_address = $_POST['address'];	
 		$company_city = $_POST['city'];  
-		$company_country = $_POST['country'];  
-	
+		$company_country = $_POST['country'];  	
 		$user_data = array(
 			'user_login' => $company_email,
 			'user_email' => $company_email,
