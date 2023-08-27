@@ -42,17 +42,15 @@ $args = array(
 
 $response = wp_remote_post($url, $args);
 
-print_r($response);
+
 
 if (is_array($response) && !is_wp_error($response)) {
     $body = wp_remote_retrieve_body($response);
-    echo $body;
+   // echo $body;
 }
 
 
-
-
-print_r($response);
+print_r($body);
 
 
 
