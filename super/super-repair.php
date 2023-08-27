@@ -44,14 +44,30 @@ $response = wp_remote_post($url, $args);
 
 
 
+
 if (is_array($response) && !is_wp_error($response)) {
     $body = wp_remote_retrieve_body($response);
-   // echo $body;
+    $data = json_decode($body, true);
+
+    if (is_array($data) && isset($data['result']) && is_array($data['result'])) {
+        foreach ($data['result'] as $record) {
+
+            print_r($record);
+            // Create a new post
+            // $post_id = wp_insert_post(array(
+            //     'post_type' => 'your_custom_post_type', // Replace with your custom post type slug
+            //     'post_title' => $record['title'], // Change this to the appropriate title field
+            //     'post_content' => $record['content'], // Change this to the appropriate content field
+            //     'post_status' => 'publish',
+            // ));
+
+            // Add custom metadata
+          //  update_post_meta($post_id, 'custom_meta_key_1', $record['meta_value_1']);
+         //   update_post_meta($post_id, 'custom_meta_key_2', $record['meta_value_2']);
+            // Add more meta fields as needed
+        }
+    }
 }
-
-
-print_r($body);
-
 
 
 
