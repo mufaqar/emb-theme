@@ -39,7 +39,7 @@ get_header();
                 </div>              
 
                 <div class="d-flex justify-content-end savebtn">
-                    <input type="submit" class="btn_primary"  value="Add Location"/>
+                    <input type="submit" class="btn_primary"  value="Add Brnach"/>
                 </div>
             </div>
         </form>
@@ -92,7 +92,7 @@ get_header();
             
             var user_type = jQuery('#user_type').val();
             form_data = new FormData();   
-            form_data.append('action', 'add_location');
+            form_data.append('action', 'add_branch');
             form_data.append('name', name);
         
             form_data.append('user_type', user_type);
