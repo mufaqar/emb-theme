@@ -22,9 +22,9 @@ get_header('admin');
             <thead>
                 <tr>
                     <th>Sr #</th>
-                    <th>Company Name</th>                  
-                    <th>City</th>
-                    <th>Country</th>
+                    <th>Location</th>                  
+                    <th>Status</th>
+                 
                     <th>Action</th>
 
 
@@ -33,35 +33,32 @@ get_header('admin');
             <tbody>
 
                 <?php
+            
                 $i = 0;
+                query_posts(array(
+                    'post_type' => 'records',
+                    'posts_per_page' => 5,
+                    'order' => 'desc'
+                ));
 
-                $members = get_users(
-                    array(                      
-                        'orderby' => 'ID',
-                        'order'   => 'ASC'
-                    )
-                );
-                $users = get_users($members);            
-
-                foreach ($users as $user) { $user_roles = $user->roles;  $i++; // Retrieve user meta for city and country
-                    $company_city = get_user_meta($user->ID , 'company_city', true);
-                    $company_country = get_user_meta($user->ID , 'company_country', true);
-                    $company_address= get_user_meta($user->ID , 'company_address', true);
+                if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();$i++
                       ?>
                 <tr>
                     <td class="pt-4"><?php echo $i ?></td>
-                    <td class="d-flex align-items-center"><img class="_user_profile"
-                            src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" alt="profile" />
-                        <?php echo $user->display_name ;   ?></td>
+                    <td class="">
+                        <?php echo the_title() ?></td>
                      
-                    <td><?php echo $company_city ?></td>
-                    <td><?php echo $company_country;   ?></td>
+               
+                    <td>Active</td>
                     <td>Update</td>
 
+            </tr>
 
-
-                </tr>
-                <?php } ?>
+                    <?php endwhile;
+                        wp_reset_query();
+                    else : ?>
+                        <h2><?php _e('Nothing Found', 'lbt_translate'); ?></h2>
+                    <?php endif; ?>
 
             </tbody>
 
