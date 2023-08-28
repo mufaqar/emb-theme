@@ -3,28 +3,32 @@ get_header('admin');
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
-    <div class="toggle_btn">
+
+
+<div class="toggle_btn">
         <div class="row ">
-            <div class="catering_wrapper mt-5 mb-2 col-md-12 p-0">
-                <div class="catering_menu buttons">
-                    <a id="1" class="showSingle _active" target="1" data="">All Users</a>
-                    <a id="2" class="showSingle" target="2" data="Administrator">Administrator</a>
-                    <a id="3" class="showSingle" target="3" data="agent">Agents</a>
-                    <a id="4" class="showSingle" target="4" data="Technician">Technician</a>
+            <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
+                <div class="catering_heading d-flex align-items-center">
+                    <h2>User</h2>
+                    <div><a href="<?php echo home_url('dashboard/add-company'); ?>"><i class="fa-solid fa-plus"></i></a>
+                    </div>
                 </div>
+               
             </div>
         </div>
+        
     </div>
+
+  
     <section id="div1" class="targetDiv activediv tablediv">
         <table id="allusers" class="table table-striped orders_table export_table" style="width:100%">
             <thead>
                 <tr>
                     <th>Sr #</th>
                     <th>Name</th>
-                    <th>Type</th>
-                    <th>Phone Number</th>
-                    <th>Email Address</th>
-                
+                    <th>Company</th>
+                    <th>Status</th>
+                    <th>Action</th>              
                    
                 </tr>
             </thead>
@@ -50,10 +54,8 @@ get_header('admin');
                         <td class="d-flex align-items-center"><img class="_user_profile" src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" alt="profile" />
                         <?php echo $user->display_name ;   ?></td>
                         <td><?php echo ucfirst($user_roles[0]); ?></td>
-                        <td><?php echo get_user_meta($user->ID, 'mobile', true);
-                        
-                        ?></td>
-                        <td><?php echo $user->user_email ?></td>
+                        <td>Active</td>
+                        <td>Update</td>
                       
 
                     </tr>
