@@ -1,7 +1,7 @@
 /*
 Theme Name: ECM Theme
 Text Domain:  ecm-store
-Version: 1.0.1
+Version: 1.0.2
 Description: Custom Theme for  ECM Theme
 Tags: blog, one-column, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images
 Author: Mufaqar 
@@ -477,7 +477,7 @@ footer .footer_social img:hover {
 
 .launch_calandar .content {
   padding: 50px;
-  width: calc(100% - 450px) !important;
+  width: calc(100% - 250px) !important;
 }
 
 .launch_calandar .content .proofile_info .user h6 {
