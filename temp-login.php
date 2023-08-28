@@ -58,26 +58,25 @@ else {
             <div class="col-sm-12 col-md-6 left">
                 <div class="login_image_wrapper">
                     <div class="image_card">
-                        <img src="<?php bloginfo('template_directory'); ?>/reources/images/mobile.jpg" alt="" style="width:100%; border-radius:20px">
+                        <img src="<?php bloginfo('template_directory'); ?>/reources/images/supply.jpg" alt="" style="width:100%; border-radius:20px">
                         <div class="overlay"></div>
                     </div>                    
                 </div>               
             </div>
             <div class="col-sm-12 right col-md-6 p-3">
-                 <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo.png" alt="" style="max-width:350px" > <br/><br/>
-                <h3>Welcome to ECM</h3>
-                <p>We Deal in UK </p>
+                 <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo_dark.png" alt="" style="max-width:200px" > <br/><br/>
+                <h3>Welcome to ECM</h3>            
               
                 <form class="login_form" id="loginform">
                     <div class="form-group">
-                        <label for="username">Email</label>
+                    
                         <input type="email" class="form-control border-0 border-bottom rounded-0"
-                            id="username" aria-describedby="emailHelp" placeholder="abc@example.com" value="" required>                  
+                            id="username" aria-describedby="emailHelp" placeholder="Enter your email" value="" required>                  
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                     
                         <input type="password" class="form-control border-0 border-bottom rounded-0"
-                            id="password" placeholder="Input your password" required>
+                            id="password" placeholder="enter your password" required>
                     </div>
                     <div class="d-flex justify-content-between align-items-center " style="margin-top: 3rem !important;">
                         <span>Don't remember your <a href="<?php echo home_url('forget-password'); ?>">Password?</a></span>
