@@ -9,7 +9,8 @@ get_header('admin');
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
                     <h2>Location</h2>
-                    <div><a href="<?php echo home_url('dashboard/add-location'); ?>"><i class="fa-solid fa-plus"></i></a>
+                    <div><a href="<?php echo home_url('dashboard/add-location'); ?>"><i
+                                class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
             </div>
@@ -22,53 +23,34 @@ get_header('admin');
             <thead>
                 <tr>
                     <th>Sr #</th>
-                    <th>Location</th>                  
-                    <th>Status</th>                 
+                    <th>Location</th>
+                    <th>Status</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
 
-                <?php
+        <?php
 
-                $i;
-            
-            $taxonomy = 'location';
-
-            // Get terms from the specified taxonomy
+           $i;
+            $taxonomy = 'location';            
             $terms = get_terms(array(
                 'taxonomy' => $taxonomy,
-                'hide_empty' => false, // Set to true if you want to exclude empty terms
-            ));
-            
+                'hide_empty' => false,
+            ));          
             
                 if (!empty($terms) && !is_wp_error($terms)) {
-                 
-                    foreach ($terms as $term) {    $i++;
-                        
-
-                        ?>
-                         <tr>
+                     foreach ($terms as $term) {    $i++; ?>
+                <tr>
                     <td class="pt-4"><?php echo $i ?></td>
                     <td class="">
                         <?php echo $term->name  ?></td>
-                     
-               
                     <td>Active</td>
                     <td>Update</td>
-
-            </tr>
-
-                     
-               <?php
-                }
-            } else {
+                </tr>
+                <?php  }  } else {
                 echo 'No terms found.';
-            }?>
-
-                       
-               
-
+                  }?>
             </tbody>
 
         </table>
