@@ -21,7 +21,8 @@
         <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
         <thead>
                     <tr>
-                        <th>Sr #</th>        
+                        <th>Sr #</th> 
+                        <th>Dev Name</th>       
                         <th>Oper date</th>
                         <th>QTY</th>
                         <th>Vol A</th>
@@ -55,7 +56,7 @@
                             ?>
                             <tr>
                                 <td><?php echo $i ?></td>
-                              
+                                <td><?php  echo $devname ?></td>   
                                 <td><?php  echo $operdate ?></td>   
                                 <td><?php  echo $qty_total ?></td>   
                                 <td><?php  echo $vol_a ?></td>   
