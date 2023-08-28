@@ -21,11 +21,16 @@
         <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
         <thead>
                     <tr>
-                        <th>Sr #</th> 
-                        <th>Dev Name</th>       
+                        <th>Sr #</th>
+                 
+                        <th>Station Id</th>
+                        <th>Transformer Id</th>
+                        <th>Dev Id</th>                         
+                        <th>Dev Name</th>                             
                         <th>Oper date</th>
                         <th>QTY</th>
-                        <th>Vol A</th>                     
+                        <th>Vol A</th>
+                     
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +60,10 @@
                             ?>
                             <tr>
                                 <td><?php echo $i ?></td>
+                            
+                                <td><?php echo $stationid;?></td>
+                                <td><?php echo $transformerid?></td>
+                                <td><?php  echo $devid ?></td>                                  
                                 <td><?php  echo $devname ?></td>   
                                 <td><?php  echo $operdate ?></td>   
                                 <td><?php  echo $qty_total ?></td>   
