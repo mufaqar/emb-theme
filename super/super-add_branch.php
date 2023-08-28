@@ -22,19 +22,41 @@ get_header();
                 <div class="col-md-6 mb-3">
                     <label for="">Address</label>
                     <div class="_select">
-                        <input type="text" value="" placeholder="Please enter name" id="name" required>
+                        <input type="text" value="" placeholder="Please enter name" id="address" required>
                     </div>
                 </div>  
                 <div class="col-md-6 mb-3">
                     <label for="">Company </label>
                     <div class="_select">
-                        <input type="text" value="" placeholder="Please enter name" id="name" required>
+                  
+
+                        <?php                     
+
+                        $role = 'Company'; 
+
+                        $users = get_users( array(
+                            'role' => $role,
+                        ) );
+                        ?>
+
+                        <select name="user_select"  id="company">
+                            
+                            <?php foreach ( $users as $user ) : ?>
+                                <option value="<?php echo esc_attr( $user->ID ); ?>">
+                                    <?php echo esc_html( $user->display_name ); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                     
+
+
+
                     </div>
                 </div>  
                 <div class="col-md-6 mb-3">
                     <label for="">Location ID</label>
                     <div class="_select">
-                        <input type="text" value="" placeholder="Please enter name" id="name" required>
+                        <input type="text" value="" placeholder="Please enter name" id="location_id" required>
                     </div>
                 </div>              
 
@@ -63,7 +85,7 @@ get_header();
                         <div class="content mt-5">
                             <div class="right"><img src="<?php bloginfo('template_directory'); ?>/reources/images/img 3.png" alt=""></div>
                             <h1 class="finished">Finished!</h1>
-                            <h2 class="mb-5 mt-5">We Have Create Location For you</h2>
+                            <h2 class="mb-5 mt-5">We Have Create Branch For you</h2>
                         </div>
                     </div>
                     
@@ -88,13 +110,17 @@ get_header();
         $("#add_ticket").submit(function(e) {                     
             e.preventDefault();   
             $("#spinner-div").show();                     
-            var name = jQuery('#name').val();	            
-            
+            var name = jQuery('#name').val();	
+            var address = jQuery('#address').val();	  
+            var company = jQuery('#company').val();	
+            var location_id = jQuery('#location_id').val();	
             var user_type = jQuery('#user_type').val();
             form_data = new FormData();   
             form_data.append('action', 'add_branch');
             form_data.append('name', name);
-        
+            form_data.append('address', address);
+            form_data.append('company', company);
+            form_data.append('location_id', location_id);        
             form_data.append('user_type', user_type);
             $.ajax(
                 {
