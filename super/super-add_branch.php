@@ -32,7 +32,7 @@ get_header();
 
                         <?php                     
 
-                        $role = 'Company'; 
+                        $role = 'company'; 
 
                         $users = get_users( array(
                             'role' => $role,
