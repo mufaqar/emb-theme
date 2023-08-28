@@ -30,20 +30,28 @@ get_header('admin');
             <tbody>
 
                 <?php
-            
-                $i = 0;
-                query_posts(array(
-                    'post_type' => 'records',
-                    'posts_per_page' => 5,
-                    'order' => 'desc'
-                ));
 
-                if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();$i++
-                      ?>
-                <tr>
+                $i;
+            
+            $taxonomy = 'location';
+
+            // Get terms from the specified taxonomy
+            $terms = get_terms(array(
+                'taxonomy' => $taxonomy,
+                'hide_empty' => false, // Set to true if you want to exclude empty terms
+            ));
+            
+            
+                if (!empty($terms) && !is_wp_error($terms)) {
+                 
+                    foreach ($terms as $term) {    $i++;
+                        
+
+                        ?>
+                         <tr>
                     <td class="pt-4"><?php echo $i ?></td>
                     <td class="">
-                        <?php echo the_title() ?></td>
+                        <?php echo $term->name  ?></td>
                      
                
                     <td>Active</td>
@@ -51,11 +59,15 @@ get_header('admin');
 
             </tr>
 
-                    <?php endwhile;
-                        wp_reset_query();
-                    else : ?>
-                        <h2><?php _e('Nothing Found', 'lbt_translate'); ?></h2>
-                    <?php endif; ?>
+                     
+               <?php
+                }
+            } else {
+                echo 'No terms found.';
+            }?>
+
+                       
+               
 
             </tbody>
 
