@@ -1,5 +1,7 @@
     <?php /* Template Name: Reports  */    get_header();
 
+    echo "Reposts";
+
 
 
 // $url = 'https://sav.jcen.cn/pwsys/sys/gettoken';
@@ -24,48 +26,78 @@
 // }
 
 
-$url = 'https://sav.jcen.cn/pwsys/pwtransiot/pwTransIot/list_xzairport';
-
-$args = array(
-    'body' => json_encode(array(
-        'meterNum' => '230729010001',
-        'pageSize' => 1000,
-        'pageNo' => 1,
-    )),
-    'headers' => array(
-        'X-Access-Token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2OTMxMzExODIsInVzZXJuYW1lIjoic2hhYmJpciJ9.EaHxm_aKHCD-TNgat50iXSnFznIdIW9hAsqjdNoPvW0',
-        'Content-Type' => 'application/json',
-    ),
-    'method' => 'POST',
-    'sslverify' => false
-);
-
-$response = wp_remote_post($url, $args);
+//'startTime' =>'2023-08-25',
+//'endTime'  => '2023-08-26',
 
 
+// Step 1: Read JSON Data from File
+$json_data = file_get_contents(get_template_directory() . '/data.json');
+$data_array = json_decode($json_data, true);
+
+$records = $data_array['result']['records'];
 
 
-if (is_array($response) && !is_wp_error($response)) {
-    $body = wp_remote_retrieve_body($response);
-    $data = json_decode($body, true);
+if ($records) {
 
-    if (is_array($data) && isset($data['result']) && is_array($data['result'])) {
-        foreach ($data['result'] as $record) {
+    foreach ($records as $array_data) {           
 
-            print_r($record);
-            // Create a new post
-            // $post_id = wp_insert_post(array(
-            //     'post_type' => 'your_custom_post_type', // Replace with your custom post type slug
-            //     'post_title' => $record['title'], // Change this to the appropriate title field
-            //     'post_content' => $record['content'], // Change this to the appropriate content field
-            //     'post_status' => 'publish',
-            // ));
+            $id = $array_data['id'];
+            $stationid = $array_data['stationid'];
+            $transformerid = $array_data['transformerid'];
+            $transformername = $array_data['transformername'];
+            $devid = $array_data['devid'];
+            $devname = $array_data['devname'];
+            $devnum  = $array_data['devnum'];
+            $operdate = $array_data['operdate'];
+            $qty_total = $array_data['qty_total'];
+            $vol_a  = $array_data['vol_a'];
+            $relay1state = $array_data['relay1state'];   
+            $post_title = $stationid."-".$id;
+          
+            $post_data = array(
+                'post_title' => $post_title,
+                'post_content' => $stationid,
+                'post_type' => 'records', // Change to your desired post type
+                'post_status' => 'publish',
+                'meta_input' => array(
+                    'id' => $array_data['id'],
+                    'stationid' => $array_data['stationid'],
+                    'transformerid' => $array_data['transformerid'],
+                    'transformername' => $array_data['transformername'],
+                    'devid' => $array_data['devid'],
+                    'devname' => $array_data['devname'],
+                    'devnum' => $array_data['devnum'],
+                    'operdate' => $array_data['operdate'],
+                    'qty_total' => $array_data['qty_total'],
+                    'vol_a' => $array_data['vol_a'],
+                    'relay1state' => $array_data['relay1state'],
+                )
+            );
 
-            // Add custom metadata
-          //  update_post_meta($post_id, 'custom_meta_key_1', $record['meta_value_1']);
-         //   update_post_meta($post_id, 'custom_meta_key_2', $record['meta_value_2']);
-            // Add more meta fields as needed
-        }
+            // Insert the post with metadata
+            $post_id = wp_insert_post($post_data);
+            echo "Post inserted with ID: " . $post_id . "<br>";
+
+            if (is_wp_error($post_id)) {
+                echo "Error inserting post: " . $post_id->get_error_message();
+            } else {
+                echo "Post inserted with ID: " . $post_id . "<br>";
+            }
+          
+
+    
+
+
+         
+
+       
+
+            
+       
+        
+           
+
+    
     }
 }
 
