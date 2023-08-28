@@ -61,7 +61,7 @@ function add_location() {
 			'display_name' => $company_name,
 			'role' => 'company'
 		);	
- $user_id = wp_insert_user($user_data);	
+     //$user_id = wp_insert_user($user_data);	
 	  if (!is_wp_error($user_id)) {	
 		// update_user_meta( $user_id,'name', $company_name);	 
 		// update_user_meta( $user_id,'company_address', $company_address);	  
@@ -84,7 +84,6 @@ function add_location() {
 		
 }
 
-
 add_action('wp_ajax_add_branch', 'add_branch', 0);
 add_action('wp_ajax_nopriv_add_branch', 'add_branch');
 
@@ -103,7 +102,7 @@ function add_branch() {
 			'display_name' => $company_name,
 			'role' => 'company'
 		);	
-	$user_id = wp_insert_user($user_data);	
+	  //$user_id = wp_insert_user($user_data);	
 	  if (!is_wp_error($user_id)) {	
 		// update_user_meta( $user_id,'name', $company_name);	 
 		// update_user_meta( $user_id,'company_address', $company_address);	  
