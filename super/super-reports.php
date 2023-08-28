@@ -21,12 +21,7 @@
         <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
         <thead>
                     <tr>
-                        <th>Sr #</th>
-                        <th>ID</th>   
-                        <th>Station Id</th>
-                        <th>Transformer Id</th>
-                        <th>Dev Id</th>                         
-                        <th>Dev Name</th>                             
+                        <th>Sr #</th>        
                         <th>Oper date</th>
                         <th>QTY</th>
                         <th>Vol A</th>
@@ -45,8 +40,6 @@
 
                     if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
                             $i++;
-                          
-
                             $id = get_post_meta(get_the_ID(),'id', true); 
                             $stationid = get_post_meta(get_the_ID(),'stationid', true); 
                             $transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
@@ -62,11 +55,7 @@
                             ?>
                             <tr>
                                 <td><?php echo $i ?></td>
-                                <td><?php  echo $id?></td> 
-                                <td><?php echo $stationid;?></td>
-                                <td><?php echo $transformerid?></td>
-                                <td><?php  echo $devid ?></td>                                  
-                                <td><?php  echo $devname ?></td>   
+                              
                                 <td><?php  echo $operdate ?></td>   
                                 <td><?php  echo $qty_total ?></td>   
                                 <td><?php  echo $vol_a ?></td>   
