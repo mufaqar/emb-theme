@@ -1,4 +1,4 @@
-    <?php /* Template Name: Add Reports  */    get_header();
+    <?php /* Template Name: ImportData */    get_header();
 
     echo "Reposts";
 
@@ -52,6 +52,12 @@ if ($records) {
             $qty_total = $array_data['qty_total'];
             $vol_a  = $array_data['vol_a'];
             $relay1state = $array_data['relay1state'];   
+            $power_a = $array_data['power_a']; 
+            $amp_a = $array_data['amp_a'];   
+
+            
+
+            
             $post_title = $stationid."-".$id;
           
             $post_data = array(
@@ -71,6 +77,9 @@ if ($records) {
                     'qty_total' => $array_data['qty_total'],
                     'vol_a' => $array_data['vol_a'],
                     'relay1state' => $array_data['relay1state'],
+                    'power_a' => $array_data['power_a'],
+                    'amp_a' => $array_data['amp_a'],
+
                 )
             );
 
