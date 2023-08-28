@@ -25,8 +25,7 @@
                         <th>Dev Name</th>       
                         <th>Oper date</th>
                         <th>QTY</th>
-                        <th>Vol A</th>
-                     
+                        <th>Vol A</th>                     
                     </tr>
                 </thead>
                 <tbody>
