@@ -56,12 +56,14 @@ get_header('admin');
                             $text_status = 'Inactive';  
                         }
 
+                        $user_info = get_userdata($branch_company);
+
                     
                       ?>
                 <tr>
                     <td><?php echo $i ?></td>
                     <th><?php the_title()?></th>
-                    <th><?php echo $branch_company?></th>
+                    <th><?php echo $user_info->name?></th>
                     <th><?php echo $branch_code?></th>                
                     <th><?php echo $branch_country?></th>
                     <th><?php echo $text_status ?></th>
