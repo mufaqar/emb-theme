@@ -58,7 +58,16 @@ get_header();
                     <div class="_select">
                         <input type="text" value="" placeholder="Please enter name" id="location_id" required>
                     </div>
-                </div>              
+                </div>  
+
+                 <div class="col-md-6 mt-3 mt-md-0 mb-3">
+                    <label for="">Country</label>
+                    <div class="_select">
+                    <input type="text" value="" placeholder="Please add country" id="country" required>
+                    </div>
+                </div>     
+
+
 
                 <div class="d-flex justify-content-end savebtn">
                     <input type="submit" class="btn_primary"  value="Add Brnach"/>
