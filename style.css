@@ -3156,9 +3156,6 @@ input[type='submit'] {
   height: 14px;
   border-radius: 0 !important;
 }
-.table > :not(caption) > * > * {
-  text-align: center;
-}
 
 .popup > div > div {
   margin-top: 0 !important;

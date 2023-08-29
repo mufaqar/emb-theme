@@ -23,7 +23,7 @@ get_header('admin');
             <thead>
                 <tr>
                     <th>Sr #</th>
-                    <th>Location</th>
+                    <th>Floor Section</th>
                     <th>Status</th>
                     <th>Action</th>
                 </tr>

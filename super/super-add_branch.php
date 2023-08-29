@@ -54,7 +54,7 @@ get_header();
                     </div>
                 </div>  
                 <div class="col-md-6 mb-3">
-                    <label for="">Location ID</label>
+                    <label for="">Branch Code</label>
                     <div class="_select">
                         <input type="text" value="" placeholder="Please enter name" id="location_id" required>
                     </div>
@@ -123,13 +123,16 @@ get_header();
             var address = jQuery('#address').val();	  
             var company = jQuery('#company').val();	
             var location_id = jQuery('#location_id').val();	
+            var country = jQuery('#country').val();	
             var user_type = jQuery('#user_type').val();
             form_data = new FormData();   
             form_data.append('action', 'add_branch');
             form_data.append('name', name);
             form_data.append('address', address);
             form_data.append('company', company);
-            form_data.append('location_id', location_id);        
+            form_data.append('location_id', location_id); 
+            form_data.append('country', country);    
+                
             form_data.append('user_type', user_type);
             $.ajax(
                 {

@@ -66,22 +66,26 @@ function add_branch() {
 		global $wpdb;			
 		$address = $_POST['address'];
 		$company = $_POST['company'];
-		$location_id = $_POST['location_id'];
-		$term_name = sanitize_text_field($_POST['name']);
-        $taxonomy = 'branches'; 
-        $term_result  = wp_insert_term($term_name, $taxonomy);
-	
-        
-		if ( ! is_wp_error( $term_result ) ) {
-		
-			$term_id = $term_result['term_id'];		
-			add_term_meta($term_id, 'address', $address, true);
-			add_term_meta($term_id, 'company', $company, true);
-			add_term_meta($term_id, 'location_id', $location_id, true);
-		} else {
-			// An error occurred during term insertion.
-			$error_message = $term_result->get_error_message();
-			// Handle the error.
+		$branch_code = $_POST['location_id'];
+		$country = $_POST['country'];
+		$name = sanitize_text_field($_POST['name']);
+
+		$new_post = array(
+			'post_title'    => $name,
+			'post_content'  => $name,
+			'post_status'   => 'publish',  
+			'post_author'   => $company,     
+			'post_type'     => 'branch'
+		);
+
+		$new_post_id = wp_insert_post($new_post);
+
+		if ($new_post_id) {
+			add_post_meta($new_post_id, 'branch_address', $address, true);
+			add_post_meta($new_post_id, 'branch_company', $company, true);
+			add_post_meta($new_post_id, 'branch_code', $branch_code, true);
+			add_post_meta($new_post_id, 'branch_country', $country, true);
 		}
+
 		
 }

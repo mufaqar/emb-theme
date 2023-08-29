@@ -22,7 +22,8 @@ get_header('admin');
             <thead>
                 <tr>
                     <th>Sr #</th>
-                    <th>Company Name</th>                  
+                    <th>Company Name</th>    
+                    <th>Branch Name</th>                  
                     <th>City</th>
                     <th>Country</th>
                     <th>Action</th>
