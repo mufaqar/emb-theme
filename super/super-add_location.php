@@ -7,7 +7,7 @@ get_header();
 
 <div class="custom_container catering_form mt-5 mb-5">
     <div class="_info mt-5 mb-3">
-        <h2>Create Location  </h2>
+        <h2>Create Floor Section  </h2>
     </div>
     <div class="_form p-4 pt-5 pb-5">
     <form class="add_ticket" id="add_ticket" action="#" enctype="multipart/form-data">
@@ -21,7 +21,7 @@ get_header();
                 </div>              
 
                 <div class="d-flex justify-content-end savebtn">
-                    <input type="submit" class="btn_primary"  value="Add Location"/>
+                    <input type="submit" class="btn_primary"  value="Add Floor Section"/>
                 </div>
             </div>
         </form>
