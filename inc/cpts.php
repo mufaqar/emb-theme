@@ -97,13 +97,13 @@ function cptui_register_my_taxes() {
 	 */
 
 	$labels = [
-		"name" => esc_html__( "Locations", "ecm-store" ),
-		"singular_name" => esc_html__( "Location", "ecm-store" ),
+		"name" => esc_html__( "Floor Sections", "ecm-store" ),
+		"singular_name" => esc_html__( "Floor Section", "ecm-store" ),
 	];
 
 	
 	$args = [
-		"label" => esc_html__( "Locations", "ecm-store" ),
+		"label" => esc_html__( "Floor Section", "ecm-store" ),
 		"labels" => $labels,
 		"public" => true,
 		"publicly_queryable" => true,
