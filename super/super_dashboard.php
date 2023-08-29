@@ -23,7 +23,9 @@ get_header('admin');
                 <tr>
                     <th>Sr #</th>
                     <th>Company Name</th>    
-                    <th>Branch Name</th>                  
+                    <th>Branch Name</th> 
+                    <th>Branch Code</th> 
+                            
                     <th>City</th>
                     <th>Country</th>
                     <th>Action</th>
@@ -39,7 +41,8 @@ get_header('admin');
                 $members = get_users(
                     array(                      
                         'orderby' => 'ID',
-                        'order'   => 'ASC'
+                        'order'   => 'ASC',
+                        'role' => 'Company', 
                     )
                 );
                 $users = get_users($members);            
@@ -48,16 +51,33 @@ get_header('admin');
                     $company_city = get_user_meta($user->ID , 'company_city', true);
                     $company_country = get_user_meta($user->ID , 'company_country', true);
                     $company_address= get_user_meta($user->ID , 'company_address', true);
+                    $args = array(
+                        'author' => $user->ID , 
+                        'post_type' => 'branch',   // Specify the post type
+                        'posts_per_page' => 1,  // Retrieve all posts
+                        'fields' => 'ids',       // Retrieve only post IDs
+                    );
+                    
+                    $post_ids = get_posts($args);
+                    $post_id = $post_ids[0];   
+                    $post_title = get_the_title($post_id);
+                    $branch_code = get_post_meta($post_id, 'branch_code', true);
+
+                    
+
+
                       ?>
                 <tr>
                     <td class="pt-4"><?php echo $i ?></td>
                     <td class="d-flex align-items-center"><img class="_user_profile"
                             src="<?php echo esc_url( get_avatar_url( $user->ID ) ); ?>" alt="profile" />
                         <?php echo $user->display_name ;   ?></td>
-                     
+                        <td><?php    echo $post_title; ?> </td>
+                        <td><?php echo $branch_code ?> </td>
+                        
                     <td><?php echo $company_city ?></td>
                     <td><?php echo $company_country;   ?></td>
-                    <td>Update</td>
+                    <td>Edit</td>
 
 
 
