@@ -87,5 +87,47 @@ function add_branch() {
 			add_post_meta($new_post_id, 'branch_country', $country, true);
 		}
 
+		die();
+
 		
 }
+
+add_action('wp_ajax_add_terminal', 'add_terminal', 0);
+add_action('wp_ajax_nopriv_add_terminal', 'add_terminal');
+
+function add_terminal() {
+	global $wpdb;			
+	$devnum = $_POST['devnum'];
+	$devname = $_POST['devname'];
+	$company = $_POST['company'];	
+	$branch_name = $_POST['branch_name'];
+	$floor_section = $_POST['floor_section'];
+
+
+	
+
+	$new_post = array(
+		'post_title'    => $devnum,
+		'post_content'  => $devname,
+		'post_status'   => 'publish',  
+		'post_author'   => $company,     
+		'post_type'     => 'terminals'
+	);
+
+	$new_post_id = wp_insert_post($new_post);
+
+	if ($new_post_id) {
+		add_post_meta($new_post_id, 'terminal_devnum', $devnum, true);
+		add_post_meta($new_post_id, 'terminal_devname', $devname, true);
+		add_post_meta($new_post_id, 'terminal_company', $company, true);
+		add_post_meta($new_post_id, 'terminal_branch_name', $branch_name, true);
+		add_post_meta($new_post_id, 'terminal_floor_section', $floor_section, true);
+	}
+
+	die();
+
+	
+}
+
+
+

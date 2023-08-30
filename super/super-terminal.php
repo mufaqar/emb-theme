@@ -22,10 +22,11 @@ get_header('admin');
             <thead>
                 <tr>
                     <th>Sr #</th>                   
-                    <th>Branch Name</th>
-                    <th>Company Name</th>
-                    <th>Location Code</th>               
-                    <th>Country</th>
+                    <th>Devnum </th>
+                    <th>Dev Name </th>
+                    <th>company  </th>               
+                    <th>branch  </th>
+                    <th>floor section  </th>                   
                     <th>Status</th>
                     <th>Action</th>
 
@@ -37,35 +38,37 @@ get_header('admin');
                 <?php
                   $i = 0;
                   query_posts(array(
-                      'post_type' => 'branch',
+                      'post_type' => 'terminals',
                       'posts_per_page' => -1,
                       'order' => 'desc'
                   ));
 
                   if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
                     $i++; 
-                    $branch_address = get_post_meta($pid , 'branch_address', true);
-                    $branch_code = get_post_meta($pid , 'branch_code', true);
-                    $branch_company = get_post_meta($pid , 'branch_company', true);                    
-                    $branch_country = get_post_meta($pid , 'branch_country', true);
-                    $post_status = get_post_status($pid);
-                 
+                    $terminal_devnum = get_post_meta($pid , 'terminal_devnum', true);
+                    $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
+                    $terminal_company = get_post_meta($pid , 'terminal_company', true);                    
+                    $terminal_branch_name = get_post_meta($pid , 'terminal_branch_name', true);
+                    $terminal_floor_section = get_post_meta($pid , 'terminal_floor_section', true);
+
+                    $user_info = get_userdata($terminal_company);
+
+                  
+                    $post_status = get_post_status($pid);                 
                         if ($post_status === 'publish') {
                             $text_status = 'Active';
                         } else {
                             $text_status = 'Inactive';  
                         }
-
-                        $user_info = get_userdata($branch_company);
-
                     
                       ?>
                 <tr>
                     <td><?php echo $i ?></td>
                     <th><?php the_title()?></th>
-                    <th><?php echo $user_info->name?></th>
-                    <th><?php echo $branch_code?></th>                
-                    <th><?php echo $branch_country?></th>
+                    <th><?php echo $terminal_devname?></th>
+                    <th><?php echo $user_info->name?></th>          
+                    <th><?php echo $terminal_branch_name?></th>
+                    <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
                     <th>Edit</th>
 

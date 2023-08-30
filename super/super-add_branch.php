@@ -11,8 +11,7 @@ get_header();
     </div>
     <div class="_form p-4 pt-5 pb-5">
     <form class="add_ticket" id="add_ticket" action="#" enctype="multipart/form-data">
-            <div class="row">
-            
+            <div class="row">            
                 <div class="col-md-6 mb-3">
                     <label for="">Brnach Name</label>
                     <div class="_select">
@@ -28,29 +27,19 @@ get_header();
                 <div class="col-md-6 mb-3">
                     <label for="">Company </label>
                     <div class="_select">
-                  
-
                         <?php                     
-
-                        $role = 'company'; 
-
+                        $role = 'company';
                         $users = get_users( array(
                             'role' => $role,
                         ) );
                         ?>
-
-                        <select name="user_select"  id="company">
-                            
+                        <select name="user_select"  id="company">                            
                             <?php foreach ( $users as $user ) : ?>
                                 <option value="<?php echo esc_attr( $user->ID ); ?>">
                                     <?php echo esc_html( $user->display_name ); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
-                     
-
-
-
                     </div>
                 </div>  
                 <div class="col-md-6 mb-3">
