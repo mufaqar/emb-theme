@@ -47,7 +47,7 @@ get_header('admin');
                 );
                 $users = get_users($members);            
 
-                foreach ($users as $user) { $user_roles = $user->roles;  $i++; // Retrieve user meta for city and country
+                foreach ($users as $user) {  $i++; // Retrieve user meta for city and country
                     $company_city = get_user_meta($user->ID , 'company_city', true);
                     $company_country = get_user_meta($user->ID , 'company_country', true);
                     $company_address= get_user_meta($user->ID , 'company_address', true);
