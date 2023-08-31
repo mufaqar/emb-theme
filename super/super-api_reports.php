@@ -3,10 +3,12 @@ $token =  Is_Token_Expired();
 
 //echo $token;
 $url = 'https://sav.jcen.cn/pwsys/pwtransiot/pwTransIot/list_xzairport';
+$startDate = '2023-08-20';
+$endDate = '2023-08-30';
 $args = array(
     'body' => json_encode(array(
-        'startTime' => '2023-08-20',       
-        'endTime' => "2023-08-30",
+        'startTime' => $startDate,
+        'endTime' => $endDate,
         'pageNo' => 1,
         'pageSize' => 1000,
     )),
