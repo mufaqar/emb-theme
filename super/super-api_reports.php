@@ -42,15 +42,11 @@ $response = wp_remote_post($url, $args);
 
                 <?php 
 
-if (is_array($response) && !is_wp_error($response)) {
-    $body = wp_remote_retrieve_body($response);
-    $data = json_decode($body, true);   
-     foreach ($data['result']['records'] as $record) {  
-        
-
-          
-                            $i = 0;
-                   
+                    if (is_array($response) && !is_wp_error($response)) {
+                        $body = wp_remote_retrieve_body($response);
+                        $data = json_decode($body, true);  
+                        $i = 0; 
+                        foreach ($data['result']['records'] as $record) {                            
                             $i++;
                             $id = $record['id'];
                             $stationid = $record['stationid'];
@@ -65,30 +61,22 @@ if (is_array($response) && !is_wp_error($response)) {
                             $relay1state = $record['relay1state'];
                             
                             ?>
-                            <tr>
+                              <tr>
                                 <td><?php echo $i ?></td>   
                                 <td><?php  echo $devid ?></td>                                  
                                 <td><?php  echo $devname ?></td>   
                                 <td><?php  echo $operdate ?></td>   
                                 <td><?php  echo $qty_total ?></td>   
                                 <td><?php  echo $vol_a ?></td>   
-                                <td><?php  echo $relay1state ?></td>   
-                                                     
-                             
+                                <td><?php  echo $relay1state ?></td>  
                             </tr>
                         <?php  } } ?>
 
-                </tbody>
-
-               
+                </tbody>           
 
             </table>
-
         </section>
 
     </div>
-
-
-
 
 <?php get_footer('admin') ?>
