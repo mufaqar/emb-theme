@@ -63,7 +63,7 @@ $response = wp_remote_post($url, $args);
                             ?>
                               <tr>
                                 <td><?php echo $i ?></td>   
-                                <td><?php  echo $devid ?></td>                                  
+                                <td><?php  echo $devnum ?></td>                                  
                                 <td><?php  echo $devname ?></td>   
                                 <td><?php  echo $operdate ?></td>   
                                 <td><?php  echo $qty_total ?></td>   
