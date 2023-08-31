@@ -31,9 +31,9 @@ $response = wp_remote_post($url, $args);
                         <th>Sr #</th>
                         <th>Device Number</th>                         
                         <th>Device Name</th>                             
-                        <th>Oper date</th>
-                        <th>QTY</th>
-                        <th>Vol A</th>
+                        <th>Operation Date</th>
+                        <th>Quanity</th>
+                        <th>Volume A</th>
                         <th>Status </th> 
                      
                     </tr>
