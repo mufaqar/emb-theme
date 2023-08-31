@@ -3552,3 +3552,59 @@ body.page-template-temp-landing {
   z-index: -22;
 }
 
+
+.toggle {
+  position: relative;
+}
+
+.toggle input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle .onoff {
+  color: #fff;
+  font-size: 1em;
+  text-align: center;
+  display: block;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.slider {
+  position: relative;
+  display: block;
+  cursor: pointer;
+  background-color: #333;
+  transition: 0.4s;
+  width: 50px;
+  height: 40px;
+}
+
+.slider:before {
+  content: "";
+  position: absolute;
+  height: 30px;
+  width: 30px;
+  background-color: #fff;
+  transition: 0.4s;
+  top: 10px;
+  left: 10px;
+}
+
+input:checked + .slider {
+  background-color: #fd5d00;
+  box-shadow: 0 0 12px #fd5d00;
+}
+
+input:checked + .slider:before {
+  transform: translateX(80px);
+}
+
+.slider.round {
+  border-radius: 20px;
+}
+.slider.round::before {
+  border-radius: 20px;
+}

@@ -33,7 +33,7 @@ $response = wp_remote_post($url, $args);
                         <th>Device Name</th>                             
                         <th>Operation Date</th>
                         <th>Quanity</th>
-                        <th>Volume A</th>
+                        <th>Volts</th>
                         <th>Status </th> 
                      
                     </tr>

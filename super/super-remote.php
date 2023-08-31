@@ -17,6 +17,11 @@ get_header('admin');
                     <th>floor section  </th>                   
                     <th>Status</th>
                     <th>Action</th>
+                    <th><label class="toggle">
+  <span class="onoff">OFF</span>
+  <input type="checkbox" />
+  <span class="slider round"></span>
+</label></th>
 
 
                 </tr>
@@ -58,10 +63,22 @@ get_header('admin');
                     <th><?php echo $terminal_branch_name?></th>
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
-                    <th><div class="custom-control custom-switch">
-  <input type="checkbox" class="custom-control-input" id="onOffSwitch">
-  <label class="custom-control-label" for="onOffSwitch">On/Off</label>
-</div></th>
+                    <th> 
+
+                    <input type="checkbox" id="on-off" hidden>
+
+<div id="switch-container">
+	<div id="toggle-text"></div>
+	<div id="toggle-wrapper">
+		<div id="toggle-button"></div>
+		<div id="toggle-on" class="on-off-icon"></div>
+		<div id="toggle-off" class="on-off-icon"></div>
+	</div>
+</div>
+
+
+
+                    </th>
 
 
 
@@ -80,7 +97,16 @@ get_header('admin');
 
 </div>
 
+<script>
 
+
+const toggle = document.querySelector('.toggle input')
+
+toggle.addEventListener('click', () => {
+    const onOff = toggle.parentNode.querySelector('.onoff')
+    onOff.textContent = toggle.checked ? 'ON' : 'OFF'
+})
+</script>
 
 
 
