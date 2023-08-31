@@ -1,7 +1,7 @@
 <?php /* Template Name: API-Reports */    get_header('admin');
 $token =  Is_Token_Expired(); 
 
-//echo $token;
+echo $token;
 
 
 $url = 'https://sav.jcen.cn/pwsys/pwtransiot/pwTransIot/list_xzairport';
