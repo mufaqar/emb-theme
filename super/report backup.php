@@ -2,30 +2,6 @@
 
 
 
-// $url = 'https://sav.jcen.cn/pwsys/sys/gettoken';
-// $args = array(
-//     'body' => json_encode(array(
-//         'appid' => 'shabbir',
-//         'appsecret' => 'shabbir-123',
-//         'code' => '892894b98ceb5f11660d6cd3fff5c3d1',
-//     )),
-//     'headers' => array(
-//         'Content-Type' => 'application/json',
-//     ),
-//     'method' => 'POST',
-//     'sslverify' => false, // Set to true to enable SSL verification
-// );
-
-// $response = wp_remote_request($url, $args);
-
-// if (is_array($response) && !is_wp_error($response)) {
-//     $body = wp_remote_retrieve_body($response);
-//     // Process $body as needed
-// }
-
-
-//'startTime' =>'2023-08-25',
-//'endTime'  => '2023-08-26',
 
 
 $url = 'https://sav.jcen.cn/pwsys/pwtransiot/pwTransIot/list_xzairport';

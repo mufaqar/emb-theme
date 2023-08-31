@@ -71,9 +71,9 @@ function pagination($pages = '', $range = 4)
 
 if (function_exists('register_nav_menus')) {
 register_nav_menus( array(	
-		'agent' => __( 'Agent Menu'),       
-        'tech' => __( 'Technician Menu'),
-        'super' => __( 'Super  Menu')
+	 
+      
+        'super' => __( 'Main Menu')
 	) );
 }
 
@@ -209,5 +209,53 @@ function load_subcategories() {
   }
  // add_action( 'init', 'update_post_title_with_meta' );
 
-
+ function Generate_Token() {
+  $url = 'https://sav.jcen.cn/pwsys/sys/gettoken';
+  $args = array(
+      'body' => json_encode(array(
+          'appid' => 'shabbir',
+          'appsecret' => 'shabbir-123',
+          'code' => '892894b98ceb5f11660d6cd3fff5c3d1',
+      )),
+      'headers' => array(
+          'Content-Type' => 'application/json',
+      ),
+      'method' => 'POST',
+      'sslverify' => false, // Set to true to enable SSL verification
+  );
   
+  $response = wp_remote_request($url, $args);
+  if (is_array($response) && !is_wp_error($response)) {
+      $body = wp_remote_retrieve_body($response);
+      $data = json_decode($body, true);
+  
+      if ($data['result']['token']) {
+          $token = $data['result']['token'];
+         $expiration_timestamp = time() + 30 * 60; // 30 minutes * 60 seconds/minute
+          update_option('system_token', $token);
+          update_option('system_token_expiration', $expiration_timestamp);
+  
+      } else {
+          // Handle the case where the token is not present in the response
+      }
+  } else {
+      // Handle the API request error
+  }
+}
+
+function Is_Token_Expired() {
+  // Get the stored token and its expiration timestamp from the database
+  $token = get_option('system_token');
+  $expiration_timestamp = get_option('system_token_expiration');
+  // Check if the token has expired
+  if ($token && $expiration_timestamp && $expiration_timestamp > time()) {
+    return $token; // Token is not expired
+  } else {
+    Generate_Token();
+    echo "Toke Regenerated";
+  }
+}
+
+
+
+

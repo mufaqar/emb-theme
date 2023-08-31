@@ -1,5 +1,6 @@
-<?php /* Template Name: Company Management  */
+<?php /* Template Name: Company  */
 get_header('admin');
+
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
@@ -36,6 +37,9 @@ get_header('admin');
             <tbody>
 
                 <?php
+
+
+
                 $i = 0;
 
                 $members = get_users(
