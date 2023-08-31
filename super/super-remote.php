@@ -3,6 +3,8 @@ get_header('admin');
 
 $token =  Is_Token_Expired(); 
 
+//echo $token;
+
 
 
 $url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
