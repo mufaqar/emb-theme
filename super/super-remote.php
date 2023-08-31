@@ -1,11 +1,46 @@
 <?php /* Template Name: Remote Manager  */
 get_header('admin');
+
+$token =  Is_Token_Expired(); 
+
+
+
+$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
+
+$headers = array(
+    'X-Access-Token' => $token,
+    'Content-Type' => 'application/json',
+);
+
+$body = json_encode(array(
+    'list' => array(
+        array('meternum' => '230729010001')
+    )
+));
+
+$args = array(
+    'headers' => $headers,
+    'body' => $body,
+    'method' => 'POST',
+);
+
+$response = wp_remote_request($url, $args);
+
+
+
+
+
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
 
 
     <section id="div1" class="targetDiv activediv tablediv">
+
+    <?php print "<pre>";
+print_r($response);
+
+?>
         <table id="allusers" class="table table-striped orders_table export_table" style="width:100%">
             <thead>
                 <tr>

@@ -210,7 +210,7 @@ function load_subcategories() {
  // add_action( 'init', 'update_post_title_with_meta' );
 
  function Generate_Token() {
-  $url = 'https://sav.jcen.cn/pwsys/sys/gettoken';
+  $url = 'https://saven.jcen.cn/pwsys/sys/gettoken';
   $args = array(
       'body' => json_encode(array(
           'appid' => 'shabbir',
