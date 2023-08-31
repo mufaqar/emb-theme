@@ -29,8 +29,8 @@ $response = wp_remote_post($url, $args);
         <thead>
                     <tr>
                         <th>Sr #</th>
-                        <th>Dev Id</th>                         
-                        <th>Dev Name</th>                             
+                        <th>Device Number</th>                         
+                        <th>Device Name</th>                             
                         <th>Oper date</th>
                         <th>QTY</th>
                         <th>Vol A</th>
