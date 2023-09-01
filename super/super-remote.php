@@ -7,26 +7,26 @@ $token =  Is_Token_Expired();
 
 
 
-$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
+// $url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
 
-$headers = array(
-    'X-Access-Token' => $token,
-    'Content-Type' => 'application/json',
-);
+// $headers = array(
+//     'X-Access-Token' => $token,
+//     'Content-Type' => 'application/json',
+// );
 
-$body = json_encode(array(
-    'list' => array(
-        array('meternum' => '230729010001')
-    )
-));
+// $body = json_encode(array(
+//     'list' => array(
+//         array('meternum' => '230729010001')
+//     )
+// ));
 
-$args = array(
-    'headers' => $headers,
-    'body' => $body,
-    'method' => 'POST',
-);
+// $args = array(
+//     'headers' => $headers,
+//     'body' => $body,
+//     'method' => 'POST',
+// );
 
-$response = wp_remote_request($url, $args);
+// $response = wp_remote_request($url, $args);
 
 
 
@@ -39,8 +39,8 @@ $response = wp_remote_request($url, $args);
 
     <section id="div1" class="targetDiv activediv tablediv">
 
-    <?php print "<pre>";
-print_r($response);
+    <?php //print "<pre>";
+    //print_r($response);
 
 ?>
         <table id="allusers" class="table table-striped orders_table export_table" style="width:100%">
