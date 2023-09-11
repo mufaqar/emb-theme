@@ -1,10 +1,12 @@
 <?php /* Template Name: API-Reports */    get_header('admin');
 $token =  Is_Token_Expired(); 
 
+echo $token;
+
 //echo $token;
-$url = 'https://sav.jcen.cn/pwsys/pwtransiot/pwTransIot/list_xzairport';
-$startDate = '2023-08-20';
-$endDate = '2023-08-30';
+$url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
+$startDate = '2023-08-13';
+$endDate = '2023-09-11';
 $args = array(
     'body' => json_encode(array(
         'startTime' => $startDate,
@@ -17,10 +19,14 @@ $args = array(
         'Content-Type' => 'application/json',
     ),
     'method' => 'POST',
-    'sslverify' => false
+    'sslverify' => false,
+    'timeout' => 180 
 );
 
 $response = wp_remote_post($url, $args);
+
+print_r($response)
+
 ?>
     <?php include('navigation.php'); ?>
     <div class="admin_parrent">        

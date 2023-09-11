@@ -1,40 +1,61 @@
     <?php /* Template Name: ImportData */    get_header();
 
-    echo "Reposts";
+  //  echo "Reposts";
 
 
+    // $allposts= get_posts( array('post_type'=>'records','numberposts'=>-1) );
+    //     foreach ($allposts as $eachpost) {
+    //     wp_delete_post( $eachpost->ID, true );
+    //     }
 
-// $url = 'https://sav.jcen.cn/pwsys/sys/gettoken';
-// $args = array(
-//     'body' => json_encode(array(
-//         'appid' => 'shabbir',
-//         'appsecret' => 'shabbir-123',
-//         'code' => '892894b98ceb5f11660d6cd3fff5c3d1',
-//     )),
-//     'headers' => array(
-//         'Content-Type' => 'application/json',
-//     ),
-//     'method' => 'POST',
-//     'sslverify' => false, // Set to true to enable SSL verification
-// );
+//exit();
 
-// $response = wp_remote_request($url, $args);
+   $token =  Is_Token_Expired(); 
 
-// if (is_array($response) && !is_wp_error($response)) {
-//     $body = wp_remote_retrieve_body($response);
-//     // Process $body as needed
-// }
+   // echo $token;
+    
+
+    $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
+    $startDate = '2023-08-13';
+    $endDate = '2023-09-11';
+    $args = array(
+        'body' => json_encode(array(
+            'startTime' => $startDate,
+            'endTime' => $endDate,
+            'pageNo' => 1,
+            'pageSize' => 1000,
+        )),
+        'headers' => array(
+            'X-Access-Token' => $token,
+            'Content-Type' => 'application/json',
+        ),
+        'method' => 'POST',
+        'sslverify' => false,
+        'timeout' => 180 
+    );
+    
+    $response = wp_remote_post($url, $args);
+
+ 
+
+    if ( is_wp_error( $response ) ) {
+        // Handle the error, if any
+    } else {
+        $body = wp_remote_retrieve_body( $response );
+
+    }
+    
+
+    $data = json_decode($body);
+
+    // Access the "records" array
+    $records = $data->result->records;
+  
+
+   //print "<pre>";
+ //  print_r($records);
 
 
-//'startTime' =>'2023-08-25',
-//'endTime'  => '2023-08-26',
-
-
-// Step 1: Read JSON Data from File
-$json_data = file_get_contents(get_template_directory() . '/data.json');
-$data_array = json_decode($json_data, true);
-
-$records = $data_array['result']['records'];
 
 
 if ($records) {
@@ -54,9 +75,6 @@ if ($records) {
             $relay1state = $array_data['relay1state'];   
             $power_a = $array_data['power_a']; 
             $amp_a = $array_data['amp_a'];   
-
-            
-
             
             $post_title = $stationid."-".$id;
           
