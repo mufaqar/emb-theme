@@ -41,24 +41,14 @@
     if ( is_wp_error( $response ) ) {
         // Handle the error, if any
     } else {
-        $body = wp_remote_retrieve_body( $response );
+        $body = wp_remote_retrieve_body( $response );        
+         $data = json_decode($body);
+        // Access the "records" array
+        $records = $data->result->records;
 
-    }
     
 
-    $data = json_decode($body);
 
-    // Access the "records" array
-    $records = $data->result->records;
-  
-
-   //print "<pre>";
- //  print_r($records);
-
-
-
-
-if ($records) {
 
     foreach ($records as $array_data) {           
 
@@ -109,13 +99,7 @@ if ($records) {
                 echo "Error inserting post: " . $post_id->get_error_message();
             } else {
                 echo "Post inserted with ID: " . $post_id . "<br>";
-            }
-          
-
-    
-
-
-         
+            }   
 
        
 
@@ -125,8 +109,19 @@ if ($records) {
            
 
     
-    }
+    
 }
+
+      
+
+    }
+    
+
+  
+
+  
+
+
 
 
 
