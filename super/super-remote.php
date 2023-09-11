@@ -94,15 +94,11 @@ $token =  Is_Token_Expired();
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
                     <th>
-                    <form name="change_status">
-                        <label><input type="radio" value="On" name="statuschange">On</label>
-                        <label><input type="radio" value="Off" name="statuschange">Off</label>
-                    </form>
-                    
-                        </div></th>
-
-
-
+                    <label class="switch" data-id="<?php echo $terminal_devname ?>">
+                    <input type="checkbox" class="id-toggle">
+                    <span class="slider round"></span>
+                    </label>     
+                    </th>
                 </tr>
                 <?php endwhile;
                         wp_reset_query();
@@ -123,31 +119,35 @@ $token =  Is_Token_Expired();
 
 
 <?php get_footer('admin') ?>
+     <!-- Font Awsome -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" ></script> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ <script type="text/javascript">   
+     jQuery(document).ready(function($) {	
+        
+        $('.id-toggle').on('change', function () {        
+            const id = $(this).closest('.switch').attr('data-id'); 
+            const isChecked = $(this).is(':checked');  
+        alert(id);
+            
+         }); 
+            
+        
+     });
+	</script>
 
-<script>
-        // Get a reference to the radio buttons
-        const radioButtons = document.getElementsByName('statuschange');     
-        radioButtons.forEach(radioButton => {
-            radioButton.addEventListener('change', function() {
-                // Check which option is selected
-                if (this.value === 'On') {
-                    // Call a function when "On" is selected
-                    handleOn();
-                } else if (this.value === 'Off') {
-                    // Call a function when "Off" is selected
-                    handleOff();
-                }
-            });
-        });
 
-        // Define the functions to call when the options are selected
-        function handleOn() {
-            console.log('Status turned On');
-            // You can perform other actions here
-        }
 
-        function handleOff() {
-            console.log('Status turned Off');
-            // You can perform other actions here
-        }
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+   
