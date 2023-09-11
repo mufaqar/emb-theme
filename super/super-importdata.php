@@ -3,12 +3,7 @@
   //  echo "Reposts";
 
 
-    // $allposts= get_posts( array('post_type'=>'records','numberposts'=>-1) );
-    //     foreach ($allposts as $eachpost) {
-    //     wp_delete_post( $eachpost->ID, true );
-    //     }
-
-//exit();
+    
 
    $token =  Is_Token_Expired(); 
 
@@ -46,8 +41,6 @@
         // Access the "records" array
         $records = $data->result->records;
 
-    
-
 
 
     foreach ($records as $array_data) {           
@@ -64,10 +57,8 @@
             $vol_a  = $array_data['vol_a'];
             $relay1state = $array_data['relay1state'];   
             $power_a = $array_data['power_a']; 
-            $amp_a = $array_data['amp_a'];   
-            
-            $post_title = $stationid."-".$id;
-          
+            $amp_a = $array_data['amp_a'];               
+            $post_title = $stationid."-".$id;          
             $post_data = array(
                 'post_title' => $post_title,
                 'post_content' => $stationid,
@@ -94,27 +85,19 @@
             // Insert the post with metadata
             $post_id = wp_insert_post($post_data);
             echo "Post inserted with ID: " . $post_id . "<br>";
-
             if (is_wp_error($post_id)) {
                 echo "Error inserting post: " . $post_id->get_error_message();
             } else {
                 echo "Post inserted with ID: " . $post_id . "<br>";
-            }   
-
-       
-
-            
-       
-        
-           
+            } 
 
     
     
-}
+        }
 
       
 
-    }
+     }
     
 
   
@@ -138,4 +121,4 @@
 
     ?>
 
-<?php get_footer()?>
+    <?php get_footer()?>
