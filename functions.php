@@ -69,13 +69,16 @@ function pagination($pages = '', $range = 4)
      }
 }
 
-if (function_exists('register_nav_menus')) {
-register_nav_menus( array(	
-	 
-      
-        'super' => __( 'Main Menu')
-	) );
-}
+  if (function_exists('register_nav_menus')) {
+  register_nav_menus( array(	
+    
+        
+          'super' => __( 'Main Menu'),
+          'company' => __( 'Company Menu'),
+          'main' => __( 'Main Menu')
+
+    ) );
+  }
 
 function fallbackmenu1(){ ?>
 			<div id="menu">

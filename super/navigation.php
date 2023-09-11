@@ -7,11 +7,26 @@
                     </div>                   
                     <div class="mt-5">                        
                         <?php 	
-								  wp_nav_menu ( array(
-                                    'container'       => false,	
-									'theme_location'  => 'super',	
-                                    'menu_class'      => 'myProfileNav activeNav'									
-								) );
+                                if (current_user_can('administrator')) {
+                                    wp_nav_menu ( array(
+                                        'container'       => false,	
+                                        'theme_location'  => 'super',	
+                                        'menu_class'      => 'myProfileNav activeNav'									
+                                    ) );                                  
+                                    
+                                }  else {
+                                    // Default menu for other users
+                                    wp_nav_menu ( array(
+                                        'container'       => false,	
+                                        'theme_location'  => 'company',	
+                                        'menu_class'      => 'myProfileNav activeNav'									
+                                        ) ); 
+                                }
+
+
+
+
+
 								?>       
                             
                         
@@ -39,18 +54,20 @@
                                         wp_redirect( home_url('login'));                                     
                                         exit;
                                     }
-
                                     global $user_login, $current_user; 
                                     get_currentuserinfo();
-                                    $user_info = get_userdata($current_user->ID);
-                                   
+                                    $user_info = get_userdata($current_user->ID);                                   
                                    $role = $user_info->roles;
-                                   echo $role[0];                                 
+                                   echo $role[0];   
                                    
-                                    if (!in_array('administrator', $user_info->roles)) {   
-                                        //wp_redirect( home_url('login'));                                                                         
-                                        die("Not Allowed");                              
-                                    }
+                                   $user = wp_get_current_user();                                    
+                                   $desired_roles = array('administrator', 'company');
+                                   if (array_intersect($desired_roles, $user->roles)) {
+                                       // The user has one of the desired roles (admin or company)                                
+                                   } else {
+                                       // User doesn't have the desired roles, display a default menu
+                                      }
+                                   
                                     ?></h6>  
                             </div>
                             <img src="<?php bloginfo('template_directory'); ?>/reources//images/profile.webp" alt="">
