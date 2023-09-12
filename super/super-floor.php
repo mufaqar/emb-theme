@@ -1,4 +1,4 @@
-<?php /* Template Name: Floor Planner  */
+<?php /* Template Name: Admin-FloorPlanner  */
 get_header('admin');
 ?>
 <?php include('navigation.php'); ?>
@@ -8,7 +8,7 @@ get_header('admin');
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
                     <h2>Floor Section</h2>
-                    <div><a href="<?php echo home_url('dashboard/add-location'); ?>"><i
+                    <div><a href="<?php echo home_url('admin-dashboard/add-location'); ?>"><i
                                 class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>

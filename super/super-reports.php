@@ -1,4 +1,4 @@
-<?php /* Template Name: Reports */    get_header('admin');
+<?php /* Template Name: Admin-Reports */    get_header('admin');
 
 
 ?>

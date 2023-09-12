@@ -10,7 +10,7 @@ get_header('admin');
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
                     <h2>Company</h2>
-                    <div><a href="<?php echo home_url('dashboard/add-company'); ?>"><i class="fa-solid fa-plus"></i></a>
+                    <div><a href="<?php echo home_url('admin-dashboard/add-company'); ?>"><i class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
             </div>

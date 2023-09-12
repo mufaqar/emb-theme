@@ -1,4 +1,4 @@
-<?php /* Template Name: Remote Manager  */
+<?php /* Template Name: Admin-RemoteManager  */
 get_header('admin');
 
 
