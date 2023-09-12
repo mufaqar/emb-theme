@@ -131,3 +131,82 @@ function add_terminal() {
 
 
 
+
+add_action('wp_ajax_switch_on', 'switch_on', 0);
+add_action('wp_ajax_nopriv_switch_on', 'switch_on');
+
+function switch_on() {
+
+	$devnum = $_POST['id'];
+
+	$token = get_option('system_token');
+	$expiration_timestamp = get_option('system_token_expiration');
+	if (!$token || !$expiration_timestamp || $expiration_timestamp < time()) {
+		Generate_Token();
+		return;
+	}
+
+
+	$meterNumber = $devnum; 
+	$url = 'https://saven.jcen.cn/pwsys/sav/switchOn';
+
+	$headers = array(
+		'X-Access-Token' => $token,
+		'Content-Type' => 'application/json',
+	);
+
+	$body = json_encode(array(
+		'list' => array(
+			array('meternum' => $meterNumber)
+		)
+	));
+
+	$args = array(
+		'headers' => $headers,
+		'body' => $body,
+		'method' => 'POST',
+	);
+
+	$response = wp_remote_request($url, $args);
+
+	print_r($response);
+		
+		
+}
+
+
+add_action('wp_ajax_switch_off', 'switch_off', 0);
+add_action('wp_ajax_nopriv_switch_off', 'switch_off');
+
+function switch_off() {
+
+	$devnum = $_POST['id'];
+	$meterNumber = 	$devnum; // Replace this with your actual meter number
+	$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
+
+	$headers = array(
+		'X-Access-Token' => $token,
+		'Content-Type' => 'application/json',
+	);
+
+	$body = json_encode(array(
+		'list' => array(
+			array('meternum' => $meterNumber)
+		)
+	));
+
+	$args = array(
+		'headers' => $headers,
+		'body' => $body,
+		'method' => 'POST',
+	);
+
+	$response = wp_remote_request($url, $args);
+
+	print_r($response);
+		
+		
+}
+
+
+

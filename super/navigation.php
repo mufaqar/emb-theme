@@ -47,26 +47,23 @@
                         </div>
                         <div class="proofile_info d-flex align-items-center">
                             <div class="user">
-                            <h6><?php global $current_user; wp_get_current_user();
+                            <h6><?php   $user = wp_get_current_user();  
                                  if ( is_user_logged_in() ) { 
-                                    echo 'Hey, ' .  $current_user->display_name ."<br/>" ; } 
+                                    echo 'Hey, ' .  $user->display_name ."<br/>" ; } 
                                     else {
                                         wp_redirect( home_url('login'));                                     
                                         exit;
-                                    }
-                                    global $user_login, $current_user; 
-                                    get_currentuserinfo();
-                                    $user_info = get_userdata($current_user->ID);                                   
-                                   $role = $user_info->roles;
-                                   echo $role[0];   
-                                   
-                                   $user = wp_get_current_user();                                    
-                                   $desired_roles = array('administrator', 'company');
-                                   if (array_intersect($desired_roles, $user->roles)) {
-                                       // The user has one of the desired roles (admin or company)                                
-                                   } else {
-                                       // User doesn't have the desired roles, display a default menu
-                                      }
+                                    }                               
+                           
+                                    $user_info = get_userdata($user->ID);                                   
+                                    $role = $user_info->roles;
+                                    echo $role[0];               
+                                    $desired_roles = array('administrator', 'company');
+                                    if (array_intersect($desired_roles, $user->roles)) {
+                                        // The user has one of the desired roles (admin or company)                                
+                                    } else {
+                                        // User doesn't have the desired roles, display a default menu
+                                        }
                                    
                                     ?></h6>  
                             </div>

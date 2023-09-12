@@ -1,35 +1,6 @@
 <?php /* Template Name: Remote Manager  */
 get_header('admin');
 
-$token =  Is_Token_Expired(); 
-
-//echo $token;
-
-
-
-// $url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
-
-// $headers = array(
-//     'X-Access-Token' => $token,
-//     'Content-Type' => 'application/json',
-// );
-
-// $body = json_encode(array(
-//     'list' => array(
-//         array('meternum' => '230729010001')
-//     )
-// ));
-
-// $args = array(
-//     'headers' => $headers,
-//     'body' => $body,
-//     'method' => 'POST',
-// );
-
-// $response = wp_remote_request($url, $args);
-
-
-
 
 
 ?>
@@ -94,7 +65,7 @@ $token =  Is_Token_Expired();
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
                     <th>
-                    <label class="switch" data-id="<?php echo $terminal_devname ?>">
+                    <label class="switch" data-id="<?php echo $terminal_devnum ?>">
                     <input type="checkbox" class="id-toggle">
                     <span class="slider round"></span>
                     </label>     
@@ -123,17 +94,52 @@ $token =  Is_Token_Expired();
      <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" ></script> 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  <script type="text/javascript">   
-     jQuery(document).ready(function($) {	
+    jQuery(document).ready(function($) {
+    $('.id-toggle').on('change', function () {
+        const id = $(this).closest('.switch').attr('data-id');
+        const isChecked = $(this).is(':checked');
+
         
-        $('.id-toggle').on('change', function () {        
-            const id = $(this).closest('.switch').attr('data-id'); 
-            const isChecked = $(this).is(':checked');  
-        alert(id);
-            
-         }); 
-            
-        
-     });
+        if (isChecked) {
+            $.ajax({
+                url:"<?php echo admin_url('admin-ajax.php'); ?>",
+                type: 'POST',
+                data: {
+                    action: "switch_on",
+                    id: id
+                },
+                success: function (response) {
+                    // Handle the success response here
+                    alert('Toggle is ON');
+                },
+                error: function (error) {
+                    // Handle the error here
+                    console.error('Error:', error);
+                }
+            });
+        } else {
+         
+            // If the toggle is turned off, make an AJAX call for "off" action
+            $.ajax({
+                url:"<?php echo admin_url('admin-ajax.php'); ?>",
+                type: 'POST',
+                data: {
+                    action: "switch_off",
+                    id: id
+                },
+                success: function (response) {
+                    // Handle the success response here
+                    alert('Toggle is OFF');
+                },
+                error: function (error) {
+                    // Handle the error here
+                    console.error('Error:', error);
+                }
+            });
+        }
+    });
+});
+
 	</script>
 
 

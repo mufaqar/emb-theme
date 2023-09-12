@@ -1,31 +1,31 @@
 <?php /* Template Name: API-Reports */    get_header('admin');
-$token =  Is_Token_Expired(); 
+// $token =  Is_Token_Expired(); 
 
-echo $token;
+// echo $token;
 
-//echo $token;
-$url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
-$startDate = '2023-08-13';
-$endDate = '2023-09-11';
-$args = array(
-    'body' => json_encode(array(
-        'startTime' => $startDate,
-        'endTime' => $endDate,
-        'pageNo' => 1,
-        'pageSize' => 1000,
-    )),
-    'headers' => array(
-        'X-Access-Token' => $token,
-        'Content-Type' => 'application/json',
-    ),
-    'method' => 'POST',
-    'sslverify' => false,
-    'timeout' => 180 
-);
+// //echo $token;
+// $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
+// $startDate = '2023-08-13';
+// $endDate = '2023-09-11';
+// $args = array(
+//     'body' => json_encode(array(
+//         'startTime' => $startDate,
+//         'endTime' => $endDate,
+//         'pageNo' => 1,
+//         'pageSize' => 1000,
+//     )),
+//     'headers' => array(
+//         'X-Access-Token' => $token,
+//         'Content-Type' => 'application/json',
+//     ),
+//     'method' => 'POST',
+//     'sslverify' => false,
+//     'timeout' => 180 
+// );
 
-$response = wp_remote_post($url, $args);
+// $response = wp_remote_post($url, $args);
 
-print_r($response)
+// print_r($response)
 
 ?>
     <?php include('navigation.php'); ?>
@@ -48,35 +48,45 @@ print_r($response)
 
                 <?php 
 
-                    if (is_array($response) && !is_wp_error($response)) {
-                        $body = wp_remote_retrieve_body($response);
-                        $data = json_decode($body, true);  
-                        $i = 0; 
-                        foreach ($data['result']['records'] as $record) {                            
-                            $i++;
-                            $id = $record['id'];
-                            $stationid = $record['stationid'];
-                            $transformerid = $record['transformerid'];
-                            $transformername = $record['transformername'];
-                            $devid = $record['devid'];
-                            $devname = $record['devname'];
-                            $devnum  = $record['devnum'];
-                            $operdate = $record['operdate'];
-                            $qty_total = $record['qty_total'];
-                            $vol_a  = $record['vol_a'];
-                            $relay1state = $record['relay1state'];
-                            
-                            ?>
-                              <tr>
-                                <td><?php echo $i ?></td>   
-                                <td><?php  echo $devnum ?></td>                                  
-                                <td><?php  echo $devname ?></td>   
-                                <td><?php  echo $operdate ?></td>   
-                                <td><?php  echo $qty_total ?></td>   
-                                <td><?php  echo $vol_a ?></td>   
-                                <td><?php  echo $relay1state ?></td>  
-                            </tr>
-                        <?php  } } ?>
+                        $i = 0;
+                        query_posts(array(
+                            'post_type' => 'records',
+                            'posts_per_page' => 10,
+                            'order' => 'desc'
+                        ));
+                        if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();                         
+                        $i++;
+                        $id = get_post_meta(get_the_ID(),'id', true); 
+                        $stationid = get_post_meta(get_the_ID(),'stationid', true); 
+                        $transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
+                        $transformername = get_post_meta(get_the_ID(),'transformername', true); 
+                        $devid = get_post_meta(get_the_ID(),'devid', true); 
+                        $devname = get_post_meta(get_the_ID(),'devname', true); 
+                        $devnum  = get_post_meta(get_the_ID(),'devnum', true); 
+                        $operdate = get_post_meta(get_the_ID(),'operdate', true); 
+                        $qty_total = get_post_meta(get_the_ID(),'qty_total', true); 
+                        $vol_a  = get_post_meta(get_the_ID(),'vol_a', true); 
+                        $relay1state = get_post_meta(get_the_ID(),'relay1state', true);    
+                        
+                        ?>
+                        <tr>
+                            <td><?php echo $i ?></td>
+                        
+                            <td><?php echo $stationid;?></td>
+                            <td><?php echo $transformerid?></td>
+                            <td><?php  echo $devid ?></td>                                  
+                            <td><?php  echo $devname ?></td>   
+                            <td><?php  echo $operdate ?></td>   
+                            <td><?php  echo $qty_total ?></td>   
+                            <td><?php  echo $vol_a ?></td>   
+                                                 
+                         
+                        </tr>
+                            <?php endwhile;
+                        wp_reset_query();
+                    else : ?>
+                        <h2><?php _e('Nothing Found', 'lbt_translate'); ?></h2>
+                    <?php endif; ?>
 
                 </tbody>           
 

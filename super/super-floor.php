@@ -3,7 +3,6 @@ get_header('admin');
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
-
     <div class="toggle_btn">
         <div class="row ">
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
@@ -32,7 +31,7 @@ get_header('admin');
 
         <?php
 
-           $i;
+            $i = 0;
             $taxonomy = 'location';            
             $terms = get_terms(array(
                 'taxonomy' => $taxonomy,
