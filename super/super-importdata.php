@@ -11,12 +11,13 @@
     
 
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
-    $startDate = '2023-08-13';
-    $endDate = '2023-09-11';
+     // Set the start and end times (30 minutes from now)
+     $start_time = date('Y-m-d H:i:s', strtotime('+30 minutes'));
+     $end_time = date('Y-m-d H:i:s', strtotime('+60 minutes'));
     $args = array(
         'body' => json_encode(array(
-            'startTime' => $startDate,
-            'endTime' => $endDate,
+            'startTime' => $start_time,
+            'endTime' => $end_time,
             'pageNo' => 1,
             'pageSize' => 1000,
         )),
@@ -48,8 +49,7 @@
             $data = json_decode($body);
         
             // Access the "records" array
-            $records = $data->result->records;
-        
+            $records = $data->result->records;        
             foreach ($records as $array_data) {
                 $id = $array_data->id;
                 $stationid = $array_data->stationid;
@@ -68,7 +68,7 @@
                 $post_data = array(
                     'post_title' => $post_title,
                     'post_content' => $stationid,
-                    'post_type' => 'records', // Change to your desired post type
+                    'post_type' => 'records', 
                     'post_status' => 'publish',
                     'meta_input' => array(
                         'id' => $id,
