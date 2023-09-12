@@ -2,6 +2,7 @@
 get_header('admin');
 $user = wp_get_current_user();  
 $UID = $user->ID;
+$company_name = $user->display_name;
 
 
 ?>
@@ -11,7 +12,7 @@ $UID = $user->ID;
         <div class="row ">
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
-                    <h2><?php echo $user->display_name ?> Dashboard</h2>
+                    <h2><?php echo $company_name ?> Dashboard</h2>
                 </div>
             </div>
         </div>
@@ -64,7 +65,7 @@ $UID = $user->ID;
             </div>
             <div class="col">
 
-                <h5>Total Quantity By </h5>
+                <h5>Total Quantity By <?php echo $company_name ?></h5>
 
                 <?php
                 $args = array(
