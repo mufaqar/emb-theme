@@ -179,9 +179,8 @@ function schedule_api_cron_job() {
 }
 
 // Hook the scheduling function
-add_action('init', 'schedule_api_cron_job');
-
-add_action( 'ecm_cron_importdata', 'call_api_with_times' );
+//add_action('init', 'schedule_api_cron_job');
+//add_action( 'ecm_cron_importdata', 'call_api_with_times' );
 
 // Define the function to be executed by the cron job
 function call_api_with_times() {
@@ -189,7 +188,6 @@ function call_api_with_times() {
   $expiration_timestamp = get_option('system_token_expiration');
   if (!$token || !$expiration_timestamp || $expiration_timestamp < time()) {
       Generate_Token();
-      echo "Token Regenerated";
       return;
   }
 
@@ -285,5 +283,5 @@ function call_api_with_times() {
 
 }
 // Hook the custom function to the scheduled event
-add_action('api_cron_event', 'call_api_with_times');
+//add_action('api_cron_event', 'call_api_with_times');
 

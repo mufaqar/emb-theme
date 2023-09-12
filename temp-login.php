@@ -8,29 +8,21 @@ global $current_user;
 $logged_user = wp_get_current_user();
 $UIL =  $logged_user->user_login;
 $uid =  $logged_user->ID;
-$url = home_url('dashboard');
-if ( is_user_logged_in() ) {
 
-   
+if ( is_user_logged_in() ) {   
 $user_info = get_userdata($uid);
 $role = $user_info->roles;
 
-
-
-
-
 if (in_array('administrator', $user_info->roles)) {
-    $url = home_url('dashboard');
+    $url = home_url('admin-dashboard');
     wp_redirect($url);
     exit();
     }
 
 else {
-    $url = home_url('dashboard');
+    $url = home_url('company-dashboard');
     wp_redirect($url);
     exit();
-
-
 }
 
 
@@ -65,7 +57,7 @@ else {
             </div>
             <div class="col-sm-12 right col-md-6 p-3">
                  <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo_dark.png" alt="" style="max-width:200px" > <br/><br/>
-                <h3>Welcome to ECM</h3>            
+                <h3>Welcome to ECM</h3>           
               
                 <form class="login_form" id="loginform">
                     <div class="form-group">

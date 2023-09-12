@@ -22,8 +22,7 @@
                                         'menu_class'      => 'myProfileNav activeNav'									
                                         ) ); 
                                 }
-								?>       
-                            
+								?>    
                         
 
                     </div>
