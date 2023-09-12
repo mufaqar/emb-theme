@@ -184,8 +184,16 @@ add_action('wp_ajax_nopriv_switch_off', 'switch_off');
 function switch_off() {
 
 	$devnum = $_POST['id'];
-	$meterNumber = 	$devnum; // Replace this with your actual meter number
+	$meterNumber = 	$devnum; 
 	$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
+
+	$token = get_option('system_token');
+	$expiration_timestamp = get_option('system_token_expiration');
+	if (!$token || !$expiration_timestamp || $expiration_timestamp < time()) {
+		Generate_Token();
+		return;
+	}
+
 
 	$headers = array(
 		'X-Access-Token' => $token,
