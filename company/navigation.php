@@ -7,21 +7,13 @@
                     </div>                   
                     <div class="mt-5">                        
                         <?php 	
-                                if (current_user_can('administrator')) {
-                                    wp_nav_menu ( array(
-                                        'container'       => false,	
-                                        'theme_location'  => 'super',	
-                                        'menu_class'      => 'myProfileNav activeNav'									
-                                    ) );                                  
-                                    
-                                }  else {
-                                    // Default menu for other users
+                               
                                     wp_nav_menu ( array(
                                         'container'       => false,	
                                         'theme_location'  => 'company',	
                                         'menu_class'      => 'myProfileNav activeNav'									
                                         ) ); 
-                                }
+                           
 								?>    
                         
 
