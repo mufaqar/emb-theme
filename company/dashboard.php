@@ -11,7 +11,7 @@ $UID = $user->ID;
         <div class="row ">
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
-                    <h2>Company Dashboard</h2>
+                    <h2><?php echo $user->display_name ?> Dashboard</h2>
                 </div>
             </div>
         </div>
