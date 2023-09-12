@@ -1,7 +1,4 @@
-<?php /* Template Name: Company-Reports */    get_header('admin');
-
-
-?>
+<?php /* Template Name: Company-Reports */    get_header('admin');?>
     <?php include('navigation.php'); ?>
     <div class="admin_parrent">
         <!-- <div class="toggle_btn">

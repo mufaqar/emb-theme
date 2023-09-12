@@ -1,9 +1,12 @@
 <?php /* Template Name: Company Dashboard  */
 get_header('admin');
+$user = wp_get_current_user();  
+$UID = $user->ID;
+
+
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
-
     <div class="toggle_btn">
         <div class="row ">
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
@@ -13,21 +16,18 @@ get_header('admin');
             </div>
         </div>
     </div>
-
-
-   
     <div class="container">
-  <div class="row boxes">
-        <div class="col">
-            <h2>List of Branches </h2>
-            <?php   
+        <div class="row boxes">
+            <div class="col">
+                <h2>List of Branches </h2>
+                <?php   
                 $args = array(
                     'post_type' => 'branch', 
                     'posts_per_page' => -1, 
                     'meta_query' => array(
                         array(
                             'key' => 'branch_company', 
-                            'value' => '16', 
+                            'value' => $UID, 
                             'compare' => '=',
                         ),
                     ),
@@ -38,13 +38,10 @@ get_header('admin');
                 wp_reset_postdata();
                 
             ?>
-        </div>
-        <div class="col">
-
-
-            <h2>List of Terminal </h2>
-
-            <?php
+            </div>
+            <div class="col">
+                <h2>List of Terminal </h2>
+                <?php
    
                 $ter_args = array(
                     'post_type' => 'terminals', 
@@ -52,7 +49,7 @@ get_header('admin');
                     'meta_query' => array(
                         array(
                             'key' => 'terminal_company', 
-                            'value' => '12', 
+                            'value' => $UID, 
                             'compare' => '=',
                         ),
                     ),
@@ -64,12 +61,12 @@ get_header('admin');
         
             ?>
 
-        </div>
-        <div class="col">
+            </div>
+            <div class="col">
 
-            <h2>Total Quantity By </h2>
+                <h2>Total Quantity By </h2>
 
-            <?php
+                <?php
                 $args = array(
                     'post_type' => 'records', // Replace 'your_post_type' with the name of your custom post type
                     'posts_per_page' => -1, // Retrieve all posts that match the criteria
@@ -109,15 +106,15 @@ get_header('admin');
                 }
 
             ?>
-        </div>
+            </div>
 
 
         </div>
 
-</div>
+    </div>
 
 
 
 
 
-<?php get_footer('admin') ?>
+    <?php get_footer('admin') ?>
