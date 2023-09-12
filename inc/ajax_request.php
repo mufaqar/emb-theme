@@ -165,6 +165,7 @@ function switch_on() {
 		'headers' => $headers,
 		'body' => $body,
 		'method' => 'POST',
+		'timeout' => 180 
 	);
 
 	$response = wp_remote_request($url, $args);
@@ -201,6 +202,7 @@ function switch_off() {
 		'headers' => $headers,
 		'body' => $body,
 		'method' => 'POST',
+		'timeout' => 180 
 	);
 
 	$response = wp_remote_request($url, $args);
