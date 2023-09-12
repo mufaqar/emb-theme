@@ -38,6 +38,55 @@ get_header('admin');
         wp_reset_postdata();
 
 
+
+
+
+
+
+?>
+
+
+<h2>Total Quantity By   </h2>
+
+<?php
+$args = array(
+    'post_type' => 'records', // Replace 'your_post_type' with the name of your custom post type
+    'posts_per_page' => -1, // Retrieve all posts that match the criteria
+    'meta_query' => array(      
+        array(
+            'key' => 'devnum', // Replace 'devnum' with your custom meta key
+            'value' => '230729010002', // Replace with the desired devnum value
+            'compare' => '=', // Exact match
+        )
+    ),
+);
+
+$query = new WP_Query($args);
+
+if ($query->have_posts()) {
+    $total_qty = 0.0; // Initialize the total quantity counter
+
+    while ($query->have_posts()) {
+        $query->the_post();
+
+        // Retrieve the qty_total value for the current post
+        $qty_total = get_post_meta(get_the_ID(), 'qty_total', true);
+
+        // Add the qty_total value to the total quantity
+        $total_qty += floatval($qty_total);
+
+        // Output or use other post data as needed
+      // echo  "Qty" . get_post_meta(get_the_ID(), 'qty_total', true). "<br/>";
+    }
+
+    // Output the total quantity
+    echo 'Total Quantity: ' . $total_qty;
+
+    wp_reset_postdata(); // Restore the global post data
+} else {
+    echo 'No posts found with the specified devnum value.';
+}
+
 ?>
        
 
