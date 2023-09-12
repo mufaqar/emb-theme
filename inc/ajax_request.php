@@ -169,7 +169,9 @@ function switch_on() {
 
 	$response = wp_remote_request($url, $args);
 
+	print "<pre>";
 	print_r($response);
+
 		
 		
 }
@@ -203,6 +205,7 @@ function switch_off() {
 
 	$response = wp_remote_request($url, $args);
 
+	print "<pre>";
 	print_r($response);
 		
 		
