@@ -148,7 +148,7 @@ function switch_on() {
 
 
 	$meterNumber = $devnum; 
-	$url = 'https://saven.jcen.cn/pwsys/sav/switchOn';
+	$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
 
 	$headers = array(
 		'X-Access-Token' => $token,
