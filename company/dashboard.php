@@ -12,7 +12,7 @@ $company_name = $user->display_name;
         <div class="row ">
             <div class="catering_wrapper mt-5 mb-2  p-0 w-100">
                 <div class="catering_heading d-flex align-items-center">
-                    <h2><?php echo $company_name ?> Dashboard</h2>
+                    <h2><span><?php echo $company_name ?></span> Dashboard</h2>
                 </div>
             </div>
         </div>
