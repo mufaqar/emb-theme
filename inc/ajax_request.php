@@ -138,6 +138,9 @@ add_action('wp_ajax_nopriv_switch_on', 'switch_on');
 function switch_on() {
 
 	$devnum = $_POST['id'];
+	$pid = $_POST['pid'];
+
+	
 
 	$token = get_option('system_token');
 	$expiration_timestamp = get_option('system_token_expiration');
@@ -145,10 +148,8 @@ function switch_on() {
 		Generate_Token();
 		return;
 	}
-
-
 	$meterNumber = $devnum; 
-	$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
+	$url = 'https://saven.jcen.cn/pwsys/sav/switchOn';
 
 	$headers = array(
 		'X-Access-Token' => $token,
@@ -170,8 +171,23 @@ function switch_on() {
 
 	$response = wp_remote_request($url, $args);
 
-	print "<pre>";
-	print_r($response);
+	// Check if the request was successful
+	if (is_wp_error($response)) {
+		echo "Error: " . $response->get_error_message();
+	} else {
+		// Get the response body as a JSON string
+		$body = wp_remote_retrieve_body($response);
+
+		// Decode the JSON string into an associative array
+		$data = json_decode($body, true);
+
+		if ($data && isset($data['success']) && $data['success'] === true) {
+			update_post_meta( $pid, 'dev_status', 'On' );
+		} else {
+			echo "Error";
+		}
+	}
+	die();
 
 		
 		
@@ -184,6 +200,8 @@ add_action('wp_ajax_nopriv_switch_off', 'switch_off');
 function switch_off() {
 
 	$devnum = $_POST['id'];
+	$pid = $_POST['pid'];
+	echo $pid;
 	$meterNumber = 	$devnum; 
 	$url = 'https://saven.jcen.cn/pwsys/sav/switchOff';
 
@@ -215,8 +233,23 @@ function switch_off() {
 
 	$response = wp_remote_request($url, $args);
 
-	print "<pre>";
-	print_r($response);
+	// Check if the request was successful
+	if (is_wp_error($response)) {
+		echo "Error: " . $response->get_error_message();
+	} else {
+		// Get the response body as a JSON string
+		$body = wp_remote_retrieve_body($response);
+
+		// Decode the JSON string into an associative array
+		$data = json_decode($body, true);
+
+		if ($data && isset($data['success']) && $data['success'] === true) {
+			update_post_meta( $pid, 'dev_status', 'OFF' );
+			
+		} else {
+			echo "Error";
+		}
+	}
 		
 		
 }

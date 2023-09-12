@@ -65,7 +65,7 @@ get_header('admin');
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
                     <th>
-                    <label class="switch" data-id="<?php echo $terminal_devnum ?>">
+                    <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>">
                     <input type="checkbox" class="id-toggle">
                     <span class="slider round"></span>
                     </label>     
@@ -97,6 +97,8 @@ get_header('admin');
     jQuery(document).ready(function($) {
     $('.id-toggle').on('change', function () {
         const id = $(this).closest('.switch').attr('data-id');
+        const pid = $(this).closest('.switch').attr('data-pid');
+        
         const isChecked = $(this).is(':checked');
 
         
@@ -106,11 +108,12 @@ get_header('admin');
                 type: 'POST',
                 data: {
                     action: "switch_on",
-                    id: id
+                    id: id,
+                    pid : pid
                 },
                 success: function (response) {
                     // Handle the success response here
-                    alert('Toggle is ON');
+                    alert('Device is ON');
                 },
                 error: function (error) {
                     // Handle the error here
@@ -125,11 +128,12 @@ get_header('admin');
                 type: 'POST',
                 data: {
                     action: "switch_off",
-                    id: id
+                    id: id,
+                    pid : pid
                 },
                 success: function (response) {
-                    // Handle the success response here
-                    alert('Toggle is OFF');
+                   
+                    alert('Device is OFF');
                 },
                 error: function (error) {
                     // Handle the error here
