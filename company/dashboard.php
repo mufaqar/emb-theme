@@ -19,7 +19,7 @@ $UID = $user->ID;
     <div class="container">
         <div class="row boxes">
             <div class="col">
-                <h2>List of Branches </h2>
+                <h5>List of Branches </h5>
                 <?php   
                 $args = array(
                     'post_type' => 'branch', 
@@ -40,7 +40,7 @@ $UID = $user->ID;
             ?>
             </div>
             <div class="col">
-                <h2>List of Terminal </h2>
+                <h5>List of Terminal </h5>
                 <?php
    
                 $ter_args = array(
@@ -64,7 +64,7 @@ $UID = $user->ID;
             </div>
             <div class="col">
 
-                <h2>Total Quantity By </h2>
+                <h5>Total Quantity By </h5>
 
                 <?php
                 $args = array(
