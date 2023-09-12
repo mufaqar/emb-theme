@@ -1,20 +1,11 @@
 <?php /* Template Name: Admin-RemoteManager  */
 get_header('admin');
-
-
-
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
-
-
     <section id="div1" class="targetDiv activediv tablediv">
 
-    <?php //print "<pre>";
-    //print_r($response);
-
-?>
-        <table id="allusers" class="table table-striped orders_table export_table" style="width:100%">
+    <table id="allusers" class="table table-striped orders_table export_table" style="width:100%">
             <thead>
                 <tr>
                     <th>Sr #</th>                   
@@ -61,10 +52,10 @@ get_header('admin');
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $terminal_status ?></th>
                     <th>
-                    <!-- <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>" >
+                    <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>" >
                     <input type="checkbox" class="id-toggle"  <?php echo $checked_status ?> >
                     <span class="slider round"></span>
-                    </label>      -->
+                    </label>     
                     </th>
                 </tr>
                 <?php endwhile;
@@ -95,7 +86,7 @@ get_header('admin');
         const id = $(this).closest('.switch').attr('data-id');
         const pid = $(this).closest('.switch').attr('data-pid');
         
-       // const isChecked = $(this).is(':checked');
+        const isChecked = $(this).is(':checked');
 
         
         if (isChecked) {

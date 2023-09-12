@@ -64,18 +64,16 @@ $company_name = $user->display_name;
 
             </div>
             <div class="col">
-
                 <h5>Total Quantity By <?php echo $company_name ?></h5>
-
                 <?php
                 $args = array(
-                    'post_type' => 'records', // Replace 'your_post_type' with the name of your custom post type
-                    'posts_per_page' => -1, // Retrieve all posts that match the criteria
+                    'post_type' => 'records',
+                    'posts_per_page' => -1, 
                     'meta_query' => array(      
                         array(
-                            'key' => 'devnum', // Replace 'devnum' with your custom meta key
-                            'value' => '230729010002', // Replace with the desired devnum value
-                            'compare' => '=', // Exact match
+                            'key' => 'devnum', 
+                            'value' => '230729010002', 
+                            'compare' => '=', 
                         )
                     ),
                 );
