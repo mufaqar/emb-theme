@@ -27,7 +27,7 @@
         ),
         'method' => 'POST',
         'sslverify' => false,
-        'timeout' => 180 
+       cls
     );
     
     $response = wp_remote_post($url, $args);
