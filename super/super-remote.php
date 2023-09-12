@@ -48,12 +48,8 @@ get_header('admin');
                     $terminal_floor_section = get_post_meta($pid , 'terminal_floor_section', true);
 
                     $user_info = get_userdata($terminal_company);                  
-                    $post_status = get_post_status($pid);                 
-                        if ($post_status === 'publish') {
-                            $text_status = 'Active';
-                        } else {
-                            $text_status = 'Inactive';  
-                        }
+                    $terminal_status = get_post_meta($pid , 'dev_status', true);
+                    $checked_status = ($terminal_status == 'On') ? 'checked' : '';
                     
                       ?>
                 <tr>
@@ -63,10 +59,10 @@ get_header('admin');
                     <th><?php echo $user_info->name?></th>          
                     <th><?php echo $terminal_branch_name?></th>
                     <th><?php echo $terminal_floor_section ?></th>
-                    <th><?php echo $text_status ?></th>
+                    <th><?php echo $terminal_status ?></th>
                     <th>
-                    <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>">
-                    <input type="checkbox" class="id-toggle">
+                    <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>" >
+                    <input type="checkbox" class="id-toggle"  <?php echo $checked_status ?> >
                     <span class="slider round"></span>
                     </label>     
                     </th>
