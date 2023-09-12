@@ -61,10 +61,10 @@ get_header('admin');
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $terminal_status ?></th>
                     <th>
-                    <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>" >
+                    <!-- <label class="switch" data-id="<?php echo $terminal_devnum ?>" data-pid="<?php echo $pid ?>" >
                     <input type="checkbox" class="id-toggle"  <?php echo $checked_status ?> >
                     <span class="slider round"></span>
-                    </label>     
+                    </label>      -->
                     </th>
                 </tr>
                 <?php endwhile;
@@ -95,7 +95,7 @@ get_header('admin');
         const id = $(this).closest('.switch').attr('data-id');
         const pid = $(this).closest('.switch').attr('data-pid');
         
-        const isChecked = $(this).is(':checked');
+       // const isChecked = $(this).is(':checked');
 
         
         if (isChecked) {
