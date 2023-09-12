@@ -1,7 +1,7 @@
 /*
 Theme Name: ECM Theme
 Text Domain:  ecm-store
-Version: 1.0.2
+Version: 1.0.3
 Description: Custom Theme for  ECM Theme
 Tags: blog, one-column, custom-background, custom-colors, custom-logo, custom-menu, editor-style, featured-images
 Author: Mufaqar 
@@ -17,9 +17,9 @@ with others.
 /* Adding custom fonts  */
 
 /* css */
-@import './reources/css/Sponsorship_of_employees.css';
-@import './reources/css/Meeting_food.css';
-@import './reources/css/blog.css';
+
+
+
 @import './reources/css/create_business_agreement.css';
 
 html,
@@ -3615,4 +3615,14 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+
+.boxes .col {
+  border: 1px solid #101010;
+  padding: 10px;
+  margin: 30px;
+  
+  
 }
