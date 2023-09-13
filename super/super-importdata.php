@@ -9,14 +9,14 @@
 
    // echo $token;
 
-   $start_time = date('Y-m-d H:i:s', strtotime('+45 minutes'));
-   $end_time = date('Y-m-d H:i:s', strtotime('+75 minutes'));
+//    $start_time = date('Y-m-d H:i:s', strtotime('+45 minutes'));
+//    $end_time = date('Y-m-d H:i:s', strtotime('+75 minutes'));
 
-   echo $start_time;
+//    echo $start_time;
 
-   echo "<hr/>";
+//    echo "<hr/>";
 
-   echo $end_time;
+//    echo $end_time;
 
    //die();
     
@@ -24,7 +24,7 @@
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
      // Set the start and end times (30 minutes from now)
     $start_time = "2023-08-14 01:30";
-    $end_time =  $end_time ;
+    $end_time =  "2023-09-13 08:30";
     $args = array(
         'body' => json_encode(array(
             'startTime' => $start_time,
@@ -43,10 +43,6 @@
     );
     
     $response = wp_remote_post($url, $args);
-
-
-
- 
 
     if ( is_wp_error( $response ) ) {
         // Handle the error, if any
@@ -73,6 +69,7 @@
                 $devname = $array_data->devname;
                 $devnum  = $array_data->devnum;
                 $operdate = $array_data->operdate;
+                $opertime = $array_data->opertime;               
                 $qty_total = $array_data->qty_total;
                 $vol_a  = $array_data->vol_a;
                 $relay1state = $array_data->relay1state;
@@ -93,6 +90,7 @@
                         'devname' => $devname,
                         'devnum' => $devnum,
                         'operdate' => $operdate,
+                        'opertime' => $opertime,
                         'qty_total' => $qty_total,
                         'vol_a' => $vol_a,
                         'relay1state' => $relay1state,
