@@ -5,7 +5,7 @@
 
     
 
-   //$token =  Is_Token_Expired(); 
+   $token =  Is_Token_Expired(); 
 
    // echo $token;
 
@@ -18,13 +18,13 @@
 
    echo $end_time;
 
-   die();
+   //die();
     
 
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
      // Set the start and end times (30 minutes from now)
-    $start_time = "2023-08-14 04";
-    $end_time = "2023-09-13";
+    $start_time = "2023-08-14 01:30";
+    $end_time =  $end_time ;
     $args = array(
         'body' => json_encode(array(
             'startTime' => $start_time,
