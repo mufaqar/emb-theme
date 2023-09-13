@@ -42,6 +42,51 @@ function add_company() {
 		
 }
 
+add_action('wp_ajax_update_company', 'update_company', 0);
+add_action('wp_ajax_nopriv_update_company', 'update_company');
+
+function update_company() {
+		global $wpdb;	
+		$uid = $_POST['uid'];
+		$company_username = $_POST['email'];
+		$company_email = $_POST['email'];
+		$company_name = $_POST['name'];
+		$company_address = $_POST['address'];	
+		$company_city = $_POST['city'];  
+		$company_country = $_POST['country'];  	
+		$user_data = array(
+			'ID' => $uid,
+			'user_login' => $company_email,
+			'user_email' => $company_email,
+			'display_name' => $company_name,
+			'role' => 'company'
+		);	
+	  $user_id = wp_update_user($user_data);	
+	  if (!is_wp_error($user_id)) {	
+		update_user_meta( $user_id,'name', $company_name);	 
+		update_user_meta( $user_id,'company_address', $company_address);	  
+		update_user_meta( $user_id,'company_city', $company_city);
+		update_user_meta( $user_id,'company_country', $company_country);			
+		echo wp_send_json( array('code' => 200 , 'message'=>__('We have Created an account for you.')));  	
+		
+	  } 
+       
+	die;   
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 add_action('wp_ajax_add_location', 'add_location', 0);
 add_action('wp_ajax_nopriv_add_location', 'add_location');
@@ -51,6 +96,30 @@ function add_location() {
 		$term_name = sanitize_text_field($_POST['name']);
         $taxonomy = 'location'; 
         $term_id = wp_insert_term($term_name, $taxonomy);
+        if (!is_wp_error($term_id)) {
+            echo 'success';
+        } else {
+            echo 'error';
+        }
+		
+}
+
+
+add_action('wp_ajax_update_location', 'update_location', 0);
+add_action('wp_ajax_nopriv_update_location', 'update_location');
+
+function update_location() {
+		global $wpdb;			
+		$term_name = sanitize_text_field($_POST['name']);
+		$term_id = $_POST['tid'];
+        $taxonomy = 'location'; 
+
+		$args = array(
+			'name' => $term_name, 
+		);
+	
+    
+		$result = wp_update_term( $term_id, $taxonomy, $args );
         if (!is_wp_error($term_id)) {
             echo 'success';
         } else {

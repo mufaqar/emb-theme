@@ -25,8 +25,7 @@ get_header('admin');
                     <th>Sr #</th>
                     <th>Company Name</th>    
                     <th>Branch Name</th> 
-                    <th>Branch Code</th> 
-                            
+                    <th>Branch Code</th>                             
                     <th>City</th>
                     <th>Country</th>
                     <th>Action</th>
@@ -55,6 +54,9 @@ get_header('admin');
                     $company_city = get_user_meta($user->ID , 'company_city', true);
                     $company_country = get_user_meta($user->ID , 'company_country', true);
                     $company_address= get_user_meta($user->ID , 'company_address', true);
+                    $url = home_url('admin-dashboard/edit-company');
+                    $query_args = array('uid' => $user->ID );
+
                     $args = array(
                         'author' => $user->ID , 
                         'post_type' => 'branch',   // Specify the post type
@@ -81,7 +83,7 @@ get_header('admin');
                         
                     <td><?php echo $company_city ?></td>
                     <td><?php echo $company_country;   ?></td>
-                    <td>Edit</td>
+                    <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit Company</a></th>
 
 
 

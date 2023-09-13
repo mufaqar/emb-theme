@@ -31,21 +31,30 @@ get_header('admin');
 
         <?php
 
+          
+
             $i = 0;
             $taxonomy = 'location';            
             $terms = get_terms(array(
                 'taxonomy' => $taxonomy,
                 'hide_empty' => false,
-            ));          
+            ));      
+            
+            $url = home_url('admin-dashboard/edit-location');
+           
             
                 if (!empty($terms) && !is_wp_error($terms)) {
-                     foreach ($terms as $term) {    $i++; ?>
+                     foreach ($terms as $term) { 
+
+                       // print_r($term);
+                        $query_args = array('tid' => $term->term_id );
+                        $i++; ?>
                 <tr>
                     <td class="pt-4"><?php echo $i ?></td>
                     <td class="">
                         <?php echo $term->name  ?></td>
                     <td>Active</td>
-                    <td>Update</td>
+                    <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit Location</a></th>
                 </tr>
                 <?php  }  } else {
                 echo 'No terms found.';
