@@ -57,27 +57,17 @@ $company_name = $user->display_name;
                 );
                 $terminal_query = new WP_Query($ter_args);  
                 $terminal_count = $terminal_query->found_posts;
-                
-                // Initialize an empty array to store post titles
                 $terminal_titles = array();
                 
                 if ($terminal_query->have_posts()) {
                     while ($terminal_query->have_posts()) {
-                        $terminal_query->the_post();
-                
-                        // Get the post title and store it in the array
+                        $terminal_query->the_post();   
                         $post_title = get_the_title();
-                        $terminal_titles[] = $post_title;
-                
-                        // Output other post content if needed
+                        $terminal_titles[] = $post_title;                
+                     
                     }
-                
-                    // Output the count of terminals
+                 
                     echo 'Terminals: ' . $terminal_count;
-                
-                    // Output or use the array of post titles as needed
-                   
-                
                     wp_reset_postdata(); // Restore the global post data
                 } else {
                     // No terminals found
@@ -89,20 +79,17 @@ $company_name = $user->display_name;
 
             </div>
             <div class="col">
-                <h5>Total Kwh By <?php echo $company_name;
-                
-                $meta_query = array('relation' => 'OR');
-
-                // Loop through the $dev array and create meta query conditions for each value
+                <h5>Total Kwh By <?php echo $company_name;                
+                $meta_query = array('relation' => 'OR');           
                 foreach ($terminal_titles as $dev_value) {
                     $meta_query[] = array(
                         'key' => 'devnum',
                         'value' => $dev_value,
                         'compare' => '=',
                     );
-                }
-
-           
+                }   
+                
+                print_r($meta_query);
                
                 
                 ?></h5>
