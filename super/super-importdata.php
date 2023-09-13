@@ -8,6 +8,17 @@
    $token =  Is_Token_Expired(); 
 
    // echo $token;
+
+   $start_time = date('Y-m-d H:i:s', strtotime('+45 minutes'));
+   $end_time = date('Y-m-d H:i:s', strtotime('+75 minutes'));
+
+   echo $start_time;
+
+   echo "<hr/>";
+
+   echo $end_time;
+
+   die();
     
 
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
