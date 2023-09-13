@@ -63,8 +63,7 @@ $company_name = $user->display_name;
                     while ($terminal_query->have_posts()) {
                         $terminal_query->the_post();   
                         $post_title = get_the_title();
-                        $terminal_titles[] = $post_title;                
-                     
+                        $terminal_titles[] = $post_title;  
                     }
                  
                     echo 'Terminals: ' . $terminal_count;
@@ -80,17 +79,19 @@ $company_name = $user->display_name;
             </div>
             <div class="col">
                 <h5>Total Kwh By <?php echo $company_name;                
-                $meta_query = array('relation' => 'OR');           
+                     
                 foreach ($terminal_titles as $dev_value) {
                     $meta_query[] = array(
                         'key' => 'devnum',
                         'value' => $dev_value,
                         'compare' => '=',
                     );
-                }   
+                }  
                 
-                print_r($meta_query);
-               
+                if (count($meta_query) > 1) {                
+                    $meta_query['relation'] = 'OR';
+                }
+               // print_r($meta_query);             
                 
                 ?></h5>
 
