@@ -1,31 +1,6 @@
-<?php /* Template Name: API-Reports */    get_header('admin');
-// $token =  Is_Token_Expired(); 
+<?php /* Template Name: Admin-TotalCon */    get_header('admin');
 
-// echo $token;
 
-// //echo $token;
-// $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
-// $startDate = '2023-08-13';
-// $endDate = '2023-09-11';
-// $args = array(
-//     'body' => json_encode(array(
-//         'startTime' => $startDate,
-//         'endTime' => $endDate,
-//         'pageNo' => 1,
-//         'pageSize' => 1000,
-//     )),
-//     'headers' => array(
-//         'X-Access-Token' => $token,
-//         'Content-Type' => 'application/json',
-//     ),
-//     'method' => 'POST',
-//     'sslverify' => false,
-//     'timeout' => 180 
-// );
-
-// $response = wp_remote_post($url, $args);
-
-// print_r($response)
 
 ?>
     <?php include('navigation.php'); ?>
@@ -40,7 +15,7 @@
                         <th>Operation Date</th>
                         <th>Quanity</th>
                         <th>Volts</th>
-                        <th>Status </th> 
+                  
                      
                     </tr>
                 </thead>
@@ -51,7 +26,7 @@
                         $i = 0;
                         query_posts(array(
                             'post_type' => 'records',
-                            'posts_per_page' => 10,
+                            'posts_per_page' => -1,
                             'order' => 'desc'
                         ));
                         if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();                         
@@ -70,15 +45,13 @@
                         
                         ?>
                         <tr>
-                            <td><?php echo $i ?></td>
-                        
-                            <td><?php echo $stationid;?></td>
-                            <td><?php echo $transformerid?></td>
-                            <td><?php  echo $devid ?></td>                                  
-                            <td><?php  echo $devname ?></td>   
-                            <td><?php  echo $operdate ?></td>   
+                            <td><?php echo $i ?></td>                        
+                            <td><?php echo $devnum;?></td>
+                            <td><?php echo $devname?></td>
+                            <td><?php  echo $operdate ?></td> 
                             <td><?php  echo $qty_total ?></td>   
                             <td><?php  echo $vol_a ?></td>   
+                          
                                                  
                          
                         </tr>
