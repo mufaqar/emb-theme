@@ -81,6 +81,42 @@ function add_branch() {
 		$new_post_id = wp_insert_post($new_post);
 
 		if ($new_post_id) {
+			update_post_meta($new_post_id, 'branch_address', $address, false);
+			update_post_meta($new_post_id, 'branch_company', $company, false);
+			update_post_meta($new_post_id, 'branch_code', $branch_code, false);
+			update_post_meta($new_post_id, 'branch_country', $country, false);
+		}
+
+		die();
+
+		
+}
+
+
+add_action('wp_ajax_update_branch', 'update_branch', 0);
+add_action('wp_ajax_nopriv_update_branch', 'update_branch');
+
+function update_branch() {
+		global $wpdb;
+		$pid = $_POST['pid'];			
+		$address = $_POST['address'];
+		$company = $_POST['company'];
+		$branch_code = $_POST['location_id'];
+		$country = $_POST['country'];
+		$name = sanitize_text_field($_POST['name']);
+
+		$new_post = array(
+			'ID'           => $pid,
+			'post_title'    => $name,
+			'post_content'  => $name,
+			'post_status'   => 'publish',  
+			'post_author'   => $company,     
+			'post_type'     => 'branch'
+		);
+
+		$new_post_id = wp_update_post($new_post);
+
+		if ($new_post_id) {
 			add_post_meta($new_post_id, 'branch_address', $address, true);
 			add_post_meta($new_post_id, 'branch_company', $company, true);
 			add_post_meta($new_post_id, 'branch_code', $branch_code, true);

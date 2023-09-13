@@ -49,6 +49,9 @@ get_header('admin');
                     $branch_company = get_post_meta($pid , 'branch_company', true);                    
                     $branch_country = get_post_meta($pid , 'branch_country', true);
                     $post_status = get_post_status($pid);
+
+                    $url = home_url('admin-dashboard/edit-branch');
+                    $query_args = array('pid' => $pid);
                  
                         if ($post_status === 'publish') {
                             $text_status = 'Active';
@@ -67,7 +70,7 @@ get_header('admin');
                     <th><?php echo $branch_code?></th>                
                     <th><?php echo $branch_country?></th>
                     <th><?php echo $text_status ?></th>
-                    <th>Edit</th>
+                    <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit Branch</a></th>
 
 
 
