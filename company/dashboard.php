@@ -91,7 +91,8 @@ $company_name = $user->display_name;
                 if (count($meta_query) > 1) {                
                     $meta_query['relation'] = 'OR';
                 }
-               // print_r($meta_query);             
+              
+                print_r($meta_query);             
                 
                 ?></h5>
 
@@ -130,7 +131,7 @@ $company_name = $user->display_name;
 
                     wp_reset_postdata(); // Restore the global post data
                 } else {
-                    echo 'No posts found with the specified devnum value.';
+                    echo 'No Kwh found';
                 }
 
             ?>
