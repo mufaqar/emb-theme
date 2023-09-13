@@ -169,18 +169,16 @@ add_filter( 'cron_schedules', 'ecm_cron_importdata' );
             wp_schedule_event( time(), 'every_fouthyfive_minutes', 'ecm_cron_importdata' );
         }
 
-// Schedule a cron job to run call_api_with_times function every 30 minutes
-function schedule_api_cron_job() {
-  if (!wp_next_scheduled('api_cron_event')) {
-    //  wp_schedule_event(time(), 'every_thirty_minutes', 'api_cron_event');
-   // wp_schedule_event(time(), 'per_minute', 'api_cron_event');
-    wp_schedule_event( time(), 'every_fouthyfive_minutes', 'ecm_cron_importdata'. $args );
-  }
-}
+
+    function schedule_api_cron_job() {
+    if (!wp_next_scheduled('api_cron_event')) {
+        wp_schedule_event( time(), 'every_fouthyfive_minutes', 'ecm_cron_importdata'. $args );
+    }
+    }
 
 // Hook the scheduling function
 //add_action('init', 'schedule_api_cron_job');
-//add_action( 'ecm_cron_importdata', 'call_api_with_times' );
+add_action( 'ecm_cron_importdata', 'call_api_with_times' );
 
 // Define the function to be executed by the cron job
 function call_api_with_times() {
@@ -282,8 +280,6 @@ function call_api_with_times() {
 
 
 }
-// Hook the custom function to the scheduled event
-//add_action('api_cron_event', 'call_api_with_times');
 
 
 function get_terminal_info($UID) {
