@@ -92,7 +92,7 @@ $company_name = $user->display_name;
                     $meta_query['relation'] = 'OR';
                 }
               
-                print_r($meta_query);             
+               // print_r($meta_query);             
                 
                 ?></h5>
 
