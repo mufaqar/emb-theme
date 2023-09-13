@@ -127,7 +127,7 @@ $company_name = $user->display_name;
                     }
 
                     // Output the total quantity
-                    echo 'Total Quantity: ' . $total_qty;
+                    echo 'Total : ' . $total_qty;
 
                     wp_reset_postdata(); // Restore the global post data
                 } else {
