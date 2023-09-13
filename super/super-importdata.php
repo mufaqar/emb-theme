@@ -12,8 +12,8 @@
 
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
      // Set the start and end times (30 minutes from now)
-     $start_time = date('Y-m-d H:i:s');
-     $end_time = date('Y-m-d H:i:s');
+     $start_time = "2023-08-14";
+     $end_time = "2023-09-13";
     $args = array(
         'body' => json_encode(array(
             'startTime' => $start_time,
