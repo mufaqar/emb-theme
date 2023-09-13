@@ -64,22 +64,31 @@ $company_name = $user->display_name;
 
             </div>
             <div class="col">
-                <h5>Total Quantity By <?php echo $company_name ?></h5>
+                <h5>Total Kwh By <?php echo $company_name ?></h5>
                 <?php
                 $args = array(
                     'post_type' => 'records',
                     'posts_per_page' => -1, 
                     'meta_query' => array(      
+                        'relation' => 'OR',
                         array(
                             'key' => 'devnum', 
                             'value' => '230729010002', 
                             'compare' => '=', 
+                        ),
+                        array(
+                            'key' => 'devnum', 
+                            'value' => '230729010001', 
+                            'compare' => '=', 
+                        ),
+                        array(
+                            'key' => 'devnum', 
+                            'value' => '230729010003', 
+                            'compare' => '=', 
                         )
                     ),
                 );
-
                 $query = new WP_Query($args);
-
                 if ($query->have_posts()) {
                     $total_qty = 0.0; // Initialize the total quantity counter
 
