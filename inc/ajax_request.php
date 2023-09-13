@@ -130,6 +130,43 @@ function add_terminal() {
 }
 
 
+add_action('wp_ajax_update_terminal', 'update_terminal', 0);
+add_action('wp_ajax_nopriv_update_terminal', 'update_terminal');
+
+function update_terminal() {
+	global $wpdb;	
+		
+	$pid = $_POST['pid'];	
+	$devnum = $_POST['devnum'];
+	$devname = $_POST['devname'];
+	$company = $_POST['company'];	
+	$branch_name = $_POST['branch_name'];
+	$floor_section = $_POST['floor_section'];
+	$new_post = array(
+		'ID'           => $pid,
+		'post_title'    => $devnum,
+		'post_content'  => $devname,
+		'post_status'   => 'publish',  
+		'post_author'   => $company,     
+		'post_type'     => 'terminals'
+	);
+
+	$new_post_id = wp_update_post($new_post);
+	if ($new_post_id) {
+		update_post_meta($new_post_id, 'terminal_devnum', $devnum, false);
+		update_post_meta($new_post_id, 'terminal_devname', $devname, false);
+		update_post_meta($new_post_id, 'terminal_company', $company, false);
+		update_post_meta($new_post_id, 'terminal_branch_name', $branch_name, false);
+		update_post_meta($new_post_id, 'terminal_floor_section', $floor_section, false);
+	
+	}
+
+	die();
+
+	
+}
+
+
 
 
 add_action('wp_ajax_switch_on', 'switch_on', 0);

@@ -24,9 +24,9 @@ get_header('admin');
                     <th>Sr #</th>                   
                     <th>Devnum </th>
                     <th>Dev Name </th>
-                    <th>company  </th>               
-                    <th>branch  </th>
-                    <th>floor section  </th>                   
+                    <th>Company  </th>               
+                    <th>Branch  </th>
+                    <th>Floor Section  </th>                   
                     <th>Status</th>
                     <th>Action</th>
 
@@ -50,8 +50,10 @@ get_header('admin');
                     $terminal_company = get_post_meta($pid , 'terminal_company', true);                    
                     $terminal_branch_name = get_post_meta($pid , 'terminal_branch_name', true);
                     $terminal_floor_section = get_post_meta($pid , 'terminal_floor_section', true);
-
                     $user_info = get_userdata($terminal_company);
+
+                    $url = home_url('admin-dashboard/edit-terminal');
+                    $query_args = array('pid' => $pid);
 
                   
                     $post_status = get_post_status($pid);                 
@@ -70,7 +72,7 @@ get_header('admin');
                     <th><?php echo $terminal_branch_name?></th>
                     <th><?php echo $terminal_floor_section ?></th>
                     <th><?php echo $text_status ?></th>
-                    <th>Edit</th>
+                    <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit Terminal</a></th>
 
 
 
