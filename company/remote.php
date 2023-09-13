@@ -20,8 +20,6 @@ $UID = $user->ID;
                     <th>floor section  </th>                   
                     <th>Status</th>
                     <th>Action</th>
-
-
                 </tr>
             </thead>
             <tbody>

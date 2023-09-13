@@ -285,3 +285,54 @@ function call_api_with_times() {
 // Hook the custom function to the scheduled event
 //add_action('api_cron_event', 'call_api_with_times');
 
+
+function get_terminal_info($UID) {
+    $ter_args = array(
+        'post_type' => 'terminals',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            array(
+                'key' => 'terminal_company',
+                'value' => $UID,
+                'compare' => '=',
+            ),
+        ),
+    );
+    $terminal_query = new WP_Query($ter_args);
+    $terminal_count = $terminal_query->found_posts;
+    $terminal_titles = array();
+    if ($terminal_query->have_posts()) {
+        while ($terminal_query->have_posts()) {
+            $terminal_query->the_post();
+            $post_title = get_the_title();
+            $terminal_titles[] = $post_title;
+        }
+        wp_reset_postdata(); 
+    }
+    return array(
+        'terminal_count' => $terminal_count,
+        'terminal_titles' => $terminal_titles,
+    );
+}
+
+
+function get_branch_info($UID) {
+$args = array(
+    'post_type' => 'branch', 
+    'posts_per_page' => -1, 
+    'meta_query' => array(
+        array(
+            'key' => 'branch_company', 
+            'value' => $UID, 
+            'compare' => '=',
+        ),
+    ),
+);
+$custom_query = new WP_Query($args);  
+$post_count = $custom_query->found_posts;
+wp_reset_postdata();
+return array(
+    'branch_count' => $post_count,
+   
+);
+}

@@ -22,57 +22,18 @@ $company_name = $user->display_name;
             <div class="col">
                 <h5>List of Branches </h5>
                 <?php   
-                $args = array(
-                    'post_type' => 'branch', 
-                    'posts_per_page' => -1, 
-                    'meta_query' => array(
-                        array(
-                            'key' => 'branch_company', 
-                            'value' => $UID, 
-                            'compare' => '=',
-                        ),
-                    ),
-                );
-                $custom_query = new WP_Query($args);  
-                $post_count = $custom_query->found_posts;
-                echo 'Branches: ' . $post_count;
-                wp_reset_postdata();
+                $branch_result = get_branch_info($UID);
+                echo "Branches: ".$branch_result['branch_count'];
                 
             ?>
             </div>
             <div class="col">
                 <h5>List of Terminal </h5>
-                <?php
-   
-                $ter_args = array(
-                    'post_type' => 'terminals', 
-                    'posts_per_page' => -1, 
-                    'meta_query' => array(
-                        array(
-                            'key' => 'terminal_company', 
-                            'value' => $UID, 
-                            'compare' => '=',
-                        ),
-                    ),
-                );
-                $terminal_query = new WP_Query($ter_args);  
-                $terminal_count = $terminal_query->found_posts;
-                $terminal_titles = array();
-                
-                if ($terminal_query->have_posts()) {
-                    while ($terminal_query->have_posts()) {
-                        $terminal_query->the_post();   
-                        $post_title = get_the_title();
-                        $terminal_titles[] = $post_title;  
-                    }
-                 
-                    echo 'Terminals: ' . $terminal_count;
-                    wp_reset_postdata(); // Restore the global post data
-                } else {
-                    // No terminals found
-                }
-               
-                
+                <?php              
+                $result = get_terminal_info($UID);
+                $terminal_count = $result['terminal_count'];
+                $terminal_list = $result['terminal_titles'];
+                echo "Terminals: " . $terminal_count;              
         
             ?>
 
@@ -80,7 +41,7 @@ $company_name = $user->display_name;
             <div class="col">
                 <h5>Total Kwh By <?php echo $company_name;               
                      
-                foreach ($terminal_titles as $dev_value) {
+                foreach ($terminal_list as $dev_value) {
                     $meta_query[] = array(
                         'key' => 'devnum',
                         'value' => $dev_value,

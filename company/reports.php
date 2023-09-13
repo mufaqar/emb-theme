@@ -1,5 +1,12 @@
-<?php /* Template Name: Company-Reports */    get_header('admin');?>
+<?php /* Template Name: Company-Reports */    get_header('admin');
+$user = wp_get_current_user();  
+$UID = $user->ID;
+
+?>
     <?php include('navigation.php'); ?>
+    <div class="tab_heading">
+       <h1> <h2> Report By Branches </h2></h1>
+    </div>
     <div class="admin_parrent">
         <!-- <div class="toggle_btn">
             <div class="row ">
@@ -14,6 +21,47 @@
                 </div>
             </div>
         </div> -->
+
+        <div class="row ">
+                <div class="catering_wrapper mb-5 col-md-8">
+                    
+                    <div class="catering_menu buttons">                   
+
+                        <?php 
+
+                    $args = array(
+                        'post_type' => 'branch', 
+                        'posts_per_page' => -1, 
+                        'meta_query' => array(
+                            array(
+                                'key' => 'branch_company', 
+                                'value' => $UID, 
+                                'compare' => '=',
+                            ),
+                        ),
+                    );
+                    $custom_query = new WP_Query($args); 
+
+             
+
+// Check if there are posts
+$s = 0;
+if ($custom_query->have_posts()) { 
+    while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
+        ?> <a id="<?php echo $s ?>" class="showSingle" target="<?php echo $s ?>" data="<?php echo get_the_ID()?>" data-title="<?php echo get_the_ID()?>"><?php echo get_the_title() ?></a> <?php
+    }
+
+    // Restore the global post object to its original state
+    wp_reset_postdata();
+} else {
+    // No posts found
+    echo 'No branches found.';
+}
+
+                    ?>
+                    </div>
+                </div>
+            </div>
         <section id="div1" class="targetDiv activediv tablediv">
         <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
         <thead>
@@ -32,11 +80,26 @@
                 <tbody>
 
                 <?php 
-                    $i = 0;
+                $result = get_terminal_info($UID);
+             
+                $terminal_list = $result['terminal_titles'];
+
+                        foreach ($terminal_list as $dev_value) {
+                            $meta_query[] = array(
+                                'key' => 'devnum',
+                                'value' => $dev_value,
+                                'compare' => '=',
+                            );
+                        }                  
+                        if (count($meta_query) > 1) {                
+                            $meta_query['relation'] = 'OR';
+                        }
+                                            $i = 0;
                     query_posts(array(
                         'post_type' => 'records',
                         'posts_per_page' => -1,
-                        'order' => 'desc'
+                        'order' => 'desc',
+                        'meta_query' => $meta_query
                     ));
 
                     if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
@@ -86,3 +149,26 @@
 
 
 <?php get_footer('admin') ?>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js" ></script> 
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>  
+
+
+
+
+jQuery(document).ready(function($) 
+        {  
+
+jQuery('.showSingle').click(function() {
+           var cat_name = $(this).attr('data');  
+          // alert(cat_name);
+        });
+
+           
+
+});
+
+   
+</script>
