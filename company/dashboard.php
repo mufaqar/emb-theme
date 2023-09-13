@@ -78,7 +78,7 @@ $company_name = $user->display_name;
 
             </div>
             <div class="col">
-                <h5>Total Kwh By <?php echo $company_name;                
+                <h5>Total Kwh By <?php echo $company_name;               
                      
                 foreach ($terminal_titles as $dev_value) {
                     $meta_query[] = array(
@@ -86,8 +86,7 @@ $company_name = $user->display_name;
                         'value' => $dev_value,
                         'compare' => '=',
                     );
-                }  
-                
+                }                  
                 if (count($meta_query) > 1) {                
                     $meta_query['relation'] = 'OR';
                 }
