@@ -57,36 +57,68 @@ $company_name = $user->display_name;
                 );
                 $terminal_query = new WP_Query($ter_args);  
                 $terminal_count = $terminal_query->found_posts;
-                echo 'Terminals: ' . $terminal_count;
-                wp_reset_postdata();
+                
+                // Initialize an empty array to store post titles
+                $terminal_titles = array();
+                
+                if ($terminal_query->have_posts()) {
+                    while ($terminal_query->have_posts()) {
+                        $terminal_query->the_post();
+                
+                        // Get the post title and store it in the array
+                        $post_title = get_the_title();
+                        $terminal_titles[] = $post_title;
+                
+                        // Output other post content if needed
+                    }
+                
+                    // Output the count of terminals
+                    echo 'Terminals: ' . $terminal_count;
+                
+                    // Output or use the array of post titles as needed
+                   
+                
+                    wp_reset_postdata(); // Restore the global post data
+                } else {
+                    // No terminals found
+                }
+               
+                
         
             ?>
 
             </div>
             <div class="col">
-                <h5>Total Kwh By <?php echo $company_name ?></h5>
+                <h5>Total Kwh By <?php echo $company_name;
+                
+                $meta_query = array('relation' => 'OR');
+
+                // Loop through the $dev array and create meta query conditions for each value
+                foreach ($terminal_titles as $dev_value) {
+                    $meta_query[] = array(
+                        'key' => 'devnum',
+                        'value' => $dev_value,
+                        'compare' => '=',
+                    );
+                }
+
+           
+               
+                
+                ?></h5>
+
+              
+
+
+
                 <?php
+
+
+              
                 $args = array(
                     'post_type' => 'records',
                     'posts_per_page' => -1, 
-                    'meta_query' => array(      
-                        'relation' => 'OR',
-                        array(
-                            'key' => 'devnum', 
-                            'value' => '230729010002', 
-                            'compare' => '=', 
-                        ),
-                        array(
-                            'key' => 'devnum', 
-                            'value' => '230729010001', 
-                            'compare' => '=', 
-                        ),
-                        array(
-                            'key' => 'devnum', 
-                            'value' => '230729010003', 
-                            'compare' => '=', 
-                        )
-                    ),
+                    'meta_query' => $meta_query
                 );
                 $query = new WP_Query($args);
                 if ($query->have_posts()) {
