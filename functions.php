@@ -177,8 +177,6 @@ function load_subcategories() {
   add_action( 'wp_ajax_load_subcategories', 'load_subcategories' );
   add_action( 'wp_ajax_nopriv_load_subcategories', 'load_subcategories' );
 
-
-
 // $allposts= get_posts( array('post_type'=>'records','numberposts'=>-1) );
 // foreach ($allposts as $eachpost) {
 // wp_delete_post( $eachpost->ID, true );
