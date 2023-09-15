@@ -15,7 +15,7 @@ $UID = $user->ID;
 
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
-                <label for="branches">Branches Select</label>                
+                <label for="branches">Branches Select</label>
                 <select class="form-control " id="branches">
                     <option value="">Select Branch</option>
                     <?php 
@@ -74,90 +74,16 @@ $UID = $user->ID;
         </div>
         <div class="catering_wrapper mb-5 col-md-2">
             <label for="invalidSelect">.</label>
-            <input type="submit" value="Generate Reporte" class="submit_btn">
+            <input type="submit" value="Generate Report" class="submit_btn" id="generateReportBtn">
         </div>
 
     </div>
 
 
-    <section id="div1" class="targetDiv activediv tablediv">
-        <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Sr #</th>
-                    <th>Station Id</th>
-                    <th>Transformer Id</th>
-                    <th>Dev Id</th>
-                    <th>Dev Name</th>
-                    <th>Oper date</th>
-                    <th>QTY</th>
-                    <th>Vol A</th>
+    <section id="div1" class="targetDiv activediv tablediv">   
 
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php 
-                $result = get_terminal_info($UID);
-             
-                $terminal_list = $result['terminal_titles'];
-
-                        foreach ($terminal_list as $dev_value) {
-                            $meta_query[] = array(
-                                'key' => 'devnum',
-                                'value' => $dev_value,
-                                'compare' => '=',
-                            );
-                        }                  
-                        if (count($meta_query) > 1) {                
-                            $meta_query['relation'] = 'OR';
-                        }
-                    $i = 0;
-                    query_posts(array(
-                        'post_type' => 'records',
-                        'posts_per_page' => -1,
-                        'order' => 'desc',
-                        'meta_query' => $meta_query
-                    ));
-
-                    if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
-                            $i++;
-                            $id = get_post_meta(get_the_ID(),'id', true); 
-                            $stationid = get_post_meta(get_the_ID(),'stationid', true); 
-                            $transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
-                            $transformername = get_post_meta(get_the_ID(),'transformername', true); 
-                            $devid = get_post_meta(get_the_ID(),'devid', true); 
-                            $devname = get_post_meta(get_the_ID(),'devname', true); 
-                            $devnum  = get_post_meta(get_the_ID(),'devnum', true); 
-                            $operdate = get_post_meta(get_the_ID(),'operdate', true); 
-                            $qty_total = get_post_meta(get_the_ID(),'qty_total', true); 
-                            $vol_a  = get_post_meta(get_the_ID(),'vol_a', true); 
-                            $relay1state = get_post_meta(get_the_ID(),'relay1state', true);    
-                            
-                            ?>
-                <tr>
-                    <td><?php echo $i ?></td>
-                    <td><?php echo $stationid;?></td>
-                    <td><?php echo $transformerid?></td>
-                    <td><?php  echo $devid ?></td>
-                    <td><?php  echo $devname ?></td>
-                    <td><?php  echo $operdate ?></td>
-                    <td><?php  echo $qty_total ?></td>
-                    <td><?php  echo $vol_a ?></td>
-
-
-                </tr>
-                <?php endwhile;
-                        wp_reset_query();
-                    else : ?>
-                <h2><?php _e('Nothing Found', 'lbt_translate'); ?></h2>
-                <?php endif; ?>
-
-            </tbody>
-
-
-
-        </table>
+      
+        <div id="invoice_orders" >Result Data</div>
 
     </section>
 
@@ -168,26 +94,43 @@ $UID = $user->ID;
 
 <?php get_footer('admin') ?>
 
+<!-- Font Awsome -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    // Add an event listener to the submit button
+    $('#generateReportBtn').click(function(event) {
+        event.preventDefault();
+        const selectedBranche = $('#branches').val();
+        const selectedFloor = $('#floor').val();
+        const selectedDate = $('#date').val();
+        const selectedDateType = $('#date_type').val();
+        console.log('Selected Branch:', selectedBranche);
+        form_data = new FormData();
+        form_data.append('action', 'show_reports');
+        form_data.append('devnum', selectedBranche);      
+        $.ajax({
+            url: "<?php echo admin_url('admin-ajax.php'); ?>",
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            data: form_data,
+            beforeSend: function() {
+                $("#loader").show();
+            },
+            complete: function() {
+                $("#spinner-div").hide();
+            },
+            success: function(data) {
 
+                $('#invoice_orders').html(data);
+               
+                
+            }
 
-<script>
-        $(document).ready(function () {
-            // Add an event listener to the submit button
-            $('#generateReportBtn').click(function (event) {
-                alert(event);
-                event.preventDefault(); // Prevent the form from submitting (you can remove this line if you want to submit the form)
-
-                // Get the selected values using jQuery
-                const selectedBranche = $('#branches').val();
-                const selectedFloor = $('#floor').val();
-                const selectedDate = $('#date').val();
-                const selectedDateType = $('#date_type').val();
-
-                // Do something with the selected values (e.g., display them or send them to the server)
-                console.log('Selected Branch:', selectedBranche);
-                console.log('Selected Floor:', selectedFloor);
-                console.log('Selected Date:', selectedDate);
-                console.log('Selected Date Type:', selectedDateType);
-            });
         });
-    </script>
+
+    });
+});
+</script>
