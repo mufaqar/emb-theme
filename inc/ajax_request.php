@@ -404,20 +404,7 @@ function show_reports() {
 		global $wpdb;	
 		$devnum = $_POST['devnum'];
 
-		$result = get_terminal_info($UID);
-	
-		$terminal_list = $result['terminal_titles'];
-
-		foreach ($terminal_list as $dev_value) {
-			$meta_query[] = array(
-				'key' => 'devnum',
-				'value' => $dev_value,
-				'compare' => '=',
-			);
-		}                  
-		if (count($meta_query) > 1) {                
-			$meta_query['relation'] = 'OR';
-		}
+		
 		?>
 			<table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
 				<thead>
@@ -434,42 +421,49 @@ function show_reports() {
 					</tr>
 				</thead>
 				<tbody>
-					<?php 
+					<?php 						
 						
-						$args = array(
+						query_posts(array(
 							'post_type' => 'records',
 							'posts_per_page' => -1, 
-							'meta_query' => $meta_query
-						);
+							'meta_query' => array(
+								array(
+									'key' => 'devnum', 
+									'value' => $devnum, 
+									'compare' => '=',
+								),
+							),
+							
+						)); 
 						
 
-								if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
-										$i++;
-										$id = get_post_meta(get_the_ID(),'id', true); 
-										$stationid = get_post_meta(get_the_ID(),'stationid', true); 
-										$transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
-										$transformername = get_post_meta(get_the_ID(),'transformername', true); 
-										$devid = get_post_meta(get_the_ID(),'devid', true); 
-										$devname = get_post_meta(get_the_ID(),'devname', true); 
-										$devnum  = get_post_meta(get_the_ID(),'devnum', true); 
-										$operdate = get_post_meta(get_the_ID(),'operdate', true); 
-										$qty_total = get_post_meta(get_the_ID(),'qty_total', true); 
-										$vol_a  = get_post_meta(get_the_ID(),'vol_a', true); 
-										$relay1state = get_post_meta(get_the_ID(),'relay1state', true);    
+						if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
+								$i++;
+								$id = get_post_meta(get_the_ID(),'id', true); 
+								$stationid = get_post_meta(get_the_ID(),'stationid', true); 
+								$transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
+								$transformername = get_post_meta(get_the_ID(),'transformername', true); 
+								$devid = get_post_meta(get_the_ID(),'devid', true); 
+								$devname = get_post_meta(get_the_ID(),'devname', true); 
+								$devnum  = get_post_meta(get_the_ID(),'devnum', true); 
+								$operdate = get_post_meta(get_the_ID(),'operdate', true); 
+								$qty_total = get_post_meta(get_the_ID(),'qty_total', true); 
+								$vol_a  = get_post_meta(get_the_ID(),'vol_a', true); 
+								$relay1state = get_post_meta(get_the_ID(),'relay1state', true);    
 										
-										?>
-					<tr>
-						<td><?php echo $i ?></td>
-						<td><?php echo $stationid;?></td>
-						<td><?php echo $transformerid?></td>
-						<td><?php  echo $devid ?></td>
-						<td><?php  echo $devname ?></td>
-						<td><?php  echo $operdate ?></td>
-						<td><?php  echo $qty_total ?></td>
-						<td><?php  echo $vol_a ?></td>
+									?>
+									<tr>
+										<td><?php echo $i ?></td>
+										<td><?php echo $stationid;?></td>
+										<td><?php echo $transformerid?></td>
+										<td><?php  echo $devid ?></td>
+										<td><?php  echo $devname ?></td>
+										<td><?php  echo $operdate ?></td>
+										<td><?php  echo $qty_total ?></td>
+										<td><?php  echo $vol_a ?></td>
 
 
-					</tr>
+									</tr>
 					<?php endwhile;
 									wp_reset_query();
 								else : ?>

@@ -20,11 +20,11 @@ $UID = $user->ID;
                     <option value="">Select Branch</option>
                     <?php 
                     $args = array(
-                        'post_type' => 'branch', 
+                        'post_type' => 'terminals', 
                         'posts_per_page' => -1, 
                         'meta_query' => array(
                             array(
-                                'key' => 'branch_company', 
+                                'key' => 'terminal_company', 
                                 'value' => $UID, 
                                 'compare' => '=',
                             ),
@@ -35,7 +35,7 @@ $UID = $user->ID;
                     if ($custom_query->have_posts()) { 
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
                     ?>
-                    <option value="<?php echo get_the_ID()?>"><?php echo get_the_title() ?></option> <?php
+                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devnum', true); ?>"><?php echo get_post_meta(get_the_ID(),'terminal_branch_name', true); ?></option> <?php
                     }
                     wp_reset_postdata();
                     } 
