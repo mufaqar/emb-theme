@@ -403,6 +403,8 @@ add_action('wp_ajax_nopriv_show_reports', 'show_reports');
 function show_reports() {
 		global $wpdb;	
 		$devnum = $_POST['devnum'];
+		$devname = $_POST['devname'];
+		
 
 		
 		?>
@@ -427,9 +429,15 @@ function show_reports() {
 							'post_type' => 'records',
 							'posts_per_page' => -1, 
 							'meta_query' => array(
+								'relation' => 'AND', 
 								array(
 									'key' => 'devnum', 
 									'value' => $devnum, 
+									'compare' => '=',
+								),
+								array(
+									'key' => 'devname', 
+									'value' => $devname, 
 									'compare' => '=',
 								),
 							),
@@ -467,7 +475,9 @@ function show_reports() {
 					<?php endwhile;
 									wp_reset_query();
 								else : ?>
-					<h2><?php _e('Nothing Found', 'lbt_translate'); ?></h2>
+									<tr>
+					<td colspan="8"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
+					<tr>
 					<?php endif; ?>
 
 				</tbody>

@@ -7,6 +7,10 @@ $pid = $_REQUEST['pid'];
 
 $terminal_devnum = get_post_meta($pid , 'terminal_devnum', true);
 $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
+$terminal_branch = get_post_meta($pid , 'terminal_branch_name', true);
+$terminal_floor = get_post_meta($pid , 'terminal_floor_section', true);
+$terminal_company = get_post_meta($pid , 'terminal_company', true);
+
 
 
 ?> 
@@ -44,7 +48,7 @@ $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
                         ?>
                         <select name="user_select"  id="company">
                             <?php foreach ( $users as $user ) : ?>
-                                <option value="<?php echo esc_attr( $user->ID ); ?>">
+                                <option value="<?php echo esc_attr( $user->ID ); ?>" <?php if ($terminal_company == $user->ID) echo 'selected'; ?>>
                                     <?php echo esc_html( $user->display_name ); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -52,7 +56,7 @@ $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
                     </div>
                 </div>  
                 <div class="col-md-6 mb-3">
-                    <label for="">Branch Name</label>
+                    <label for="">Branch Name  <?php  echo $terminal_branch; ?></label>
                     <div class="_select">
                         <?php            
                         $args = array(
@@ -60,10 +64,13 @@ $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
                             'posts_per_page' => -1, 
                         );                    
                         $posts = get_posts($args);
+                       
+
+                      
                         ?>
                         <select name="user_select"  id="branch_name">
                             <?php foreach ($posts as $post)  : ?>
-                                <option value="<?php echo esc_attr( $post->post_title ); ?>">
+                                <option value="<?php echo esc_attr( $post->post_title ); ?>" <?php if ($terminal_branch == $post->post_title) echo 'selected'; ?>>
                                     <?php echo esc_html( $post->post_title ); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -82,7 +89,7 @@ $terminal_devname = get_post_meta($pid , 'terminal_devname', true);
                         ?>
                         <select name="user_select"  id="floor_section">
                             <?php  foreach ($terms as $term)  : ?>
-                                <option value="<?php echo esc_attr( $term->name); ?>">
+                                <option value="<?php echo esc_attr( $term->name); ?>"  <?php if ($terminal_floor == $term->name) echo 'selected'; ?>>
                                     <?php echo  $term->name ?>
                                 </option>
                             <?php endforeach; ?>

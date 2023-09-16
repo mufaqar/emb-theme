@@ -49,9 +49,29 @@ $UID = $user->ID;
                 <label for="floor"> Select Floor</label>
                 <select class="form-control select-dropdown" id="floor">
                     <option value="">Choose Floor </option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
+                    <?php 
+                    $args = array(
+                        'post_type' => 'terminals', 
+                        'posts_per_page' => -1, 
+                        'meta_query' => array(
+                            array(
+                                'key' => 'terminal_company', 
+                                'value' => $UID, 
+                                'compare' => '=',
+                            ),
+                        ),
+                    );
+                    $custom_query = new WP_Query($args); 
+                    $s = 0;
+                    if ($custom_query->have_posts()) { 
+                    while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
+                    ?>
+                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?>"><?php echo get_post_meta(get_the_ID(),'terminal_floor_section', true); ?></option> <?php
+                    }
+                    wp_reset_postdata();
+                    } 
+
+                    ?>
                 </select>
             </div>
         </div>
@@ -105,10 +125,11 @@ jQuery(document).ready(function($) {
         const selectedFloor = $('#floor').val();
         const selectedDate = $('#date').val();
         const selectedDateType = $('#date_type').val();
-        console.log('Selected Branch:', selectedBranche);
+
         form_data = new FormData();
         form_data.append('action', 'show_reports');
-        form_data.append('devnum', selectedBranche);      
+        form_data.append('devnum', selectedBranche);  
+        form_data.append('devname', selectedFloor);      
         $.ajax({
             url: "<?php echo admin_url('admin-ajax.php'); ?>",
             type: 'POST',
