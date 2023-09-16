@@ -443,7 +443,7 @@ function show_reports() {
 								),
 								array(
 									'key' => 'operdate', 
-									'value' => $devname, 
+									'value' => $operdate, 
 									'compare' => '=',
 								),
 							),
