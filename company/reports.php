@@ -81,7 +81,6 @@ $UID = $user->ID;
 
 
     <section id="div1" class="targetDiv activediv tablediv">   
-
       
         <div id="invoice_orders" >Result Data</div>
 
