@@ -404,6 +404,7 @@ function show_reports() {
 		global $wpdb;	
 		$devnum = $_POST['devnum'];
 		$devname = $_POST['devname'];
+		$operdate = "2023-09-16";
 		
 
 		
@@ -437,6 +438,11 @@ function show_reports() {
 								),
 								array(
 									'key' => 'devname', 
+									'value' => $devname, 
+									'compare' => '=',
+								),
+								array(
+									'key' => 'operdate', 
 									'value' => $devname, 
 									'compare' => '=',
 								),
