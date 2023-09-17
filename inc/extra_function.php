@@ -36,39 +36,44 @@ function custom_records_column( $column, $post_id ) {
     global $post;
     switch ( $column ) {
         case 'devname' :
-            if(get_field( "devname", $post_id )) {
-                echo get_field( "devname", $post_id );
+            if(get_post_meta($post_id, "devname", true)) {
+               
+                echo get_post_meta($post_id, "devname", true);
             } else {
                 echo 0;
             }
         break;
 
         case 'devnum' :
-            if(get_field( "devnum", $post_id )) {
-                echo get_field( "devnum", $post_id );
+            if(get_post_meta($post_id, "devnum", true)) {
+            
+                echo get_post_meta($post_id, "devnum", true);
             } else {
                 echo 0;
             }
         break;  
         case 'operdate' :
-          if(get_field( "operdate", $post_id )) {
-              echo get_field( "operdate", $post_id );
+            if(get_post_meta($post_id, "operdate", true)) {
+           
+              echo get_post_meta($post_id, "operdate", true);
           } else {
               echo 0;
           }
       break; 
       break;  
         case 'opertime' :
-          if(get_field( "opertime", $post_id )) {
-              echo get_field( "opertime", $post_id );
+            if(get_post_meta($post_id, "opertime", true)) {
+   
+              echo get_post_meta($post_id, "opertime", true);
           } else {
               echo 0;
           }
       break; 
       break;  
         case 'qty_total' :
-          if(get_field( "qty_total", $post_id )) {
-              echo get_field( "qty_total", $post_id );
+            if(get_post_meta($post_id, "qty_total", true)) {
+          
+              echo get_post_meta($post_id, "qty_total", true);
           } else {
               echo 0;
           }
