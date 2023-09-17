@@ -80,7 +80,7 @@ $UID = $user->ID;
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
                 <label for="date"> Select Date</label>
-                <input type="date" id="date" class="date" value="<?php echo date("Y-m-d"); ?>">
+                <input type="date" id="date" class="date" value="">
             </div>
         </div>
         <div class="catering_wrapper mb-5 col-md-2">
