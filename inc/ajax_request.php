@@ -404,9 +404,8 @@ function show_reports() {
 		global $wpdb;	
 		$devnum = $_POST['devnum'];
 		$devname = $_POST['devname'];
-		$operdate = "2023-09-16";
-		
-
+		$date = $_POST['date'];
+		$type =  $_POST['type'];
 		
 		?>
 			<table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
@@ -443,7 +442,7 @@ function show_reports() {
 								),
 								array(
 									'key' => 'operdate', 
-									'value' => $operdate, 
+									'value' => $date, 
 									'compare' => '=',
 								),
 							),

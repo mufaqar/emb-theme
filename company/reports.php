@@ -126,10 +126,14 @@ jQuery(document).ready(function($) {
         const selectedDate = $('#date').val();
         const selectedDateType = $('#date_type').val();
 
+     
+
         form_data = new FormData();
         form_data.append('action', 'show_reports');
         form_data.append('devnum', selectedBranche);  
-        form_data.append('devname', selectedFloor);      
+        form_data.append('devname', selectedFloor);   
+        form_data.append('date', selectedDate);  
+        form_data.append('type', selectedDateType);      
         $.ajax({
             url: "<?php echo admin_url('admin-ajax.php'); ?>",
             type: 'POST',

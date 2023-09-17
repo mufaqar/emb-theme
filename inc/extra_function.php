@@ -16,55 +16,59 @@ function remove_admin_bar() {
 add_role( 'company', 'Company', get_role( 'company' )->capabilities );
 
 
-add_filter( 'manage_tickets_posts_columns', 'set_custom_edit_tickets_columns' );    
-add_action( 'manage_tickets_posts_custom_column' , 'custom_tickets_column', 10, 2 );
-function set_custom_edit_tickets_columns($columns) {    
+add_filter( 'manage_records_posts_columns', 'set_custom_edit_records_columns' );    
+add_action( 'manage_records_posts_custom_column' , 'custom_records_column', 10, 2 );
+function set_custom_edit_records_columns($columns) {    
     unset( $columns['author'] );   
  
-    $columns['user_type'] = 'User Type';
-    $columns['order_uid'] = 'Order By';
-    $columns['order_price'] = 'Price';
+    $columns['devname'] = 'Name';
+    $columns['devnum'] = 'Number';
+    $columns['operdate'] = 'Date';
+    $columns['opertime'] = 'Time';
+    $columns['qty_total'] = 'Qty';
+
+    
 
     return $columns;    
 }
 
-function custom_tickets_column( $column, $post_id ) {   
+function custom_records_column( $column, $post_id ) {   
     global $post;
     switch ( $column ) {
-        case 'order_status' :
-            if(get_field( "order_status", $post_id )) {
-                echo get_field( "order_status", $post_id );
+        case 'devname' :
+            if(get_field( "devname", $post_id )) {
+                echo get_field( "devname", $post_id );
             } else {
                 echo 0;
             }
         break;
 
-        case 'order_type' :
-            if(get_field( "order_type", $post_id )) {
-                echo get_field( "order_type", $post_id );
+        case 'devnum' :
+            if(get_field( "devnum", $post_id )) {
+                echo get_field( "devnum", $post_id );
             } else {
                 echo 0;
             }
         break;  
-        case 'user_type' :
-          if(get_field( "user_type", $post_id )) {
-              echo get_field( "user_type", $post_id );
+        case 'operdate' :
+          if(get_field( "operdate", $post_id )) {
+              echo get_field( "operdate", $post_id );
           } else {
               echo 0;
           }
       break; 
       break;  
-        case 'order_price' :
-          if(get_field( "price", $post_id )) {
-              echo get_field( "price", $post_id );
+        case 'opertime' :
+          if(get_field( "opertime", $post_id )) {
+              echo get_field( "opertime", $post_id );
           } else {
               echo 0;
           }
       break; 
       break;  
-        case 'order_uid' :
-          if(get_field( "order_uid", $post_id )) {
-              echo get_field( "order_uid", $post_id );
+        case 'qty_total' :
+          if(get_field( "qty_total", $post_id )) {
+              echo get_field( "qty_total", $post_id );
           } else {
               echo 0;
           }
@@ -72,7 +76,7 @@ function custom_tickets_column( $column, $post_id ) {
     }   
 }
 
-function tickets_column_register_sortable( $columns ) {
+function records_column_register_sortable( $columns ) {
      $columns['order_status'] = 'order_status';
     $columns['order_type'] = 'order_type';
     return $columns;
