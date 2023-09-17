@@ -245,6 +245,7 @@ function call_api_with_times() {
               $devname = $array_data->devname;
               $devnum  = $array_data->devnum;
               $operdate = $array_data->operdate;
+              $opertime = $array_data->opertime;    
               $qty_total = $array_data->qty_total;
               $vol_a  = $array_data->vol_a;
               $relay1state = $array_data->relay1state;
@@ -265,6 +266,7 @@ function call_api_with_times() {
                       'devname' => $devname,
                       'devnum' => $devnum,
                       'operdate' => $operdate,
+                      'opertime' => $opertime,
                       'qty_total' => $qty_total,
                       'vol_a' => $vol_a,
                       'relay1state' => $relay1state,
