@@ -35,7 +35,8 @@ $UID = $user->ID;
                     if ($custom_query->have_posts()) { 
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
                     ?>
-                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devnum', true); ?>"><?php echo get_post_meta(get_the_ID(),'terminal_branch_name', true); ?></option> <?php
+                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devnum', true); ?>">
+                        <?php echo get_post_meta(get_the_ID(),'terminal_branch_name', true); ?></option> <?php
                     }
                     wp_reset_postdata();
                     } 
@@ -66,7 +67,8 @@ $UID = $user->ID;
                     if ($custom_query->have_posts()) { 
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
                     ?>
-                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?>"><?php echo get_post_meta(get_the_ID(),'terminal_floor_section', true); ?></option> <?php
+                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?>">
+                        <?php echo get_post_meta(get_the_ID(),'terminal_floor_section', true); ?></option> <?php
                     }
                     wp_reset_postdata();
                     } 
@@ -100,10 +102,8 @@ $UID = $user->ID;
     </div>
 
 
-    <section id="div1" class="targetDiv activediv tablediv">   
-      
-        <div id="invoice_orders" >Result Data</div>
-
+    <section id="div1" class="targetDiv activediv tablediv">
+        <div id="invoice_orders"></div>
     </section>
 
 </div>
@@ -126,14 +126,14 @@ jQuery(document).ready(function($) {
         const selectedDate = $('#date').val();
         const selectedDateType = $('#date_type').val();
 
-     
+
 
         form_data = new FormData();
         form_data.append('action', 'show_reports');
-        form_data.append('devnum', selectedBranche);  
-        form_data.append('devname', selectedFloor);   
-        form_data.append('date', selectedDate);  
-        form_data.append('type', selectedDateType);      
+        form_data.append('devnum', selectedBranche);
+        form_data.append('devname', selectedFloor);
+        form_data.append('date', selectedDate);
+        form_data.append('type', selectedDateType);
         $.ajax({
             url: "<?php echo admin_url('admin-ajax.php'); ?>",
             type: 'POST',
@@ -147,10 +147,9 @@ jQuery(document).ready(function($) {
                 $("#spinner-div").hide();
             },
             success: function(data) {
-
                 $('#invoice_orders').html(data);
-               
-                
+
+
             }
 
         });

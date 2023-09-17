@@ -423,32 +423,47 @@ function show_reports() {
 					</tr>
 				</thead>
 				<tbody>
-					<?php 						
+					<?php 		
+					
+					$meta_query = array(
+						'relation' => 'AND',
+					);
+					
+					// Check and add the 'devnum' condition if $devnum is not empty
+					if (!empty($devnum)) {
+						$meta_query[] = array(
+							'key' => 'devnum',
+							'value' => $devnum,
+							'compare' => '=',
+						);
+					}
+					
+					// Check and add the 'devname' condition if $devname is not empty
+					if (!empty($devname)) {
+						$meta_query[] = array(
+							'key' => 'devname',
+							'value' => $devname,
+							'compare' => '=',
+						);
+					}
+					
+					// Check and add the 'operdate' condition if $date is not empty
+					if (!empty($date)) {
+						$meta_query[] = array(
+							'key' => 'operdate',
+							'value' => $date,
+							'compare' => '=',
+						);
+					}
+
+				
+					
 						
 						query_posts(array(
 							'post_type' => 'records',
 							'posts_per_page' => -1, 
-							'meta_query' => array(
-								'relation' => 'AND', 
-								array(
-									'key' => 'devnum', 
-									'value' => $devnum, 
-									'compare' => '=',
-								),
-								array(
-									'key' => 'devname', 
-									'value' => $devname, 
-									'compare' => '=',
-								),
-								array(
-									'key' => 'operdate', 
-									'value' => $date, 
-									'compare' => '=',
-								),
-							),
-							
-						)); 
-						
+							'meta_query' => $meta_query
+						));
 
 						if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
 								$i++;
