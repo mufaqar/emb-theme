@@ -10,9 +10,7 @@ $UID = $user->ID;
     </h1>
 </div>
 <div class="admin_parrent">
-
     <div class="row ">
-
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
                 <label for="branches">Select Branch</label>
@@ -65,10 +63,10 @@ $UID = $user->ID;
                     $custom_query = new WP_Query($args); 
                     $s = 0;
                     if ($custom_query->have_posts()) { 
-                    while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
+                    while ($custom_query->have_posts()) { $s++; $custom_query->the_post(); //terminal_floor_section
                     ?>
                     <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?>">
-                        <?php echo get_post_meta(get_the_ID(),'terminal_floor_section', true); ?></option> <?php
+                        <?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?></option> <?php
                     }
                     wp_reset_postdata();
                     } 
@@ -86,7 +84,7 @@ $UID = $user->ID;
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
                 <label for="date"> End Date</label>
-                <input type="date" id="start_date" class="date" value="">
+                <input type="date" id="end_date" class="date" value="">
             </div>
         </div>
         <!-- <div class="catering_wrapper mb-5 col-md-2">
@@ -110,6 +108,82 @@ $UID = $user->ID;
 
     <section id="div1" class="targetDiv activediv tablediv">
         <div id="invoice_orders"></div>
+
+        <div style="display:none">
+
+        <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
+				<thead>
+					<tr>
+						<th>Sr #</th>
+						<th>Station Id</th>
+						<th>Start Date</th>
+						<th>End Date</th>					
+						<th>QTY</th>
+						<th>Vol A</th>
+
+					</tr>
+				</thead>
+				<tbody>
+        <?php
+$meta_query = array(
+    // Your existing meta queries go here
+);
+
+$query = new WP_Query(array(
+    'post_type' => 'records',
+    'posts_per_page' => -1,
+    'meta_query' => $meta_query,
+));
+
+if ($query->have_posts()) :
+    $device_sums = array(); 
+
+    while ($query->have_posts()) : $query->the_post();
+        $devname = get_post_meta(get_the_ID(), 'devname', true); 
+        if (!empty($devname)) {         
+            if (!isset($device_sums[$devname])) {
+                $device_sums[$devname] = 0; 
+            }
+            $device_sums[$devname] += (float) get_post_meta(get_the_ID(), 'qty_total', true);
+        }
+    endwhile;
+
+  
+
+    // Sort the device sums in descending order
+    arsort($device_sums);
+
+    $i = 1; // Counter for the rows
+
+    foreach ($device_sums as $devname => $sum) :
+?>
+        <tr>
+            <td><?php echo $i ?></td>
+            <td><?php echo $devname; ?></td>
+            <td>Start Date</td>
+            <td>end DAte</td>
+            <td><?php echo $devname; ?></td>
+            <td><?php echo $sum; ?></td>
+        </tr>
+<?php
+        $i++;
+    endforeach;
+
+    wp_reset_postdata();
+else :
+?>
+    <tr>
+        <td colspan="3"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
+    </tr>
+<?php
+endif;
+?>
+
+        </div>
+        
+    
+    
+    
     </section>
 
 </div>
@@ -129,7 +203,10 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         const selectedBranche = $('#branches').val();
         const selectedFloor = $('#floor').val();
-        const selectedDate = $('#date').val();
+        const start_date = $('#start_date').val();
+        const end_date = $('#end_date').val();
+
+        
         const selectedDateType = $('#date_type').val();
 
 
@@ -138,7 +215,8 @@ jQuery(document).ready(function($) {
         form_data.append('action', 'show_reports');
         form_data.append('devnum', selectedBranche);
         form_data.append('devname', selectedFloor);
-        form_data.append('date', selectedDate);
+        form_data.append('start_date', start_date);
+        form_data.append('end_date', end_date);
         form_data.append('type', selectedDateType);
         $.ajax({
             url: "<?php echo admin_url('admin-ajax.php'); ?>",

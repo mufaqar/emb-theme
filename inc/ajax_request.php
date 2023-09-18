@@ -404,26 +404,40 @@ function show_reports() {
 		global $wpdb;	
 		$devnum = $_POST['devnum'];
 		$devname = $_POST['devname'];
-		$date = $_POST['date'];
+		$start_date = $_POST['start_date'];
+		$end_date = $_POST['end_date'];
 		$type =  $_POST['type'];
+
+		if (isset($_POST['start_date']) && !empty($_POST['start_date'])) {
+			$start_date = $_POST['start_date'];
+		} else {
+			$start_date = date('Y-m-01'); 
+		}
+		
+		if (isset($_POST['end_date']) && !empty($_POST['end_date'])) {
+			$end_date = $_POST['end_date'];
+		} else {
+			$end_date = date('Y-m-d'); 
+		}
 		
 		?>
 			<table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
 				<thead>
 					<tr>
 						<th>Sr #</th>
-						<th>Station Id</th>
-						<th>Transformer Id</th>
+						<th>Floor Station</th>				
 						<th>Dev Id</th>
 						<th>Dev Name</th>
 						<th>Oper date</th>
-						<th>QTY</th>
-						<th>Vol A</th>
+						<th>Total consumption</th>
+						
 
 					</tr>
 				</thead>
 				<tbody>
-					<?php 		
+					<?php 	
+
+					
 					
 					$meta_query = array(
 						'relation' => 'AND',
@@ -447,58 +461,69 @@ function show_reports() {
 						);
 					}
 					
-					// Check and add the 'operdate' condition if $date is not empty
-					if (!empty($date)) {
+				
+					if (!empty($start_date) && !empty($end_date)) {
+						// Add date range condition for 'operdate'
 						$meta_query[] = array(
 							'key' => 'operdate',
-							'value' => $date,
-							'compare' => '=',
+							'value' => array($start_date, $end_date),
+							'compare' => 'BETWEEN',
+							'type' => 'DATE', 
 						);
-					}
-
-				
+					}		
 					
 						
-						query_posts(array(
-							'post_type' => 'records',
-							'posts_per_page' => -1, 
-							'meta_query' => $meta_query
-						));
-
-						if (have_posts()) :  while (have_posts()) : the_post();$pid = get_the_ID();
-								$i++;
-								$id = get_post_meta(get_the_ID(),'id', true); 
-								$stationid = get_post_meta(get_the_ID(),'stationid', true); 
-								$transformerid = get_post_meta(get_the_ID(),'transformerid', true); 
-								$transformername = get_post_meta(get_the_ID(),'transformername', true); 
-								$devid = get_post_meta(get_the_ID(),'devid', true); 
-								$devname = get_post_meta(get_the_ID(),'devname', true); 
-								$devnum  = get_post_meta(get_the_ID(),'devnum', true); 
-								$operdate = get_post_meta(get_the_ID(),'operdate', true); 
-								$qty_total = get_post_meta(get_the_ID(),'qty_total', true); 
-								$vol_a  = get_post_meta(get_the_ID(),'vol_a', true); 
-								$relay1state = get_post_meta(get_the_ID(),'relay1state', true);    
-										
-									?>
-									<tr>
-										<td><?php echo $i ?></td>
-										<td><?php echo $stationid;?></td>
-										<td><?php echo $transformerid?></td>
-										<td><?php  echo $devid ?></td>
-										<td><?php  echo $devname ?></td>
-										<td><?php  echo $operdate ?></td>
-										<td><?php  echo $qty_total ?></td>
-										<td><?php  echo $vol_a ?></td>
-
-
-									</tr>
-					<?php endwhile;
-									wp_reset_query();
-								else : ?>
-									<tr>
-					<td colspan="8"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
-					<tr>
-					<?php endif; ?>
+					$query = new WP_Query(array(
+						'post_type' => 'records',
+						'posts_per_page' => -1,
+						'meta_query' => $meta_query,
+					));
+					
+					if ($query->have_posts()) :
+						$device_sums = array(); 
+					
+						while ($query->have_posts()) : $query->the_post();
+							$devname = get_post_meta(get_the_ID(), 'devname', true); 
+							if (!empty($devname)) {         
+								if (!isset($device_sums[$devname])) {
+									$device_sums[$devname] = 0; 
+								}
+								$device_sums[$devname] += (float) get_post_meta(get_the_ID(), 'qty_total', true);
+							}
+						endwhile;
+					
+					  
+					
+						// Sort the device sums in descending order
+						arsort($device_sums);
+					
+						$i = 1; // Counter for the rows
+					
+						foreach ($device_sums as $devname => $sum) :
+					?>
+							<tr>
+								<td><?php echo $i ?></td>
+								<td><?php echo $devname; ?></td>
+								<td><?php echo $start_date ?></td>
+								<td><?php echo $end_date ?></td>
+								<td><?php echo $devname; ?></td>
+								<td><?php echo $sum; ?> KWh</td>
+							</tr>
+					<?php
+							$i++;
+						endforeach;
+					
+						wp_reset_postdata();
+					else :
+					?>
+						<tr>
+							<td colspan="3"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
+						</tr>
+					<?php
+					endif;
+					?>
+					
+							</div>
 
 				</tbody>
 			</table>
