@@ -177,11 +177,6 @@ function update_branch() {
 		$locations = $_POST['floor_section'];
 
 		print_r($locations);
-
-
-
-	
-
 		
 
 		$new_post = array(
