@@ -79,8 +79,14 @@ $UID = $user->ID;
         </div>
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
-                <label for="date"> Select Date</label>
-                <input type="date" id="date" class="date" value="">
+                <label for="date"> Start Date</label>
+                <input type="date" id="start_date" class="date" value="">
+            </div>
+        </div>
+        <div class="catering_wrapper mb-5 col-md-2">
+            <div class="form-group">
+                <label for="date"> End Date</label>
+                <input type="date" id="start_date" class="date" value="">
             </div>
         </div>
         <div class="catering_wrapper mb-5 col-md-2">
