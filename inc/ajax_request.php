@@ -517,7 +517,7 @@ function show_reports() {
 					else :
 					?>
 						<tr>
-							<td colspan="3"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
+							<td colspan="6"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
 						</tr>
 					<?php
 					endif;
