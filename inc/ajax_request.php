@@ -174,23 +174,41 @@ function update_branch() {
 		$country = $_POST['country'];
 		$name = sanitize_text_field($_POST['name']);
 
+		$locations = $_POST['floor_section'];
+
+		print_r($locations);
+
+
+
+	
+
+		
+
 		$new_post = array(
 			'ID'           => $pid,
 			'post_title'    => $name,
 			'post_content'  => $name,
 			'post_status'   => 'publish',  
 			'post_author'   => $company,     
-			'post_type'     => 'branch'
+			'post_type'     => 'branch',
+			'tax_input' => array(
+				'location' => array($locations), // Array of term IDs
+			),
+			
+			
 		);
 
-		$new_post_id = wp_update_post($new_post);
+		$result = wp_update_post($new_post);
 
-		if ($new_post_id) {
-			add_post_meta($new_post_id, 'branch_address', $address, true);
-			add_post_meta($new_post_id, 'branch_company', $company, true);
-			add_post_meta($new_post_id, 'branch_code', $branch_code, true);
-			add_post_meta($new_post_id, 'branch_country', $country, true);
-		}
+		
+		update_post_meta($pid, 'branch_address', $address, false);
+		update_post_meta($pid, 'branch_company', $company, false);
+		update_post_meta($pid, 'branch_code', $branch_code, false);
+		update_post_meta($pid, 'branch_country', $country, false);
+
+		//$new = wp_set_object_terms( $pid, array($locations), 'location' );
+
+		
 
 		die();
 

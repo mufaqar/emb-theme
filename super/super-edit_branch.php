@@ -20,6 +20,7 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
     </div>
     <div class="_form p-4 pt-5 pb-5">
     <form class="add_ticket" id="add_ticket" action="#" enctype="multipart/form-data">
+    <input type="hidden" value="<?php echo $pid ?>"  id="pid" required>
             <div class="row">            
                 <div class="col-md-6 mb-3">
                     <label for="">Brnach Name</label>
@@ -65,7 +66,22 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
                     </div>
                 </div>     
 
-
+                <div class="col-md-6 mt-3 mt-md-0 mb-3">
+                <?php            
+                       $terms = get_terms(array(
+                        'taxonomy' => 'location',
+                        'hide_empty' => false, 
+                    ));
+                        ?>
+                <select class="selectpicker" data-live-search="true" multiple name="floor_section"  id="floor_section"> 
+              
+                    <?php  foreach ($terms as $term)  :  ?>
+                                <option value="<?php echo esc_attr( $term->term_id); ?>">
+                                    <?php echo  $term->name ?>
+                                </option>
+                            <?php endforeach; ?>
+                </select>
+                </div>   
 
                 <div class="d-flex justify-content-end savebtn">
                     <input type="submit" class="btn_primary"  value="Update Branch"/>
@@ -118,20 +134,26 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
             e.preventDefault();   
             $("#spinner-div").show();                     
             var name = jQuery('#name').val();	
+            var pid = jQuery('#pid').val();	
+            
             var address = jQuery('#address').val();	  
             var company = jQuery('#company').val();	
             var location_id = jQuery('#location_id').val();	
             var country = jQuery('#country').val();	
             var user_type = jQuery('#user_type').val();
+            var floor_section = jQuery('#floor_section').val();
+                       
             form_data = new FormData();   
-            form_data.append('action', 'add_branch');
+            form_data.append('action', 'update_branch');
             form_data.append('name', name);
+            form_data.append('pid', pid);
             form_data.append('address', address);
             form_data.append('company', company);
             form_data.append('location_id', location_id); 
-            form_data.append('country', country);    
-                
+            form_data.append('country', country);  
+            form_data.append('floor_section', floor_section);                    
             form_data.append('user_type', user_type);
+           
             $.ajax(
                 {
                     url:"<?php echo admin_url('admin-ajax.php'); ?>",
@@ -151,7 +173,7 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
                                     alert(data.message);
                         }  
                         else {
-                           $(".overlay").css("display", "flex");
+                        //   $(".overlay").css("display", "flex");
                       
                         }      
             }
