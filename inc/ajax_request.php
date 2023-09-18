@@ -173,12 +173,8 @@ function update_branch() {
 		$branch_code = $_POST['location_id'];
 		$country = $_POST['country'];
 		$name = sanitize_text_field($_POST['name']);
-
 		$locations = $_POST['floor_section'];
-
-		print_r($locations);
-		
-
+		$location_ids = explode(',', $locations);
 		$new_post = array(
 			'ID'           => $pid,
 			'post_title'    => $name,
@@ -186,22 +182,18 @@ function update_branch() {
 			'post_status'   => 'publish',  
 			'post_author'   => $company,     
 			'post_type'     => 'branch',
-			'tax_input' => array(
-				'location' => array($locations), // Array of term IDs
-			),
-			
+			'tax_input'    => array(
+				'location' => $location_ids
+			),		
 			
 		);
 
-		$result = wp_update_post($new_post);
-
-		
+		$result = wp_update_post($new_post);		
 		update_post_meta($pid, 'branch_address', $address, false);
 		update_post_meta($pid, 'branch_company', $company, false);
 		update_post_meta($pid, 'branch_code', $branch_code, false);
 		update_post_meta($pid, 'branch_country', $country, false);
-
-		//$new = wp_set_object_terms( $pid, array($locations), 'location' );
+		//$new = wp_set_object_terms( $pid, array($location_ids), 'location' );
 
 		
 
