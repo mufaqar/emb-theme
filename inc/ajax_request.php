@@ -506,7 +506,7 @@ function show_reports() {
 								<td><?php echo $devname; ?></td>
 								<td><?php echo $start_date ?></td>
 								<td><?php echo $end_date ?></td>
-								<td><?php echo $devname; ?></td>
+								<td><?php echo $devnum; ?></td>
 								<td><?php echo $sum; ?> KWh</td>
 							</tr>
 					<?php

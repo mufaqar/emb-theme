@@ -18,7 +18,7 @@ $UID = $user->ID;
                     <option value="">Select Branch</option>
                     <?php 
                     $args = array(
-                        'post_type' => 'terminals', 
+                        'post_type' => 'branch', 
                         'posts_per_page' => -1, 
                         'meta_query' => array(
                             array(
