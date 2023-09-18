@@ -33,7 +33,7 @@ $UID = $user->ID;
                     if ($custom_query->have_posts()) { 
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
                     ?>
-                    <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devnum', true); ?>">
+                    <option value="<?php echo get_post_meta(get_the_ID(),'branch_code', true); ?>">
                         <?php  the_title(); ?></option> <?php
                     }
                     wp_reset_postdata();
