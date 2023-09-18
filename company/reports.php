@@ -66,7 +66,7 @@ $UID = $user->ID;
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post(); //terminal_floor_section
                     ?>
                     <option value="<?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?>">
-                        <?php echo get_post_meta(get_the_ID(),'terminal_devname', true); ?></option> <?php
+                        <?php echo get_post_meta(get_the_ID(),'terminal_floor_section', true); ?></option> <?php
                     }
                     wp_reset_postdata();
                     } 
