@@ -89,7 +89,7 @@ $UID = $user->ID;
                 <input type="date" id="start_date" class="date" value="">
             </div>
         </div>
-        <div class="catering_wrapper mb-5 col-md-2">
+        <!-- <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
                 <label for="date_type">Date Type</label>
                 <select class="form-control" id="date_type">
@@ -99,7 +99,7 @@ $UID = $user->ID;
                     <option value="option3">Daily</option>
                 </select>
             </div>
-        </div>
+        </div> -->
         <div class="catering_wrapper mb-5 col-md-2">
             <label for="invalidSelect">.</label>
             <input type="submit" value="Generate Report" class="submit_btn" id="generateReportBtn">
