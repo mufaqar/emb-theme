@@ -15,7 +15,7 @@ $UID = $user->ID;
 
         <div class="catering_wrapper mb-5 col-md-2">
             <div class="form-group">
-                <label for="branches">Branches Select</label>
+                <label for="branches">Select Branch</label>
                 <select class="form-control " id="branches">
                     <option value="">Select Branch</option>
                     <?php 
