@@ -22,7 +22,7 @@ $UID = $user->ID;
                         'posts_per_page' => -1, 
                         'meta_query' => array(
                             array(
-                                'key' => 'terminal_company', 
+                                'key' => 'branch_company', 
                                 'value' => $UID, 
                                 'compare' => '=',
                             ),
