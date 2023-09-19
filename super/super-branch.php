@@ -24,7 +24,7 @@ get_header('admin');
                     <th>Sr #</th>                   
                     <th>Branch Name</th>
                     <th>Company Name</th>
-                    <th>Location Code</th>               
+                    <th>Floors</th>               
                     <th>Country</th>
                     <th>Status</th>
                     <th>Action</th>
@@ -60,6 +60,9 @@ get_header('admin');
                         }
 
                         $user_info = get_userdata($branch_company);
+                        $custom_post_type = 'branch';
+                        $custom_taxonomy = 'location';
+                        $custom_post_terms = wp_get_post_terms(get_the_ID(), $custom_taxonomy);
 
                     
                       ?>
@@ -67,7 +70,19 @@ get_header('admin');
                     <td><?php echo $i ?></td>
                     <th><?php the_title()?></th>
                     <th><?php echo $user_info->name?></th>
-                    <th><?php echo $branch_code?></th>                
+                    <th><?php 
+                    
+                    // Loop through the terms
+                        foreach ($custom_post_terms as $term) {
+                            // Access term properties
+                            $term_id = $term->term_id;
+                            $term_name = $term->name;
+                            $term_slug = $term->slug;
+                            // Do something with the term data
+                            echo $term_name.",<br>";
+                        }
+                    
+                    ?></th>                
                     <th><?php echo $branch_country?></th>
                     <th><?php echo $text_status ?></th>
                     <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit Branch</a></th>

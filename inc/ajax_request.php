@@ -407,11 +407,37 @@ add_action('wp_ajax_nopriv_show_reports', 'show_reports');
 
 function show_reports() {
 		global $wpdb;	
-		$devnum = $_POST['devnum'];
+		$branch = $_POST['branch'];
 		$devname = $_POST['devname'];
 		$start_date = $_POST['start_date'];
 		$end_date = $_POST['end_date'];
 		$type =  $_POST['type'];
+
+		echo $branch;
+
+		// Replace 'your_post_id' with the actual post ID you want to retrieve terms for.
+$post_id = $branch;
+
+// Replace 'your_taxonomy' with the name of the taxonomy you want to retrieve terms from.
+$taxonomy = 'your_taxonomy';
+
+// Get the terms for a specific post by its ID
+$post_terms = wp_get_post_terms($post_id, $taxonomy);
+
+// Loop through the terms
+foreach ($post_terms as $term) {
+    // Access term properties
+    $term_id = $term->term_id;
+    $term_name = $term->name;
+    $term_slug = $term->slug;
+
+    // Do something with the term data
+    echo "Term ID: $term_id, Term Name: $term_name, Term Slug: $term_slug<br>";
+}
+
+
+
+
 
 		if (isset($_POST['start_date']) && !empty($_POST['start_date'])) {
 			$start_date = $_POST['start_date'];

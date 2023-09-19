@@ -6,7 +6,7 @@ $UID = $user->ID;
 <?php include('navigation.php'); ?>
 <div class="tab_heading">
     <h1>
-        <h2> Report By Branches </h2>
+        <h2> Reports</h2>
     </h1>
 </div>
 <div class="admin_parrent">
@@ -33,7 +33,7 @@ $UID = $user->ID;
                     if ($custom_query->have_posts()) { 
                     while ($custom_query->have_posts()) { $s++; $custom_query->the_post();
                     ?>
-                    <option value="<?php echo get_post_meta(get_the_ID(),'branch_code', true); ?>">
+                    <option value="<?php echo get_the_ID(); ?>">
                         <?php  the_title(); ?></option> <?php
                     }
                     wp_reset_postdata();
@@ -109,75 +109,12 @@ $UID = $user->ID;
     <section id="div1" class="targetDiv activediv tablediv">
         <div id="invoice_orders"></div>
 
-        <div style="display:none">
+        <div>
+         
 
-        <table id="invoice_orders" class="table table-striped orders_table export_table" style="width:100%">
-				<thead>
-					<tr>
-						<th>Sr #</th>
-						<th>Station Id</th>
-						<th>Start Date</th>
-						<th>End Date</th>					
-						<th>QTY</th>
-						<th>Vol A</th>
+        
 
-					</tr>
-				</thead>
-				<tbody>
-        <?php
-$meta_query = array(
-    // Your existing meta queries go here
-);
-
-$query = new WP_Query(array(
-    'post_type' => 'records',
-    'posts_per_page' => -1,
-    'meta_query' => $meta_query,
-));
-
-if ($query->have_posts()) :
-    $device_sums = array(); 
-
-    while ($query->have_posts()) : $query->the_post();
-        $devname = get_post_meta(get_the_ID(), 'devname', true); 
-        if (!empty($devname)) {         
-            if (!isset($device_sums[$devname])) {
-                $device_sums[$devname] = 0; 
-            }
-            $device_sums[$devname] += (float) get_post_meta(get_the_ID(), 'qty_total', true);
-        }
-    endwhile;
-
-  
-
-    // Sort the device sums in descending order
-    arsort($device_sums);
-
-    $i = 1; // Counter for the rows
-
-    foreach ($device_sums as $devname => $sum) :
-?>
-        <tr>
-            <td><?php echo $i ?></td>
-            <td><?php echo $devname; ?></td>
-            <td>Start Date</td>
-            <td>end DAte</td>
-            <td><?php echo $devname; ?></td>
-            <td><?php echo $sum; ?></td>
-        </tr>
-<?php
-        $i++;
-    endforeach;
-
-    wp_reset_postdata();
-else :
-?>
-    <tr>
-        <td colspan="3"><?php _e('Nothing Found', 'lbt_translate'); ?></td>
-    </tr>
-<?php
-endif;
-?>
+       
 
         </div>
         
@@ -213,7 +150,7 @@ jQuery(document).ready(function($) {
 
         form_data = new FormData();
         form_data.append('action', 'show_reports');
-        form_data.append('devnum', selectedBranche);
+        form_data.append('branch', selectedBranche);
         form_data.append('devname', selectedFloor);
         form_data.append('start_date', start_date);
         form_data.append('end_date', end_date);
