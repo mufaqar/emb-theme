@@ -211,10 +211,7 @@ function add_terminal() {
 	$devname = $_POST['devname'];
 	$company = $_POST['company'];	
 	$branch_name = $_POST['branch_name'];
-	$floor_section = $_POST['floor_section'];
-
-
-	
+	$floor_section = $_POST['floor_section'];	
 
 	$new_post = array(
 		'post_title'    => $devnum,

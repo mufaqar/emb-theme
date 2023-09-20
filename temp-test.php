@@ -18,6 +18,14 @@ get_header('landing');
 
 <?php 
 
+$start_time = date('Y-m-d H:i:s', strtotime('+45 minutes'));
+$end_time = date('Y-m-d H:i:s', strtotime('+75 minutes'));
+
+
+echo $start_time;
+echo "<hr/>";
+echo $end_time;
+
 $args = array(
     'post_type' => 'records', // Replace with your custom post type name
     'posts_per_page' => -1, // Retrieve all matching posts
