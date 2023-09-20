@@ -492,25 +492,13 @@ function show_reports() {
 				<tbody>
 					<?php 	
 
-					if($branch == '' ) 
+					if($branch == '' && $devname != '' ) 
 					{	
-
-						echo $branch;				
+						// By Floor	
 					
 						$meta_query = array(
 							'relation' => 'AND',
-						);
-						
-						// Check and add the 'devnum' condition if $devnum is not empty
-						if (!empty($devnum)) {
-							$meta_query[] = array(
-								'key' => 'devnum',
-								'value' => $devnum,
-								'compare' => '=',
-							);
-						}
-						
-						// Check and add the 'devname' condition if $devname is not empty
+						);						
 						if (!empty($devname)) {
 							$meta_query[] = array(
 								'key' => 'devname',
@@ -520,10 +508,11 @@ function show_reports() {
 						}
 				}
 
-				else {
+				else if($branch != '' &&  $devname == ''  ) {
 
-				
+					// By Branch	
 
+					
 					$meta_query = array(
 						'relation' => 'OR',
 					);
@@ -535,6 +524,19 @@ function show_reports() {
 							'compare' => '=',
 						);
 					}
+					
+
+
+				}
+
+				else if($branch != '' &&  $devname != ''  ) {
+					// By Floor
+					
+					$meta_query[] = array(
+						'key' => 'devname',
+						'value' => $devname,
+						'compare' => '=',
+					);
 					
 
 
@@ -561,6 +563,12 @@ function show_reports() {
 						'posts_per_page' => -1,
 						'meta_query' => $meta_query,
 					));
+
+					//print_r($meta_query);
+
+
+
+
 					if ($query->have_posts()) :
 						$device_sums = array(); 					
 						while ($query->have_posts()) : $query->the_post();
