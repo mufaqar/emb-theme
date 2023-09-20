@@ -56,7 +56,7 @@ $custom_query = new WP_Query($args);
 if ($custom_query->have_posts()) {
     while ($custom_query->have_posts()) {
         $custom_query->the_post();
-        the_title(); // Display the post title
+       // the_title(); // Display the post title
     }
     wp_reset_postdata(); // Reset the post data
 } else {
