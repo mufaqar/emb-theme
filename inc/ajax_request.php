@@ -492,6 +492,8 @@ function show_reports() {
 				<tbody>
 					<?php 	
 
+					//print "<pre>";
+
 					if($branch == '' && $devname != '' ) 
 					{	
 						// By Floor	
@@ -541,14 +543,19 @@ function show_reports() {
 
 
 				}
+				
 
-				//print "<pre>";
+			
 
 				//print_r($meta_query);
 					
 				
 					if (!empty($start_date) && !empty($end_date)) {
 						// Add date range condition for 'operdate'
+
+						$meta_query = array(
+							'relation' => 'AND',
+						);
 						$meta_query[] = array(
 							'key' => 'operdate',
 							'value' => array($start_date, $end_date),
@@ -556,7 +563,7 @@ function show_reports() {
 							'type' => 'DATE', 
 						);
 					}		
-					
+				
 						
 					$query = new WP_Query(array(
 						'post_type' => 'records',
