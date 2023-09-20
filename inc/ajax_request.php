@@ -492,7 +492,7 @@ function show_reports() {
 				<tbody>
 					<?php 	
 
-					//print "<pre>";
+					print "<pre>";
 
 					if($branch == '' && $devname != '' ) 
 					{	
@@ -517,8 +517,7 @@ function show_reports() {
 					
 					$meta_query = array(
 						'relation' => 'OR',
-					);
-			
+					);			
 					foreach ($terminals_arr as $terminal) {						
 						$meta_query[] = array(
 							'key' => 'devnum',
@@ -550,12 +549,7 @@ function show_reports() {
 				//print_r($meta_query);
 					
 				
-					if (!empty($start_date) && !empty($end_date)) {
-						// Add date range condition for 'operdate'
-
-						$meta_query = array(
-							'relation' => 'AND',
-						);
+					if (!empty($start_date) && !empty($end_date)) {						
 						$meta_query[] = array(
 							'key' => 'operdate',
 							'value' => array($start_date, $end_date),
@@ -571,7 +565,7 @@ function show_reports() {
 						'meta_query' => $meta_query,
 					));
 
-					//print_r($meta_query);
+					print_r($meta_query);
 
 
 
