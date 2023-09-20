@@ -26,9 +26,11 @@ echo $start_time;
 echo "<hr/>";
 echo $end_time;
 
+
+
 $args = array(
     'post_type' => 'records', // Replace with your custom post type name
-    'posts_per_page' => -1, // Retrieve all matching posts
+    'posts_per_page' => 1, // Retrieve all matching posts
     'meta_query' => array(
         'relation' => 'OR', // All conditions must be met
         array(
