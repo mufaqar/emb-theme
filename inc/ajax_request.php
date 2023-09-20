@@ -568,7 +568,7 @@ function show_reports() {
 						'meta_query' => $meta_query,
 					));
 
-					print_r($meta_query);
+				//	print_r($meta_query);
 
 
 
