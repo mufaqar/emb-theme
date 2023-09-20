@@ -524,6 +524,9 @@ function show_reports() {
 							'value' => $terminal,
 							'compare' => '=',
 						);
+						$meta_query = array(
+							'relation' => 'AND',
+						);
 					}
 					
 
