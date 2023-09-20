@@ -413,28 +413,53 @@ function show_reports() {
 		$end_date = $_POST['end_date'];
 		$type =  $_POST['type'];
 
-		echo $branch;
+	
+		
+		$post_terms = wp_get_post_terms($branch, 'location');
+		$branchesarr = [];
+		foreach ($post_terms as $term) {
+			$term_id = $term->term_id;
+			$term_name = $term->name;
+			$term_slug = $term->slug;
+			$branchesarr[$term_id] = $term_name;
 
-		// Replace 'your_post_id' with the actual post ID you want to retrieve terms for.
-$post_id = $branch;
+		}
+		$meta_query_branch = array(
+			'relation' => 'OR',
+		);
 
-// Replace 'your_taxonomy' with the name of the taxonomy you want to retrieve terms from.
-$taxonomy = 'your_taxonomy';
+		foreach ($branchesarr as $section) {	
+			$meta_query_branch[] = array(
+				'key' => 'terminal_floor_section',
+				'value' => $section,
+				'compare' => '=',
+			);
+		}
+		//print_r($meta_query_branch);
+		$terminal_args = array(
+			'post_type' => 'terminals', // Replace with your custom post type name
+			'posts_per_page' => -1, // Retrieve all matching posts
+			'meta_query' => $meta_query_branch,
+		);
 
-// Get the terms for a specific post by its ID
-$post_terms = wp_get_post_terms($post_id, $taxonomy);
+		//print "<pre>";
+		//print_r($args);
+		
+		$custom_query = new WP_Query($terminal_args);
+		$terminals_arr = [];
+		if ($custom_query->have_posts()) {
+			while ($custom_query->have_posts()) {
+				$custom_query->the_post();
+				$terminals_arr[Get_the_ID()] = get_the_title();
+				
+			}
+			wp_reset_postdata(); // Reset the post data
+		} else {
+			// No posts found
+		}
 
-// Loop through the terms
-foreach ($post_terms as $term) {
-    // Access term properties
-    $term_id = $term->term_id;
-    $term_name = $term->name;
-    $term_slug = $term->slug;
-
-    // Do something with the term data
-    echo "Term ID: $term_id, Term Name: $term_name, Term Slug: $term_slug<br>";
-}
-
+		
+		
 
 
 
@@ -456,10 +481,9 @@ foreach ($post_terms as $term) {
 				<thead>
 					<tr>
 						<th>Sr #</th>
-						<th>Floor Station</th>				
-						<th>Dev Id</th>
-						<th>Dev Name</th>
-						<th>Oper date</th>
+						<th>Floor Station</th>	
+						<th>Starting Date</th>
+						<th>Ending date</th>
 						<th>Total consumption</th>
 						
 
@@ -468,29 +492,57 @@ foreach ($post_terms as $term) {
 				<tbody>
 					<?php 	
 
+					if($branch == '' ) 
+					{	
+
+						echo $branch;				
 					
-					
+						$meta_query = array(
+							'relation' => 'AND',
+						);
+						
+						// Check and add the 'devnum' condition if $devnum is not empty
+						if (!empty($devnum)) {
+							$meta_query[] = array(
+								'key' => 'devnum',
+								'value' => $devnum,
+								'compare' => '=',
+							);
+						}
+						
+						// Check and add the 'devname' condition if $devname is not empty
+						if (!empty($devname)) {
+							$meta_query[] = array(
+								'key' => 'devname',
+								'value' => $devname,
+								'compare' => '=',
+							);
+						}
+				}
+
+				else {
+
+				
+
 					$meta_query = array(
-						'relation' => 'AND',
+						'relation' => 'OR',
 					);
-					
-					// Check and add the 'devnum' condition if $devnum is not empty
-					if (!empty($devnum)) {
+			
+					foreach ($terminals_arr as $terminal) {						
 						$meta_query[] = array(
 							'key' => 'devnum',
-							'value' => $devnum,
+							'value' => $terminal,
 							'compare' => '=',
 						);
 					}
 					
-					// Check and add the 'devname' condition if $devname is not empty
-					if (!empty($devname)) {
-						$meta_query[] = array(
-							'key' => 'devname',
-							'value' => $devname,
-							'compare' => '=',
-						);
-					}
+
+
+				}
+
+				//print "<pre>";
+
+				//print_r($meta_query);
 					
 				
 					if (!empty($start_date) && !empty($end_date)) {
@@ -509,35 +561,44 @@ foreach ($post_terms as $term) {
 						'posts_per_page' => -1,
 						'meta_query' => $meta_query,
 					));
-					
 					if ($query->have_posts()) :
-						$device_sums = array(); 
-					
+						$device_sums = array(); 					
 						while ($query->have_posts()) : $query->the_post();
 							$devname = get_post_meta(get_the_ID(), 'devname', true); 
 							if (!empty($devname)) {         
 								if (!isset($device_sums[$devname])) {
-									$device_sums[$devname] = 0; 
-								}
+									$device_sums[$devname] = 0; 								}
 								$device_sums[$devname] += (float) get_post_meta(get_the_ID(), 'qty_total', true);
 							}
 						endwhile;
-					
-					  
-					
 						// Sort the device sums in descending order
 						arsort($device_sums);
 					
 						$i = 1; // Counter for the rows
 					
-						foreach ($device_sums as $devname => $sum) :
+						foreach ($device_sums as $devname => $sum) :						
+
+							$args = array(
+								'post_type' => 'terminals',
+								'meta_key' => 'terminal_devname',
+								'meta_value' => $devname,
+								'posts_per_page' => 1,
+							);
+
+							$posts = get_posts($args);
+						
+
+							$floor = get_post_meta($posts[0]->ID, 'terminal_floor_section', true);
+
+
+
 					?>
 							<tr>
 								<td><?php echo $i ?></td>
-								<td><?php echo $devname; ?></td>
+								<td><?php echo $floor; ?></td>
 								<td><?php echo $start_date ?></td>
 								<td><?php echo $end_date ?></td>
-								<td><?php echo $devnum; ?></td>
+							
 								<td><?php echo $sum; ?> KWh</td>
 							</tr>
 					<?php

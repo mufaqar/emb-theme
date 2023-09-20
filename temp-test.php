@@ -18,39 +18,42 @@ get_header('landing');
 
 <?php 
 
-            $args = array(
-                'post_type' => 'terminals',
-                'posts_per_page' => -1, 
-                'meta_query' => array(
-                    'relation' => 'AND', // Match both conditions
-                    array(
-                        'key' => 'terminal_floor_section',
-                        'value' => 'Room 01',
-                        'compare' => 'LIKE'
-                     
-                    ),
-                    array(
-                        'key' => 'terminal_floor_section',
-                        'value' => 'Kitchen',
-                        'compare' => 'LIKE'
-                       
-                    )
-                )
-            );
-            print "<pre>";
-            print_r($args);
+$args = array(
+    'post_type' => 'records', // Replace with your custom post type name
+    'posts_per_page' => -1, // Retrieve all matching posts
+    'meta_query' => array(
+        'relation' => 'OR', // All conditions must be met
+        array(
+            'key' => 'devnum',
+            'value' => '230729010003',
+         
+        ),
+        array(
+            'key' => 'devnum',
+            'value' => '230729010002',
+         
+        ),
+        array(
+            'key' => 'devnum',
+            'value' => '230729010001',
+           
+        ),
+    ),
+);
 
-            $query = new WP_Query($args);
+$custom_query = new WP_Query($args);
 
-            if ($query->have_posts()) {
-                while ($query->have_posts()) {
-                    $query->the_post();
-                   ?> <h2> <?php the_title()?></h2><?php
-                }
-                wp_reset_postdata(); // Reset the post data query
-            } else {
-                // No posts found
-            }
+if ($custom_query->have_posts()) {
+    while ($custom_query->have_posts()) {
+        $custom_query->the_post();
+        the_title(); // Display the post title
+    }
+    wp_reset_postdata(); // Reset the post data
+} else {
+    echo "No posts found";
+}
+
+
 
 
          ?>
