@@ -8,15 +8,25 @@ $branch_code = get_post_meta($pid , 'branch_code', true);
 $branch_address = get_post_meta($pid , 'branch_address', true);
 $branch_country = get_post_meta($pid , 'branch_country', true);
 
+$terminal_company = get_post_meta($pid , 'terminal_company', true);
+
+$branch_company = get_post_meta($pid , 'branch_company', true);
+
+$location_terms = wp_get_post_terms($pid, 'location'); 
+
+
+
+
+
 
 
 ?> 
  <?php include('navigation.php'); ?>
- <?php global $current_user; wp_get_current_user();  $uid = $current_user->ID;?>
+ <?php global $current_user; wp_get_current_user();  $uid = $current_user->ID;   ?>
 
 <div class="custom_container catering_form mt-5 mb-5">
     <div class="_info mt-5 mb-3">
-        <h2>Edit Branch  </h2>
+        <h2>Edit Branch </h2>
     </div>
     <div class="_form p-4 pt-5 pb-5">
     <form class="add_ticket" id="add_ticket" action="#" enctype="multipart/form-data">
@@ -45,7 +55,7 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
                         ?>
                         <select name="user_select"  id="company">                            
                             <?php foreach ( $users as $user ) : ?>
-                                <option value="<?php echo esc_attr( $user->ID ); ?>">
+                                <option value="<?php echo esc_attr( $user->ID ); ?>" <?php if ($user->ID == $branch_company) echo 'selected'; ?>>
                                     <?php echo esc_html( $user->display_name ); ?>
                                 </option>
                             <?php endforeach; ?>
@@ -76,7 +86,14 @@ $branch_country = get_post_meta($pid , 'branch_country', true);
                 <select class="selectpicker" data-live-search="true" multiple name="floor_section"  id="floor_section"> 
               
                     <?php  foreach ($terms as $term)  :  ?>
-                                <option value="<?php echo esc_attr( $term->term_id); ?>">
+                                <option value="<?php echo esc_attr( $term->term_id); ?>" <?php
+                                    foreach ($location_terms as $loc) {
+                                        if ($term->term_id == $loc->term_id) {
+                                            echo 'selected';
+                                        }
+                                    }                                                                    
+                                
+                                 ?>>
                                     <?php echo  $term->name ?>
                                 </option>
                             <?php endforeach; ?>
