@@ -62,13 +62,21 @@ $company_name = $user->display_name;
 
                 <?php
 
-
-              
+                $start_date = date('Y-m-01'); 
+                $end_date = date('Y-m-d');
+                $meta_query[] = array(
+                    'key' => 'operdate',
+                    'value' => array($start_date, $end_date),
+                    'compare' => 'BETWEEN',
+                    'type' => 'DATE', 
+                );
                 $args = array(
                     'post_type' => 'records',
                     'posts_per_page' => -1, 
                     'meta_query' => $meta_query
                 );
+
+             
                 $query = new WP_Query($args);
                 if ($query->have_posts()) {
                     $total_qty = 0.0; // Initialize the total quantity counter
@@ -93,6 +101,9 @@ $company_name = $user->display_name;
                 } else {
                     echo 'No Kwh found';
                 }
+
+                echo '<br/><br/><br/>Starting Date : ' . $start_date;
+                echo '<br/>Ending Date : ' . $start_date;
 
             ?>
             </div>

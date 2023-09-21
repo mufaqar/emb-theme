@@ -138,13 +138,18 @@ function add_branch() {
 		$branch_code = $_POST['location_id'];
 		$country = $_POST['country'];
 		$name = sanitize_text_field($_POST['name']);
+		$locations = $_POST['floor_section'];
+		$location_ids = explode(',', $locations);
 
 		$new_post = array(
 			'post_title'    => $name,
 			'post_content'  => $name,
 			'post_status'   => 'publish',  
 			'post_author'   => $company,     
-			'post_type'     => 'branch'
+			'post_type'     => 'branch',
+			'tax_input'    => array(
+				'location' => $location_ids
+			),	
 		);
 
 		$new_post_id = wp_insert_post($new_post);

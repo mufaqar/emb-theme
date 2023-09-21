@@ -54,7 +54,23 @@ get_header();
                     <div class="_select">
                     <input type="text" value="" placeholder="Please add country" id="country" required>
                     </div>
-                </div>     
+                </div>  
+                <div class="col-md-6 mt-3 mt-md-0 mb-3">
+                <?php            
+                       $terms = get_terms(array(
+                        'taxonomy' => 'location',
+                        'hide_empty' => false, 
+                    ));
+                        ?>
+                <select class="selectpicker" data-live-search="true" multiple name="floor_section"  id="floor_section"> 
+              
+                    <?php  foreach ($terms as $term)  :  ?>
+                                <option value="<?php echo esc_attr( $term->term_id); ?>" >
+                                    <?php echo  $term->name ?>
+                                </option>
+                            <?php endforeach; ?>
+                </select>
+                </div>    
 
 
 
@@ -114,6 +130,9 @@ get_header();
             var location_id = jQuery('#location_id').val();	
             var country = jQuery('#country').val();	
             var user_type = jQuery('#user_type').val();
+            var floor_section = jQuery('#floor_section').val();
+
+            
             form_data = new FormData();   
             form_data.append('action', 'add_branch');
             form_data.append('name', name);
@@ -121,7 +140,7 @@ get_header();
             form_data.append('company', company);
             form_data.append('location_id', location_id); 
             form_data.append('country', country);    
-                
+            form_data.append('floor_section', floor_section);                     
             form_data.append('user_type', user_type);
             $.ajax(
                 {

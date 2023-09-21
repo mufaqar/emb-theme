@@ -18,13 +18,7 @@ get_header('landing');
 
 <?php 
 
-$start_time = date('Y-m-d H:i:s', strtotime('+45 minutes'));
-$end_time = date('Y-m-d H:i:s', strtotime('+75 minutes'));
 
-
-echo $start_time;
-echo "<hr/>";
-echo $end_time;
 
 
 
