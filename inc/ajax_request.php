@@ -66,7 +66,8 @@ function update_company() {
 		update_user_meta( $user_id,'name', $company_name);	 
 		update_user_meta( $user_id,'company_address', $company_address);	  
 		update_user_meta( $user_id,'company_city', $company_city);
-		update_user_meta( $user_id,'company_country', $company_country);			
+		update_user_meta( $user_id,'company_country', $company_country);	
+				
 		echo wp_send_json( array('code' => 200 , 'message'=>__('We have Created an account for you.')));  	
 		
 	  } 
@@ -78,6 +79,54 @@ function update_company() {
 
 
 
+
+add_action('wp_ajax_add_personal', 'add_personal', 0);
+add_action('wp_ajax_nopriv_add_personal', 'add_personal');
+
+function add_personal() {
+		global $wpdb;	
+		$personal_username = $_POST['email'];
+		$personal_email = $_POST['email'];
+		$personal_name = $_POST['name'];
+		$personal_address = $_POST['address'];	
+		$personal_city = $_POST['city'];  
+		$personal_country = $_POST['country'];  
+		$personal_company = $_POST['company'];  
+		$persbranchs = $_POST['branch_name'];  
+
+		$personal_branch_name = explode(',', $persbranchs);
+
+		$user_data = array(
+			'user_login' => $personal_email,
+			'user_email' => $personal_email,
+			'user_pass' => "123456789",	
+			'display_name' => $personal_name,
+			'role' => 'personal'
+		);	
+	  $user_id = wp_insert_user($user_data);	
+	  if (!is_wp_error($user_id)) {	
+		update_user_meta( $user_id,'name', $personal_name);	 
+		update_user_meta( $user_id,'personal_address', $personal_address);	  
+		update_user_meta( $user_id,'personal_city', $personal_city);
+		update_user_meta( $user_id,'personal_country', $personal_country);	
+		update_user_meta( $user_id,'personal_company', $personal_company);	
+		update_user_meta( $user_id,'personal_branch_name', $personal_branch_name);			
+		echo wp_send_json( array('code' => 200 , 'message'=>__('We have Created an account for you.')));
+	  	
+		
+	  } else {
+		if (isset($user_id->errors['empty_user_login'])) {	          
+		  echo wp_send_json( array('code' => 0 , 'message'=>__('User Name and Email are mandatory')));
+		  } elseif (isset($user_id->errors['existing_user_login'])) {
+		  echo wp_send_json( array('code' => 0 , 'message'=>__('This email address is already registered.')));
+		  } else {	         
+		  echo wp_send_json( array('code' => 0 , 'message'=>__('Error Occured please fill up the sign up form carefully.')));
+		  }
+	  }
+       
+	die;   
+		
+}
 
 
 

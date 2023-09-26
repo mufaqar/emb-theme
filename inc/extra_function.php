@@ -15,6 +15,8 @@ function remove_admin_bar() {
 
 add_role( 'company', 'Company', get_role( 'company' )->capabilities );
 
+add_role( 'personal', 'Personal', get_role( 'personal' )->capabilities );
+
 
 add_filter( 'manage_records_posts_columns', 'set_custom_edit_records_columns' );    
 add_action( 'manage_records_posts_custom_column' , 'custom_records_column', 10, 2 );
