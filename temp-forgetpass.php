@@ -48,10 +48,8 @@ if ( is_user_logged_in() ) {
                 </div>               
             </div>
             <div class="col-sm-12 right col-md-6 p-3">
-                 <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo.png" alt="" style="max-width:350px" > <br/><br/>
-                <h3>Welcome to Budget Computer & Kiwi Mobiles</h3>
-                <p>1191 Eruera street Rotrua, 3010 </p>
-                <p>DID : 073477044 </p>
+            <img src="<?php bloginfo('template_directory'); ?>/reources/images/logo_dark.png" alt="" style="max-width:200px" > <br/><br/>
+                <h3>Welcome to ECM</h3>     
                 <form class="resetpassword" id="resetpassword">
                     <div class="form-group">
                         <label for="username">Email</label>
@@ -63,7 +61,7 @@ if ( is_user_logged_in() ) {
                     
                         <button type="submit" class="green_btn">Reset Password</button>
 
-                        <a href="https://kiwimobiles.co.nz/jobform" class="green_btn">Login</a>
+                        <a href="https://ecm.ttso.co.uk/" class="green_btn">Login</a>
                     </div>
                     
                 </form>
