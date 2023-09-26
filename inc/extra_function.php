@@ -161,42 +161,33 @@ function Generate_Token() {
 
 
 
+  
 
-
-add_filter( 'cron_schedules', 'ecm_cron_importdata' );
-
-        function ecm_cron_importdata( $schedules ) {
-            $schedules['every_fouthyfive_minutes'] = array(
-                'interval'  => 2700,
-                'display'   => 'Every 45 Minutes'
+       // Add a custom cron schedule
+        add_filter('cron_schedules', 'ecm_cron_importdata');
+        function ecm_cron_importdata($schedules) {
+            $schedules['every_forty_five_minutes'] = array(
+                'interval' => 2700,
+                'display' => 'Every 45 Minutes'
             );
             return $schedules;
         }
-        
+
         // Schedule an action if it's not already scheduled
-        if ( ! wp_next_scheduled( 'ecm_cron_importdata' ) ) {
-            wp_schedule_event( time(), 'every_fouthyfive_minutes', 'ecm_cron_importdata' );
+        if (!wp_next_scheduled('ecm_cron_importdata')) {
+            wp_schedule_event(time(), 'every_forty_five_minutes', 'ecm_cron_importdata');
         }
 
 
-    function schedule_api_cron_job() {
-    if (!wp_next_scheduled('api_cron_event')) {
-        wp_schedule_event( time(), 'every_fouthyfive_minutes', 'ecm_cron_importdata'. $args );
-    }
-    }
-
-// Hook the scheduling function
-//add_action('init', 'schedule_api_cron_job');
-add_action( 'ecm_cron_importdata', 'call_api_with_times' );
 
 // Define the function to be executed by the cron job
 function call_api_with_times() {
-  $token = get_option('system_token');
-  $expiration_timestamp = get_option('system_token_expiration');
-  if (!$token || !$expiration_timestamp || $expiration_timestamp < time()) {
-      Generate_Token();
-      return;
-  }
+        $token = get_option('system_token');
+        $expiration_timestamp = get_option('system_token_expiration');
+        if (!$token || !$expiration_timestamp || $expiration_timestamp < time()) {
+            Generate_Token();
+            return;
+        }
 
   $api_url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
   // Set the start and end times (30 minutes from now)
@@ -291,6 +282,8 @@ function call_api_with_times() {
 
 
 }
+
+add_action('ecm_cron_importdata', 'call_api_with_times');
 
 
 function get_terminal_info($UID) {
