@@ -66,8 +66,48 @@ $user_email = $user->user_email;
                     </div>
                 </div>
 
+                <div class="col-md-6 mb-3">
+                    <label for="">Company </label>
+                    <div class="_select">
+                        <?php                     
+                        $role = 'personal';
+                        $users = get_users( array(
+                            'role' => $role,
+                        ) );
+                        ?>
+                        <select name="user_select"  id="company">                            
+                            <?php foreach ( $users as $user ) : ?>
+                                <option value="<?php echo esc_attr( $user->ID ); ?>">
+                                    <?php echo esc_html( $user->display_name ); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>  
+
+
+                <div class="col-md-6 mb-3">
+                    <label for="">Branch Name</label>
+                    <div class="_select">
+                        <?php            
+                        $args = array(
+                            'post_type' => 'branch',  
+                            'posts_per_page' => -1, 
+                        );                    
+                        $posts = get_posts($args);
+                        ?>
+                       <select class="selectpicker" data-live-search="true" multiple id="branch_name">
+                            <?php foreach ($posts as $post)  : ?>
+                                <option value="<?php echo esc_attr( $post->ID ); ?>">
+                                    <?php echo esc_html( $post->post_title ); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>  
+
                 <div class="d-flex justify-content-end savebtn">
-                    <input type="submit" class="btn_primary"  value="Update Company"/>
+                    <input type="submit" class="btn_primary"  value="Update User"/>
                 </div>
             </div>
         </form>
@@ -123,8 +163,11 @@ $user_email = $user->user_email;
             var city = jQuery('#city').val();
             var country = jQuery('#country').val();
             var user_type = jQuery('#user_type').val();
+            var company = jQuery('#company').val();
+            var branch_name = jQuery('#branch_name').val();
+
             form_data = new FormData();   
-            form_data.append('action', 'update_company');
+            form_data.append('action', 'update_personal');
             form_data.append('uid', uid);
             form_data.append('name', name);
             form_data.append('email', email);	
@@ -132,6 +175,8 @@ $user_email = $user->user_email;
             form_data.append('city', city);
             form_data.append('country', country);
             form_data.append('user_type', user_type);
+            form_data.append('company', company);
+            form_data.append('branch_name', branch_name);
             $.ajax(
                 {
                     url:"<?php echo admin_url('admin-ajax.php'); ?>",

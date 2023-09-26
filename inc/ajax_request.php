@@ -129,6 +129,43 @@ function add_personal() {
 }
 
 
+add_action('wp_ajax_update_personal', 'update_personal', 0);
+add_action('wp_ajax_nopriv_update_personal', 'update_personal');
+
+function update_personal() {
+		global $wpdb;	
+		$uid = $_POST['uid'];
+		$company_username = $_POST['email'];
+		$company_email = $_POST['email'];
+		$company_name = $_POST['name'];
+		$company_address = $_POST['address'];	
+		$company_city = $_POST['city'];  
+		$company_country = $_POST['country']; 
+		
+		$user_data = array(
+			'ID' => $uid,
+			'user_login' => $company_email,
+			'user_email' => $company_email,
+			'display_name' => $company_name,
+			'role' => 'personal'
+		);	
+	  $user_id = wp_update_user($user_data);	
+	
+		update_user_meta( $user_id,'name', $personal_name);	 
+		update_user_meta( $user_id,'personal_address', $personal_address);	  
+		update_user_meta( $user_id,'personal_city', $personal_city);
+		update_user_meta( $user_id,'personal_country', $personal_country);	
+		update_user_meta( $user_id,'personal_company', $personal_company);	
+		update_user_meta( $user_id,'personal_branch_name', $personal_branch_name);					
+	
+		
+	
+       
+	die;   
+		
+}
+
+
 
 
 

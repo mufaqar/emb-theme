@@ -46,10 +46,12 @@ get_header('admin');
                 );
           
                 $url = home_url('admin-dashboard/edit-user');
-                $query_args = array('uid' => $user->ID );         
+                   
 
                 foreach ($members as $user) {
-                     $user_roles = $user->roles;                 
+                     $user_roles = $user->roles;    
+                     
+                     $query_args = array('uid' => $user->ID );   
                    
                     $i++;  ?>
                     <tr>
