@@ -40,12 +40,15 @@ get_header('admin');
                 $members = get_users(
                     array(                      
                         'orderby' => 'ID',
-                        'order'   => 'ASC'
+                        'order'   => 'ASC',
+                        'role' => 'personal', 
                     )
                 );
-                $users = get_users($members);            
+          
+                $url = home_url('admin-dashboard/edit-user');
+                $query_args = array('uid' => $user->ID );         
 
-                foreach ($users as $user) {
+                foreach ($members as $user) {
                      $user_roles = $user->roles;                 
                    
                     $i++;  ?>
@@ -55,7 +58,7 @@ get_header('admin');
                         <?php echo $user->display_name ;   ?></td>
                         <td><?php echo ucfirst($user_roles[0]); ?></td>
                         <td>Active</td>
-                        <td>Update</td>
+                        <th><a href="<?php echo add_query_arg($query_args, $url); ?>">Edit User</a></th>
                       
 
                     </tr>
