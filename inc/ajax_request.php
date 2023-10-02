@@ -724,3 +724,44 @@ function show_reports() {
 		die();	
 		
 }
+
+
+
+
+add_action('wp_ajax_reset_user_password', 'reset_user_password', 0);
+add_action('wp_ajax_nopriv_reset_user_password', 'reset_user_password');
+
+function reset_user_password() {
+
+
+	$user_email = sanitize_email($_POST['username']);
+
+    // Check if the email exists in the database
+    $user_data = get_user_by('email', $user_email);
+
+    if (!$user_data) {
+        echo 'error';
+        die();
+    }
+
+    // Generate a random password
+    $new_password = wp_generate_password(12, false);
+
+    // Update the user's password
+    wp_set_password($new_password, $user_data->ID);
+
+    // Send the new password to the user via email
+    $subject = 'Your new password';
+    $message = 'Your new password: ' . $new_password;
+    $headers = array('Content-Type: text/html; charset=UTF-8');
+
+    $mail_result = wp_mail($user_email, $subject, $message, $headers);
+
+    if ($mail_result) {
+        echo 'success';
+    } else {
+        echo 'error';
+    }
+		  
+		
+}

@@ -54,7 +54,7 @@ if ( is_user_logged_in() ) {
                     <div class="form-group">
                         <label for="username">Email</label>
                         <input type="email" class="form-control border-0 border-bottom rounded-0"
-                            id="username" aria-describedby="emailHelp" placeholder="abc@example.com" value="" required>                  
+                            id="username"  placeholder="abc@example.com" value="" required>                  
                     </div>
                     
                     <div class="d-flex justify-content-between align-items-center " style="margin-top: 3rem !important;">
@@ -124,7 +124,7 @@ if ( is_user_logged_in() ) {
             type:"POST",
             url:"<?php echo admin_url('admin-ajax.php'); ?>",
             data: {
-                action: "resetpassword",
+                action: "reset_user_password",
                 username : username              
             },
             beforeSend: function(){                    
