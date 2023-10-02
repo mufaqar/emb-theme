@@ -107,9 +107,7 @@ if ( is_user_logged_in() ) {
        
 
 <script type="text/javascript">   
-   jQuery(document).ready(function($) {  
-    
-   
+   jQuery(document).ready(function($) {   
     
     
     $('._cross').click(function(){
