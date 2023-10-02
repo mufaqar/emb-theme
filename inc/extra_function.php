@@ -159,18 +159,14 @@ function Generate_Token() {
       echo "Toke Regenerated";
     }
   }
-
-
-
-
-  
+ 
 
        // Add a custom cron schedule
         add_filter('cron_schedules', 'ecm_cron_importdata');
         function ecm_cron_importdata($schedules) {
             $schedules['every_forty_five_minutes'] = array(
-                'interval' => 2700,
-                'display' => 'Every 45 Minutes'
+                'interval' => 120,
+                'display' => 'Every 2 Minutes'
             );
             return $schedules;
         }

@@ -20,8 +20,8 @@
 
     $url = 'https://saven.jcen.cn/pwsys/pwtransiot/pwTransIot/list_data';
      // Set the start and end times (30 minutes from now)
-    $start_time = "2023-08-14 01:30";
-    $end_time =  "2023-09-13 08:30";
+    $start_time = "10-8-2023";
+    $end_time =  "10-10-2023";
     $args = array(
         'body' => json_encode(array(
             'startTime' => $start_time,
@@ -35,7 +35,7 @@
         ),
         'method' => 'POST',
         'sslverify' => false,
-        'timeout' => 180 
+        'timeout' => 280 
     
     );
     
