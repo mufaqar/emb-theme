@@ -3,8 +3,6 @@ get_header('admin');
 $user = wp_get_current_user();  
 $UID = $user->ID;
 $company_name = $user->display_name;
-
-
 ?>
 <?php include('navigation.php'); ?>
 <div class="admin_parrent">
@@ -54,9 +52,7 @@ $company_name = $user->display_name;
               
                // print_r($meta_query);             
                 
-                ?></h5>
-
-              
+                ?></h5>     
 
 
 

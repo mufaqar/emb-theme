@@ -109,18 +109,61 @@ $UID = $user->ID;
     <section id="div1" class="targetDiv activediv tablediv">
         <div id="invoice_orders"></div>
 
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+        <div id="bar_chart" style="width: 600px; height: 400px;"></div>
+        <?php
+$data = [
+    ['Floor Station', 'Total Consumption'],
+    ['Kitchen', 11.18],
+    ['Office Room', 5.07],
+];
+$dataJson = json_encode($data);
+?>
+
+        <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(<?php echo $dataJson; ?>);
+
+            var options = {
+                title: 'Energy Consumption by Floor Station',
+                chartArea: {
+                    width: '50%'
+                },
+                hAxis: {
+                    title: 'Total Consumption (KWh)',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Floor Station'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+
+            chart.draw(data, options);
+        }
+        </script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+
         <div>
-         
 
-        
 
-       
+
+
+
 
         </div>
-        
-    
-    
-    
+
+
+
+
     </section>
 
 </div>
@@ -143,7 +186,7 @@ jQuery(document).ready(function($) {
         const start_date = $('#start_date').val();
         const end_date = $('#end_date').val();
 
-        
+
         const selectedDateType = $('#date_type').val();
 
 
