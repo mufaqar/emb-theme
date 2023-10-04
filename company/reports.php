@@ -112,6 +112,7 @@ $UID = $user->ID;
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
         <div id="bar_chart" style="width: 600px; height: 400px;"></div>
+      
         <?php
 $data = [
     ['Floor Station', 'Total Consumption'],
@@ -144,7 +145,8 @@ $dataJson = json_encode($data);
                 }
             };
 
-            var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
+           // var chart = new google.visualization.PieChart(document.getElementById('bar_chart'));
+           var chart = new google.visualization.BarChart(document.getElementById('bar_chart'));
 
             chart.draw(data, options);
         }
