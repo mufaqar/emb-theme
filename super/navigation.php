@@ -33,7 +33,6 @@
                     <img src="<?php bloginfo('template_directory'); ?>/reources/images/cancel.png" class="hide_nav" alt="" onclick="HideNav()">
             </div>
         </div>    
-
         <div class="content">
                 <div class="container_wrapper">
                     <div class="d-flex align-items-center justify-content-between mt-4">
